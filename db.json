@@ -1,24 +1,24 @@
 {
   "users": [
     {
-      "id": "1",
-      "username": "Jon"
+      "password": "passwordEasy",
+      "id": "1"
     },
     {
-      "id": "2",
-      "username": "Sally"
+      "password": "passwordEasy",
+      "id": "2"
     },
     {
-      "id": "3",
-      "username": "Jon"
+      "password": "passwordEasy",
+      "id": "3"
     },
     {
-      "id": "4",
-      "username": "Sally"
+      "password": "passwordEasy",
+      "id": "4"
     },
     {
-      "id": "5",
-      "username": "Jon"
+      "password": "passwordEasy",
+      "id": "5"
     }
   ],
   "memes": [
@@ -53,6 +53,18 @@
     {
       "id": "8",
       "imageUrl": "/path/to/image2.jpg"
+    },
+    {
+      "id": "cce5",
+      "imagePathUrl": "path"
+    },
+    {
+      "id": "1eb5",
+      "imagePathUrl": "path/newpath"
+    },
+    {
+      "id": "a9ee",
+      "imagePathUrl": "new"
     }
   ],
   "quotes": [
