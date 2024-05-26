@@ -1,7 +1,10 @@
 const HomePage = ()=> {
   return (
     <div>
-      <h1>Home Page</h1>
+      <div className="home-page-header">
+        <h1>Home Page</h1>
+      </div>
+    
     </div>
   )
 }

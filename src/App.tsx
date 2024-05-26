@@ -1,15 +1,18 @@
-import { useState } from 'react'
-import { Router } from 'react-router'
-import HomePage from './components/HomePage'
-import AppRoutes from './Utils/appRoutes'
+import { useState } from "react";
+import AppRoutes from "./Utils/appRoutes";
+import { BrowserRouter as Router } from "react-router-dom";
+import { FavoritesProvider } from "./Providers/favorite.providers";
 
 function App() {
-
   return (
-   <>
-    <AppRoutes />
-   </>
-  )
+    <>
+      <Router>
+        <FavoritesProvider>
+          <AppRoutes />
+        </FavoritesProvider>
+      </Router>
+    </>
+  );
 }
 
-export default App
+export default App;
