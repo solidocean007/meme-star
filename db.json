@@ -2,69 +2,100 @@
   "users": [
     {
       "password": "passwordEasy",
-      "id": "1"
+      "id": "1",
+      "name": "Jon"
     },
     {
       "password": "passwordEasy",
-      "id": "2"
+      "id": "2",
+      "name": "Clinton"
     },
     {
       "password": "passwordEasy",
-      "id": "3"
+      "id": "3",
+      "name": "Beth"
     },
     {
       "password": "passwordEasy",
-      "id": "4"
+      "id": "4",
+      "name": "Devin"
     },
     {
       "password": "passwordEasy",
-      "id": "5"
+      "id": "5",
+      "name": "Kevin"
+    },
+    {
+      "password": "passwordEasy",
+      "id": "6",
+      "name": "Chris"
+    },
+    {
+      "password": "passwordEasy",
+      "id": "7",
+      "name": "Amy"
+    },
+    {
+      "password": "passwordEasy",
+      "id": "8",
+      "name": "Bonnie"
     }
   ],
   "memes": [
     {
-      "id": "1",
-      "imageUrl": "/path/to/image1.jpg"
+      "id": "",
+      "imageUrl": "/src/assets/images/biden-face.webp",
+      "caption": "About to say something dumb in 3..2..1.."
     },
     {
       "id": "2",
-      "imageUrl": "/path/to/image2.jpg"
+      "imageUrl": "src/assets/images/cat-man.webp",
+      "caption": ""
     },
     {
       "id": "3",
-      "imageUrl": "/path/to/image1.jpg"
+      "imageUrl": "src/assets/images/dumbNdumber.webp",
+      "caption": ""
     },
     {
       "id": "4",
-      "imageUrl": "/path/to/image2.jpg"
+      "imageUrl": "src/assets/images/dumbndumberyelling.webp",
+      "caption": ""
     },
     {
       "id": "5",
-      "imageUrl": "/path/to/image1.jpg"
+      "imageUrl": "src/assets/images/giant-alien.webp",
+      "caption": ""
     },
     {
       "id": "6",
-      "imageUrl": "/path/to/image2.jpg"
+      "imageUrl": "src/assets/images/luka-gobert.webp",
+      "caption": ""
     },
     {
       "id": "7",
-      "imageUrl": "/path/to/image1.jpg"
-    },
-    {
-      "id": "8",
-      "imageUrl": "/path/to/image2.jpg"
-    },
-    {
-      "id": "cce5",
-      "imagePathUrl": "path"
+      "imageUrl": "src/assets/images/monaco.webp",
+      "caption": ""
     },
     {
       "id": "1eb5",
-      "imagePathUrl": "path/newpath"
+      "imagePathUrl": "src/assets/images/tornado.webp",
+      "caption": ""
     },
     {
       "id": "a9ee",
-      "imagePathUrl": "new"
+      "imagePathUrl": "src/assets/images/xeno-ripley.webp",
+      "caption": ""
+    },
+    {
+      "id": "cce5",
+      "imagePathUrl": "src/assets/images/southparkgenderbender.webp",
+      "caption": ""
+    },
+    {
+      "id": "8",
+      "imageUrl": "src/assets/images/soccer.webp",
+      "caption": ""
     }
   ],
   "quotes": [

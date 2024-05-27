@@ -7,3 +7,4 @@ export const createMeme= ({path}) => fetch("http://localhost:3001/memes", {
   .then(result => console.log(result))
   // .then(console.log)
   // .catch(error => console.log('error', error));
+

@@ -1,7 +1,7 @@
 // src/features/comments/CaptionForm.tsx
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addComment } from './commentSlice';
+// import { addComment } from './commentSlice';
 
 interface Props {
   postId: number;
@@ -13,7 +13,7 @@ const CaptionForm: React.FC<Props> = ({ postId }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(addComment({ postId, caption }));
+    // dispatch(addComment({ postId, caption }));
     setCaption('');
   };
 

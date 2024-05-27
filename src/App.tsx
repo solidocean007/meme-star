@@ -1,16 +1,24 @@
 import { useState } from "react";
 import AppRoutes from "./Utils/appRoutes";
 import { BrowserRouter as Router } from "react-router-dom";
-import { FavoritesProvider } from "./Providers/favorite.providers";
+import { Provider } from "react-redux";
+import { store } from "./Redux/store";
+import { Container } from "@mui/material";
+// import { FavoritesProvider } from "./Providers/favorite.providers";
 
 function App() {
   return (
     <>
-      <Router>
-        <FavoritesProvider>
+      <Provider store={store}>
+        <Router>
+        <Container component="main" maxWidth="xl" sx={{ mt: 8, mb: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+              {/* <FavoritesProvider> */}
           <AppRoutes />
-        </FavoritesProvider>
-      </Router>
+          {/* </FavoritesProvider> */}
+          </Container>
+        
+        </Router>
+      </Provider>
     </>
   );
 }

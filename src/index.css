@@ -24,10 +24,22 @@ a:hover {
 
 body {
   margin: 0;
+  padding: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
+  justify-content: center;
+  align-items: center;
   min-height: 100vh;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  background-color: #f0f2f5; /* A light grey background */
+}
+
+#root {
+  width: 100%;
+  max-width: 960px; /* Adjust based on your design preference */
+}
+
+.container {
+  width: 100%;
 }
 
 h1 {
