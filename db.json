@@ -48,291 +48,175 @@
     },
     {
       "id": "2",
-      "imageUrl": "src/assets/images/cat-man.webp",
-      "caption": ""
+      "imageUrl": "src/assets/images/cat-man.webp"
     },
     {
       "id": "3",
-      "imageUrl": "src/assets/images/dumbNdumber.webp",
-      "caption": ""
+      "imageUrl": "src/assets/images/dumbNdumber.webp"
     },
     {
       "id": "4",
-      "imageUrl": "src/assets/images/dumbndumberyelling.webp",
-      "caption": ""
+      "imageUrl": "src/assets/images/dumbndumberyelling.webp"
     },
     {
       "id": "5",
-      "imageUrl": "src/assets/images/giant-alien.webp",
-      "caption": ""
+      "imageUrl": "src/assets/images/giant-alien.webp"
     },
     {
       "id": "6",
-      "imageUrl": "src/assets/images/luka-gobert.webp",
-      "caption": ""
+      "imageUrl": "src/assets/images/luka-gobert.webp"
     },
     {
       "id": "7",
-      "imageUrl": "src/assets/images/monaco.webp",
-      "caption": ""
-    },
-    {
-      "id": "1eb5",
-      "imagePathUrl": "src/assets/images/tornado.webp",
-      "caption": ""
-    },
-    {
-      "id": "a9ee",
-      "imagePathUrl": "src/assets/images/xeno-ripley.webp",
-      "caption": ""
-    },
-    {
-      "id": "cce5",
-      "imagePathUrl": "src/assets/images/southparkgenderbender.webp",
-      "caption": ""
+      "imageUrl": "src/assets/images/monaco.webp"
     },
     {
       "id": "8",
-      "imageUrl": "src/assets/images/soccer.webp",
-      "caption": ""
+      "imageUrl": "src/assets/images/tornado.webp"
+    },
+    {
+      "id": "9",
+      "imageUrl": "src/assets/images/xeno-ripley.webp"
+    },
+    {
+      "id": "10",
+      "imageUrl": "src/assets/images/southparkgenderbender.webp"
+    },
+    {
+      "id": "11",
+      "imageUrl": "src/assets/images/soccer.webp"
     }
   ],
   "quotes": [
     {
       "id": "1",
-      "memeId": 1,
+      "memeId": "1",
       "text": "About to say something dumb in 3..2..1..",
-      "userId": 1
+      "userId": "2"
     },
     {
       "id": "2",
-      "memeId": 2,
+      "memeId": "2",
       "text": "Another caption",
-      "userId": 2
+      "userId": "3"
     },
     {
       "id": "3",
-      "memeId": 1,
+      "memeId": "3",
       "text": "Funny caption",
-      "userId": 1
+      "userId": "5"
     },
     {
       "id": "4",
-      "memeId": 2,
+      "memeId": "4",
       "text": "Another caption",
-      "userId": 2
+      "userId": "3"
     },
     {
       "id": "5",
-      "memeId": 1,
+      "memeId": "5",
       "text": "Funny caption",
-      "userId": 1
+      "userId": "1"
     },
     {
       "id": "6",
-      "memeId": 2,
+      "memeId": "6",
       "text": "Another caption",
-      "userId": 2
+      "userId": "6"
     },
     {
       "id": "7",
-      "memeId": 1,
+      "memeId": "7",
       "text": "Funny caption",
-      "userId": 1
+      "userId": "2"
     },
     {
       "id": "8",
-      "memeId": 2,
+      "memeId": "8",
       "text": "Another caption",
-      "userId": 2
+      "userId": "1"
     },
     {
       "id": "9",
-      "memeId": 1,
+      "memeId": "9",
       "text": "Funny caption",
-      "userId": 1
+      "userId": "4"
     },
     {
       "id": "10",
-      "memeId": 2,
+      "memeId": "10",
       "text": "Another caption",
-      "userId": 2
+      "userId": "7"
     },
     {
       "id": "11",
-      "memeId": 1,
+      "memeId": "11",
       "text": "Funny caption",
-      "userId": 1
-    },
-    {
-      "id": "12",
-      "memeId": 2,
-      "text": "Another caption",
-      "userId": 2
+      "userId": "8"
     }
   ],
   "likedQuotes": [
     {
-      "userId": 1,
-      "quoteId": 5,
-      "id": "5e7f"
+      "userId": "3",
+      "quoteId": "1",
+      "id": "1"
     },
     {
-      "userId": 2,
-      "quoteId": 7,
-      "id": "58c6"
+      "userId": "4",
+      "quoteId": "1",
+      "id": "2"
     },
     {
-      "userId": 11,
-      "quoteId": 6,
-      "id": "24a2"
+      "userId": "5",
+      "quoteId": "7",
+      "id": "3"
     },
     {
-      "userId": 4,
-      "quoteId": 1,
-      "id": "1007"
+      "userId": "6",
+      "quoteId": "6",
+      "id": "4"
     },
     {
-      "userId": 1,
-      "quoteId": 7,
-      "id": "9d53"
+      "userId": "7",
+      "quoteId": "5",
+      "id": "5"
     },
     {
-      "userId": 1,
-      "quoteId": 4,
-      "id": "0c45"
-    },
-    {
-      "userId": 8,
-      "quoteId": 3,
-      "id": "b17e"
-    },
-    {
-      "userId": 1,
-      "quoteId": 1,
-      "id": "76fa"
-    },
-    {
-      "userId": 11,
-      "quoteId": 8,
-      "id": "311c"
-    },
-    {
-      "userId": 10,
-      "quoteId": 1,
-      "id": "119c"
-    },
-    {
-      "userId": 1,
-      "quoteId": 4,
-      "id": "ae60"
-    },
-    {
-      "userId": 2,
-      "quoteId": 10,
-      "id": "7ec5"
-    },
-    {
-      "userId": 11,
-      "quoteId": 3,
-      "id": "5e8f"
-    },
-    {
-      "userId": 4,
-      "quoteId": 1,
-      "id": "c910"
-    },
-    {
-      "userId": 1,
-      "quoteId": 8,
-      "id": "24cc"
-    },
-    {
-      "userId": 1,
-      "quoteId": 5,
-      "id": "3921"
-    },
-    {
-      "userId": 8,
-      "quoteId": 8,
-      "id": "e7e4"
-    },
-    {
-      "userId": 1,
-      "quoteId": 1,
-      "id": "a9c5"
-    },
-    {
-      "userId": 11,
-      "quoteId": 8,
-      "id": "759d"
-    },
-    {
-      "userId": 10,
-      "quoteId": 9,
-      "id": "2655"
+      "userId": "8",
+      "quoteId": "11",
+      "id": "6"
     }
   ],
   "likedMemes": [
     {
-      "userId": 7,
-      "memeId": 1,
-      "id": "5f2d"
+      "userId": "7",
+      "memeId": "1",
+      "id": "1"
     },
     {
-      "userId": 4,
-      "memeId": 5,
-      "id": "371b"
+      "userId": "4",
+      "memeId": "5",
+      "id": "2"
     },
     {
-      "userId": 3,
-      "memeId": 3,
-      "id": "3bdd"
+      "userId": "3",
+      "memeId": "3",
+      "id": "3"
     },
     {
-      "userId": 8,
-      "memeId": 10,
-      "id": "2b94"
+      "userId": "8",
+      "memeId": "10",
+      "id": "4"
     },
     {
-      "userId": 1,
-      "memeId": 5,
-      "id": "a082"
+      "userId": "1",
+      "memeId": "5",
+      "id": "5"
     },
     {
-      "userId": 3,
-      "memeId": 3,
-      "id": "c3b7"
-    },
-    {
-      "userId": 4,
-      "memeId": 5,
-      "id": "dc67"
-    },
-    {
-      "userId": 8,
-      "memeId": 3,
-      "id": "32a9"
-    },
-    {
-      "userId": 2,
-      "memeId": 1,
-      "id": "b07c"
-    },
-    {
-      "userId": 4,
-      "memeId": 5,
-      "id": "7d4b"
-    },
-    {
-      "userId": 5,
-      "memeId": 7,
-      "id": "6f3d"
-    },
-    {
-      "userId": 8,
-      "memeId": 8,
-      "id": "a461"
+      "userId": "6",
+      "memeId": "6",
+      "id": "6"
     }
   ]
 }

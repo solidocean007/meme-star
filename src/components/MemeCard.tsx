@@ -6,12 +6,12 @@ import { MemeCaptions } from './MemeCaptions';
 
 const MemeCard = ({ meme }:{meme: MemeType}) => {
   const [newCaption, setNewCaption] = React.useState("");
-  const [captions , setCaptions] = useState([]); // i should probably think about how this component will know about the captions for this meme
+  // const [captions , setCaptions] = useState([]); // i should probably think about how this component will know about the captions for this meme
 
-  const handleAddCaption = () => {
-    onAddCaption(newCaption);
-    setNewCaption("");
-  };
+  // const handleAddCaption = () => {
+  //   onAddCaption(newCaption);
+  //   setNewCaption("");
+  // };
   return (
     <Card sx={{ maxWidth: 345, position: 'relative', m: 2 }}>
       <CardMedia
@@ -29,10 +29,11 @@ const MemeCard = ({ meme }:{meme: MemeType}) => {
         padding: '8px'
       }}>
         <Typography variant="body2" color="text.primary" component="p">
-          {meme.caption}
+          {/* {meme.caption} */}
         </Typography>
       </Box>
-      <MemeCaptions newCaption={newCaption} setNewCaption={setNewCaption} handleAddCaption={handleAddCaption}/>
+      {/* <MemeCaptions newCaption={newCaption} setNewCaption={setNewCaption} handleAddCaption={handleAddCaption}/> */}
+      {/* <MemeCaptions newCaption={newCaption} setNewCaption={setNewCaption}/> */}
     </Card>
   );
 };

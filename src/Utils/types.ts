@@ -1,6 +1,7 @@
 export interface MemeType  {
   'id': string,
   'imageUrl': string,
+  'userId': string
 }
 
 export interface UsersType {

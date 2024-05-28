@@ -1,13 +1,15 @@
 // features/memes/memesSlice.js
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getAllMemes } from '../api/getAllMemes';
+// import { getAllMemes } from '../api/getAllMemes';
 import { MemeType } from '../Utils/types';
+import { getAllData } from '../api/getAllData';
  // Adjust path as necessary
 
 export const fetchMemes = createAsyncThunk(
   'memes/fetchMemes',
   async () => {
-    const response = await getAllMemes();
+    // const response = await getAllMemes();
+    const response = await getAllData();
     return response;
   }
 );

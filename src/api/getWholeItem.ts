@@ -1,8 +1,8 @@
 import { API_CONFIG } from "./config";
 
-export const getAllMemes = async () => {
+export const getWholeItem = async (item:string) => {
   try {
-    const response = await fetch(API_CONFIG + "/memes", {
+    const response = await fetch(API_CONFIG + `${item}`, {
       method: 'GET',
       headers: {"Content-Type": "application/json"},
     });
@@ -16,5 +16,3 @@ export const getAllMemes = async () => {
     throw error; 
   }
 };
-
-  

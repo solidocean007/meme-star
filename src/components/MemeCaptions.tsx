@@ -1,8 +1,5 @@
 import { Box, Button, CardContent, List, ListItem, ListItemText, TextField } from "@mui/material"
 
-const MemeCaptionsProps {
-  handleAddCaption: () => void
-}
 
 export const MemeCaptions = ({captions}) => {
   return (
@@ -22,7 +19,8 @@ export const MemeCaptions = ({captions}) => {
             value={newCaption}
             onChange={(e) => setNewCaption(e.target.value)}
           />
-          <Button onClick={handleAddCaption} variant="contained" color="primary">
+          {/* <Button onClick={handleAddCaption} variant="contained" color="primary"> */}
+          <Button variant="contained" color="primary">
             Submit
           </Button>
         </Box>
