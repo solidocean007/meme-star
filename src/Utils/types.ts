@@ -1,25 +1,30 @@
 export interface MemeType  {
-  'imageUrl': string;
-  'caption' : string;
+  'id': string,
+  'imageUrl': string,
 }
 
 export interface UsersType {
+  'id': string,
   'name': string,
   'password': string
 }
 
 export interface QuoteType {
+  'id': string,
   "memeId": string,
   'text': string,
   'userId': string
 }
 
 export interface LikedQuotesType {
-  'userId': string,
-  'likedQuoteId': string,
+  'id': string;        // Unique identifier for the like
+  'userId': string;
+  'quoteId': string;
 }
 
-export interface likedMemesType {
-  'userId': string,
-  'likedMemeId': string
+
+export interface LikedMemesType {
+  'id': string;        // Unique identifier for the like
+  'userId': string;
+  'memeId': string;
 }

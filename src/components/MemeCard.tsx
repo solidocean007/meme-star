@@ -2,8 +2,16 @@
 import React from 'react';
 import { Card, CardMedia, CardContent, Typography, Box } from '@mui/material';
 import { MemeType } from '../Utils/types';
+import { MemeCaptions } from './MemeCaptions';
 
 const MemeCard = ({ meme }:{meme: MemeType}) => {
+  const [newCaption, setNewCaption] = React.useState("");
+  const [captions , setCaptions] = useState([]); // i should probably think about how this component will know about the captions for this meme
+
+  const handleAddCaption = () => {
+    onAddCaption(newCaption);
+    setNewCaption("");
+  };
   return (
     <Card sx={{ maxWidth: 345, position: 'relative', m: 2 }}>
       <CardMedia
@@ -24,6 +32,7 @@ const MemeCard = ({ meme }:{meme: MemeType}) => {
           {meme.caption}
         </Typography>
       </Box>
+      <MemeCaptions newCaption={newCaption} setNewCaption={setNewCaption} handleAddCaption={handleAddCaption}/>
     </Card>
   );
 };

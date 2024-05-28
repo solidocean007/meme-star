@@ -43,9 +43,8 @@
   ],
   "memes": [
     {
-      "id": "",
-      "imageUrl": "/src/assets/images/biden-face.webp",
-      "caption": "About to say something dumb in 3..2..1.."
+      "id": "1",
+      "imageUrl": "/src/assets/images/biden-face.webp"
     },
     {
       "id": "2",
@@ -102,7 +101,7 @@
     {
       "id": "1",
       "memeId": 1,
-      "text": "Funny caption",
+      "text": "About to say something dumb in 3..2..1..",
       "userId": 1
     },
     {
