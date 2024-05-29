@@ -1,6 +1,5 @@
-// features/memes/memesSlice.js
+// memesSlice.js
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-// import { getAllMemes } from '../api/getAllMemes';
 import { MemeType } from '../Utils/types';
 import { getAllData } from '../api/getAllData';
  // Adjust path as necessary
@@ -8,16 +7,15 @@ import { getAllData } from '../api/getAllData';
 export const fetchMemes = createAsyncThunk(
   'memes/fetchMemes',
   async () => {
-    // const response = await getAllMemes();
     const response = await getAllData();
-    return response;
+    return response.processedMemes;
   }
 );
 
 interface MemeState {
   entities: MemeType[];
   loading: 'idle' | 'loading';
-  error: string | null | undefined; // Allow undefined
+  error: string | null | undefined;
 }
 
 const initialState: MemeState = {
