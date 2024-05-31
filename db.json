@@ -45,46 +45,6 @@
     {
       "id": "1",
       "imageUrl": "/src/assets/images/biden-face.webp"
-    },
-    {
-      "id": "2",
-      "imageUrl": "src/assets/images/cat-man.webp"
-    },
-    {
-      "id": "3",
-      "imageUrl": "src/assets/images/dumbNdumber.webp"
-    },
-    {
-      "id": "4",
-      "imageUrl": "src/assets/images/dumbndumberyelling.webp"
-    },
-    {
-      "id": "5",
-      "imageUrl": "src/assets/images/giant-alien.webp"
-    },
-    {
-      "id": "6",
-      "imageUrl": "src/assets/images/luka-gobert.webp"
-    },
-    {
-      "id": "7",
-      "imageUrl": "src/assets/images/monaco.webp"
-    },
-    {
-      "id": "8",
-      "imageUrl": "src/assets/images/tornado.webp"
-    },
-    {
-      "id": "9",
-      "imageUrl": "src/assets/images/xeno-ripley.webp"
-    },
-    {
-      "id": "10",
-      "imageUrl": "src/assets/images/southparkgenderbender.webp"
-    },
-    {
-      "id": "11",
-      "imageUrl": "src/assets/images/soccer.webp"
     }
   ],
   "quotes": [
@@ -96,60 +56,78 @@
     },
     {
       "id": "2",
+      "memeId": "1",
+      "text": "My rap name is Fresh Diaper!",
+      "userId": "3"
+    },
+    {
+      "id": "3",
+      "memeId": "1",
+      "text": "I was in the game Oregon trail...",
+      "userId": "4"
+    },
+    {
+      "id": "4",
+      "memeId": "1",
+      "text": "Let's go Brandon!",
+      "userId": "5"
+    },
+    {
+      "id": "5",
       "memeId": "2",
       "text": "Another caption",
       "userId": "3"
     },
     {
-      "id": "3",
+      "id": "6",
       "memeId": "3",
       "text": "Funny caption",
       "userId": "5"
     },
     {
-      "id": "4",
+      "id": "7",
       "memeId": "4",
       "text": "Another caption",
       "userId": "3"
     },
     {
-      "id": "5",
+      "id": "8",
       "memeId": "5",
       "text": "Funny caption",
       "userId": "1"
     },
     {
-      "id": "6",
+      "id": "9",
       "memeId": "6",
       "text": "Another caption",
       "userId": "6"
     },
     {
-      "id": "7",
+      "id": "10",
       "memeId": "7",
       "text": "Funny caption",
       "userId": "2"
     },
     {
-      "id": "8",
+      "id": "11",
       "memeId": "8",
       "text": "Another caption",
       "userId": "1"
     },
     {
-      "id": "9",
+      "id": "12",
       "memeId": "9",
       "text": "Funny caption",
       "userId": "4"
     },
     {
-      "id": "10",
+      "id": "13",
       "memeId": "10",
       "text": "Another caption",
       "userId": "7"
     },
     {
-      "id": "11",
+      "id": "14",
       "memeId": "11",
       "text": "Funny caption",
       "userId": "8"
@@ -159,32 +137,38 @@
     {
       "userId": "3",
       "quoteId": "1",
-      "id": "1"
+      "id": "1",
+      "memeId": "1"
     },
     {
       "userId": "4",
       "quoteId": "1",
-      "id": "2"
+      "id": "2",
+      "memeId": "1"
     },
     {
       "userId": "5",
-      "quoteId": "7",
-      "id": "3"
+      "quoteId": "1",
+      "id": "3",
+      "memeId": "1"
     },
     {
       "userId": "6",
       "quoteId": "6",
-      "id": "4"
+      "id": "4",
+      "memeId": "1"
     },
     {
       "userId": "7",
       "quoteId": "5",
-      "id": "5"
+      "id": "5",
+      "memeId": "1"
     },
     {
       "userId": "8",
       "quoteId": "11",
-      "id": "6"
+      "id": "6",
+      "memeId": "1"
     }
   ],
   "likedMemes": [

@@ -1,7 +1,8 @@
 export interface MemeType  {
   'id': string,
   'imageUrl': string,
-  'userId': string
+  'userId': string,
+  'allQuotes'?: QuoteType[],
 }
 
 export interface UsersType {
@@ -14,11 +15,12 @@ export interface QuoteType {
   'id': string,
   "memeId": string,
   'text': string,
-  'userId': string
+  'userId': string,
+  'likedBy': string[],
 }
 
 export interface LikedQuotesType {
-  'id': string;        // Unique identifier for the like
+  'id': string;     
   'userId': string;
   'quoteId': string;
 }

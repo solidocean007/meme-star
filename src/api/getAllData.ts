@@ -1,5 +1,5 @@
 // api/getAllData.js
-import { LikedMemesType, MemeType, QuoteType, UsersType } from "../Utils/types";
+import { LikedMemesType, LikedQuotesType, MemeType, QuoteType, UsersType } from "../Utils/types";
 import { getWholeItem } from "./getWholeItem";
 
 export const getAllData = async () => {
@@ -15,10 +15,15 @@ export const getAllData = async () => {
     // Process data as necessary here
     const processedMemes = memes.map((meme: MemeType) => ({
       ...meme,
-      aLLQuotes: quotes.filter((quote: QuoteType) => quote.memeId === meme.id),
-      user: users.find((user: UsersType ) => user.id === meme.userId), // Associate user with meme
-      likedBy: likedMemes.filter((like: LikedMemesType) => like.memeId === meme.id)
-        .map((like: LikedMemesType) => users.find((user: UsersType) => user.id === like.userId)) // List of users who liked the meme
+      user: users.find((user: UsersType) => user.id === meme.userId),  // User who posted the meme
+      allQuotes: quotes.filter((quote: QuoteType) => quote.memeId === meme.id).map((quote : QuoteType) => {
+        return {
+          ...quote,
+          user: users.find((user: UsersType) => user.id === quote.userId),  // User who wrote the quote
+          likedBy: likedQuotes.filter((lq: LikedQuotesType) => lq.quoteId === quote.id).map((lq: LikedQuotesType) => lq.userId)  // Array of user IDs who liked the quote
+        };
+      }),
+      likesCount: likedMemes.filter((lm: LikedMemesType) => lm.memeId === meme.id).length  // Total likes for the meme
     }));
 
     // Optional: Process quotes to include user details

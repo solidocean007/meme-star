@@ -1,7 +1,6 @@
 // MemeFeed.tsx
 import React, { useEffect } from "react";
 import { FixedSizeList as List } from "react-window";
-import { getAllMemes } from "../api/getAllMemes";
 import { MemeType } from "../Utils/types";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMemes } from "../Redux/memeSlice";
