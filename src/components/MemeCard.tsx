@@ -1,39 +1,76 @@
 // MemeCard.tsx
-import React from "react";
-import { Card, CardMedia, Typography, Box } from "@mui/material";
+import { useState } from "react";
+import { Card, CardMedia, Box, Modal, Button } from "@mui/material";
 import { MemeType } from "../Utils/types";
 import { MemeQuotes } from "./MemeQuotes";
 import { leadingQuoteForMeme } from "../api/leadingQuoteForMeme";
+import CaptionWithLikes from "./CaptionWithLikes";
 // import { useSelector } from "react-redux";
 // import { RootState } from "../Redux/store";
 
 const MemeCard = ({ meme }: { meme: MemeType }) => {
   const captionWithMostLikes = leadingQuoteForMeme(meme);
-  console.log(captionWithMostLikes)
+  const [openQuotes, setOpenQuotes] = useState(false);
+  console.log("meme: ", meme);
+  const handleClose = () => {
+    setOpenQuotes(false);
+  };
+
+  const handleOpen = () => {
+    setOpenQuotes(true);
+  };
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    // bgcolor: "#ffffff",
+    bgcolor: "#ffffff",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
+  console.log(meme.allQuotes)
   return (
-    <Card sx={{ maxWidth: 345, m: 2 }}>
+    <Card sx={{ maxWidth: 600, m: 2 }}>
       <CardMedia
         component="img"
-        height="250"
+        height="450"
+        width="600"
         image={meme.imageUrl}
         // alt={meme.altImageText}
-        sx={{ position: "relative"}}
+        sx={{ position: "relative" }}
       />
       <Box
         sx={{
           position: "absolute",
-          bottom: 25,
+          bottom: 45,
           left: 15,
           width: "100%",
-          bgcolor: "rgba(255, 255, 255, 0.9)", // Semi-transparent white background
+          height: 40,
+          // textAlign?
+          bgcolor: "rgba(255, 255, 255, 0.8)", // Semi-transparent white background
           padding: "8px",
         }}
       >
-         <Typography variant="body2" color="text.primary" component="p">
-            {`${captionWithMostLikes?.text}`}
-          </Typography>
+        <CaptionWithLikes caption={captionWithMostLikes} />
       </Box>
-      <MemeQuotes quotes={meme.allQuotes} />
+      <Button onClick={handleOpen}>
+        {meme.allQuotes && meme.allQuotes?.length - 1} Other Quotes. Now add
+        yours!
+      </Button>
+      <Modal // this modal should be absolutely positioned center to the window or body
+        open={openQuotes}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <MemeQuotes quotes={meme.allQuotes} />
+        </Box>
+      </Modal>
     </Card>
   );
 };

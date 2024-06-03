@@ -2,9 +2,14 @@ import { Box, Button, CardContent, List, ListItem, ListItemText, TextField } fro
 import { useState } from "react";
 import { QuoteType } from "../Utils/types";
 
+interface MemeQuotesProps {
+  quotes: QuoteType[] | undefined;
+}
 
-export const MemeQuotes = ({quotes}:{quotes: QuoteType[]}) => {
+export const MemeQuotes = ({quotes}: MemeQuotesProps) => {
   const [newCaption, setNewCaption] = useState('');
+  if(!quotes) return null;
+  console.log(quotes)
  
   return (
     <CardContent>
@@ -13,7 +18,7 @@ export const MemeQuotes = ({quotes}:{quotes: QuoteType[]}) => {
        {quotes && quotes.length > 0 ? (
           quotes.map((quote, index) => (
             <ListItem key={index}>
-              <ListItemText primary={quote.text} secondary={`by ${quote.userId}`} /> {/* Assuming userId exists, replace with user details if available */}
+              <ListItemText primary={quote.text} secondary={`by ${quote.userNameQuote}`} /> {/* Assuming userId exists, replace with user details if available */}
             </ListItem>
           ))
         ) : (
@@ -28,7 +33,7 @@ export const MemeQuotes = ({quotes}:{quotes: QuoteType[]}) => {
             variant="outlined"
 
 
-            label="Add a caption"
+            label="Add your two cents here"
             value={newCaption}
             onChange={(e) => setNewCaption(e.target.value)}
           />

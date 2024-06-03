@@ -1,7 +1,7 @@
 export interface MemeType  {
   'id': string,
   'imageUrl': string,
-  'userId': string,
+  'createdBy': UsersType,
   'allQuotes'?: QuoteType[],
 }
 
@@ -16,7 +16,8 @@ export interface QuoteType {
   "memeId": string,
   'text': string,
   'userId': string,
-  'likedBy': string[],
+  'userNameQuote': string,
+  'quoteLikedBy': string[],
 }
 
 export interface LikedQuotesType {

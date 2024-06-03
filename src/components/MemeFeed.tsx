@@ -23,11 +23,11 @@ const MemeFeed: React.FC = () => {
   }
 
   return (
-    <Box sx={{ width: "100%", height: 600, bgcolor: "background.paper", display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <Box sx={{ width: "100%", height: 800, bgcolor: "background.paper", display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <List
-        height={600}
+        height={800}
         width={500}
-        itemSize={300}
+        itemSize={500}
         itemCount={memes.length}
         itemData={memes}
       >

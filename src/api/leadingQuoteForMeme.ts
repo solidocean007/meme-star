@@ -4,9 +4,9 @@ export const leadingQuoteForMeme = (meme: MemeType) => {
     if (!meme.allQuotes?.length) return null; // No quotes available
   
     return meme.allQuotes.reduce((max, quote) => {
-      if (quote.likedBy.length > max.likedBy.length) {
+      if (quote.quoteLikedBy.length > max.quoteLikedBy.length) {
         return quote; // This quote has more likes, so it becomes the new max
-      } else if (quote.likedBy.length === max.likedBy.length) {
+      } else if (quote.quoteLikedBy.length === max.quoteLikedBy.length) {
         // If they have the same number of likes, return the first one encountered
         return max;
       }

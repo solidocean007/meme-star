@@ -1,6 +1,7 @@
 // api/getAllData.js
 import { LikedMemesType, LikedQuotesType, MemeType, QuoteType, UsersType } from "../Utils/types";
 import { getWholeItem } from "./getWholeItem";
+import { getAllQuotes } from "./getallQuotes";
 
 export const getAllData = async () => {
   try {
@@ -13,19 +14,19 @@ export const getAllData = async () => {
     ]);
 
     // Process data as necessary here
-    const processedMemes = memes.map((meme: MemeType) => ({
-      ...meme,
-      user: users.find((user: UsersType) => user.id === meme.userId),  // User who posted the meme
-      allQuotes: quotes.filter((quote: QuoteType) => quote.memeId === meme.id).map((quote : QuoteType) => {
+    const processedMemes = memes.map((thisMeme: MemeType) => ({
+      ...thisMeme,
+      CreatedBy: users.find((userFromDB: UsersType) => userFromDB.id === thisMeme.id),  // User who posted the meme
+      allQuotes: quotes.filter((quoteFromDB: QuoteType) => quoteFromDB.memeId === thisMeme.id).map((quoteForThisMeme : QuoteType) => {
         return {
-          ...quote,
-          user: users.find((user: UsersType) => user.id === quote.userId),  // User who wrote the quote
-          likedBy: likedQuotes.filter((lq: LikedQuotesType) => lq.quoteId === quote.id).map((lq: LikedQuotesType) => lq.userId)  // Array of user IDs who liked the quote
+          ...quoteForThisMeme,
+          userNameQuote: users.find((userFromDB: UsersType) => userFromDB.id === quoteForThisMeme.userId)?.name,  // User who wrote the quote
+          quoteLikedBy: likedQuotes.filter((likedQuoteFromDB: LikedQuotesType) => likedQuoteFromDB.quoteId === quoteForThisMeme.id).map((lq: LikedQuotesType) => lq.userId)  // Array of user IDs who liked the quote
         };
       }),
-      likesCount: likedMemes.filter((lm: LikedMemesType) => lm.memeId === meme.id).length  // Total likes for the meme
+      likesCount: likedMemes.filter((likedMemesFromDB: LikedMemesType) => likedMemesFromDB.memeId === thisMeme.id).length  // Total likes for the meme
     }));
-
+    console.log(processedMemes)
     // Optional: Process quotes to include user details
 
     return {
