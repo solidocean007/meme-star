@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Card, CardMedia, Box, Modal, Button } from "@mui/material";
 import { MemeType } from "../Utils/types";
 import { MemeQuotes } from "./MemeQuotes";
-import { leadingQuoteForMeme } from "../api/leadingQuoteForMeme";
+import { leadingQuoteForMeme } from "../api/helperFunctions/leadingQuoteForMeme";
 import CaptionWithLikes from "./CaptionWithLikes";
 // import { useSelector } from "react-redux";
 // import { RootState } from "../Redux/store";
