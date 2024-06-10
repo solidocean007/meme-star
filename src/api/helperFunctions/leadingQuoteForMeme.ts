@@ -1,4 +1,4 @@
-import { MemeType } from "../Utils/types";
+import { MemeType } from "../../Utils/types";
 
 export const leadingQuoteForMeme = (meme: MemeType) => {
     if (!meme.allQuotes?.length) return null; // No quotes available

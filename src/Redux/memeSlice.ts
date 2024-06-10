@@ -1,21 +1,32 @@
 // memesSlice.js
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { MemeType } from '../Utils/types';
 import { getAllData } from '../api/getAllData';
- // Adjust path as necessary
+import { processMemes } from '../api/helperFunctions/processedMemes';
 
-export const fetchMemes = createAsyncThunk(
+
+interface FetchError {
+  message: string;
+}
+
+export const fetchMemes = createAsyncThunk<MemeType[], void, { rejectValue: FetchError }>(
   'memes/fetchMemes',
-  async () => {
-    const response = await getAllData();
-    return response.processedMemes;
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await getAllData();
+      const processedMemes = processMemes(response);
+      return processedMemes;
+    } catch (error) {
+      const fetchError: FetchError = { message: error instanceof Error ? error.message : 'Unknown error' };
+      return rejectWithValue(fetchError);
+    }
   }
 );
 
 interface MemeState {
   entities: MemeType[];
   loading: 'idle' | 'loading';
-  error: string | null | undefined;
+  error: string | null;
 }
 
 const initialState: MemeState = {
@@ -23,7 +34,6 @@ const initialState: MemeState = {
   loading: 'idle',
   error: null
 };
-
 
 const memesSlice = createSlice({
   name: 'memes',
@@ -34,13 +44,13 @@ const memesSlice = createSlice({
       .addCase(fetchMemes.pending, (state) => {
         state.loading = 'loading';
       })
-      .addCase(fetchMemes.fulfilled, (state, action) => {
+      .addCase(fetchMemes.fulfilled, (state, action: PayloadAction<MemeType[]>) => {
         state.entities = action.payload;
         state.loading = 'idle';
       })
-      .addCase(fetchMemes.rejected, (state, action) => {
+      .addCase(fetchMemes.rejected, (state, action: PayloadAction<FetchError | undefined>) => {
         state.loading = 'idle';
-        state.error = action.error.message ?? 'An unknown error occurred';
+        state.error = action.payload ? action.payload.message : 'An unknown error occurred';
       });
   }
 });
