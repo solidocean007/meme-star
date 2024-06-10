@@ -11,7 +11,7 @@ import CaptionWithLikes from "./CaptionWithLikes";
 const MemeCard = ({ meme }: { meme: MemeType }) => {
   const captionWithMostLikes = leadingQuoteForMeme(meme);
   const [openQuotes, setOpenQuotes] = useState(false);
-  console.log("meme: ", meme);
+  // console.log("meme: ", meme);
   const handleClose = () => {
     setOpenQuotes(false);
   };
@@ -32,7 +32,7 @@ const MemeCard = ({ meme }: { meme: MemeType }) => {
     boxShadow: 24,
     p: 4,
   };
-  console.log(meme.allQuotes)
+  // console.log(meme.allQuotes)
   return (
     <Card sx={{ maxWidth: 600, m: 2 }}>
       <CardMedia

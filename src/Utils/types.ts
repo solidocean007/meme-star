@@ -7,8 +7,17 @@ export interface MemeType  {
 
 export interface UsersType {
   'id': string,
-  'name': string,
-  'password': string
+  'firstName': string,
+  'lastName': string,
+  'password': string,
+  'email': string
+}
+
+export interface NewUserType {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
 }
 
 export interface QuoteType {
