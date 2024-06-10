@@ -1,9 +1,8 @@
-// getAllUsers.ts
 import { API_CONFIG } from "./config";
 
-export const getAllUsers = async () => {
+export const getOneUser = async (userId: string) => {
   try {
-    const response = await fetch(API_CONFIG + "/users", {
+    const response = await fetch(API_CONFIG + "/users/" + userId, {
       method: 'GET',
       headers: {"Content-Type": "application/json"},
     });

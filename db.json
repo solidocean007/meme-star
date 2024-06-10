@@ -3,42 +3,50 @@
     {
       "password": "passwordEasy",
       "id": "1",
-      "name": "Jon"
+      "first name": "Jon",
+      "last name": "Higger"
     },
     {
       "password": "passwordEasy",
       "id": "2",
-      "name": "Clinton"
+      "first name": "Clinton",
+      "last name": "Williams"
     },
     {
       "password": "passwordEasy",
       "id": "3",
-      "name": "Beth"
+      "first name": "Beth",
+      "last name": "Beth"
     },
     {
       "password": "passwordEasy",
       "id": "4",
-      "name": "Devin"
+      "first name": "Devin",
+      "last name": "Williams"
     },
     {
       "password": "passwordEasy",
       "id": "5",
-      "name": "Kevin"
+      "first name": "Kevin",
+      "last name": "Williams"
     },
     {
       "password": "passwordEasy",
       "id": "6",
-      "name": "Chris"
+      "first name": "Chris",
+      "last name": "Lovelady"
     },
     {
       "password": "passwordEasy",
       "id": "7",
-      "name": "Amy"
+      "first name": "Amy",
+      "last name": "Lovelady"
     },
     {
       "password": "passwordEasy",
       "id": "8",
-      "name": "Bonnie"
+      "first name": "Bonnie",
+      "last name": "Clark"
     }
   ],
   "memes": [
