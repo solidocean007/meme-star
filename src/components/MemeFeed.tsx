@@ -10,9 +10,10 @@ import { Box } from "@mui/material";
 
 const MemeFeed: React.FC = () => {
   const dispatch = useDispatch();
+  const loggedInUser = useSelector((state: RootState) => state.auth.user);
   const { entities: memes, loading } = useSelector(
     (state: RootState) => state.memes
-  ); // Destructure memes and loading directly
+  );
 
   useEffect(() => {
     dispatch(fetchMemes()); // Argument of type 'AsyncThunkAction<any, void, AsyncThunkConfig>' is not assignable to parameter of type 'UnknownAction'
@@ -33,7 +34,7 @@ const MemeFeed: React.FC = () => {
       >
         {({ index, style }) => (
           <div style={style}>
-            <MemeCard meme={memes[index]} />
+            <MemeCard meme={memes[index]} loggedInUser={loggedInUser}/>
           </div>
         )}
       </List>

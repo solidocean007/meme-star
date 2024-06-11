@@ -1,10 +1,16 @@
+// HomePage.tsx
 import React from 'react';
 import { Container, Typography, Button, AppBar, Toolbar, IconButton, Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu'; // If you need a menu button
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MemeFeed from './MemeFeed';
+import { useSelector } from 'react-redux';
+import { RootState } from '../Redux/store';
 
 const HomePage = () => {
+  const loggedInUser = useSelector((state: RootState) => state.auth.user);
+  const isAuthenticated = Boolean(loggedInUser);
+
   return (
     <>
       <AppBar position="static" color="primary">
@@ -28,11 +34,13 @@ const HomePage = () => {
         
         <MemeFeed />
 
-        <Box mt={2} width="100%">
-          <Button variant="contained" color="secondary" fullWidth onClick={() => console.log('Go to Sign Up/Login')}>
-            Sign Up / Log In
-          </Button>
-        </Box>
+        {!isAuthenticated && (
+          <Box mt={2} width="100%">
+            <Button variant="contained" color="secondary" fullWidth onClick={() => console.log('Go to Sign Up/Login')}>
+              Sign Up / Log In
+            </Button>
+          </Box>
+        )}
       </Container>
 
       <Box component="footer" sx={{ bgcolor: 'primary.main', color: 'white', py: 3, mt: 4, textAlign: 'center' }}>

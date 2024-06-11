@@ -28,8 +28,6 @@ const LoginSignUp = () => {
       password,
     };
     dispatch(signUpUser(newUserData));
-    // Argument of type '{ firstName: string; lastName: string; email: string; password: string; }' is not assignable to parameter of type 'UsersType'.
-  // Type '{ firstName: string; lastName: string; email: string; password: string; }' is missing the following properties from type 'UsersType': 'id', 'first name', 'last name'ts(2345)
   }
   
   const submitLogin = (event: React.SyntheticEvent) => {

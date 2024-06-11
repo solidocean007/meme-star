@@ -1,14 +1,16 @@
 // MemeCard.tsx
 import { useState } from "react";
 import { Card, CardMedia, Box, Modal, Button } from "@mui/material";
-import { MemeType } from "../Utils/types";
+import { MemeType, UsersType } from "../Utils/types";
 import { MemeQuotes } from "./MemeQuotes";
 import { leadingQuoteForMeme } from "../api/helperFunctions/leadingQuoteForMeme";
 import CaptionWithLikes from "./CaptionWithLikes";
+import { useNavigate } from "react-router";
 // import { useSelector } from "react-redux";
 // import { RootState } from "../Redux/store";
 
-const MemeCard = ({ meme }: { meme: MemeType }) => {
+const MemeCard = ({ meme, loggedInUser }: { meme: MemeType, loggedInUser: UsersType }) => {
+  const navigate = useNavigate();
   const captionWithMostLikes = leadingQuoteForMeme(meme);
   const [openQuotes, setOpenQuotes] = useState(false);
   // console.log("meme: ", meme);
@@ -19,6 +21,10 @@ const MemeCard = ({ meme }: { meme: MemeType }) => {
   const handleOpen = () => {
     setOpenQuotes(true);
   };
+
+  const handleGoToSignUp = () => {
+    navigate('/signup')
+  }
 
   const style = {
     position: "absolute",
@@ -57,9 +63,8 @@ const MemeCard = ({ meme }: { meme: MemeType }) => {
       >
         <CaptionWithLikes caption={captionWithMostLikes} />
       </Box>
-      <Button onClick={handleOpen}>
-        {meme.allQuotes && meme.allQuotes?.length - 1} Other Quotes. Now add
-        yours!
+     <Button onClick={ loggedInUser ? handleOpen : handleGoToSignUp}>
+        ({loggedInUser ? `${meme.allQuotes && meme.allQuotes?.length - 1} Other Quotes. Now add yours!` : 'login to comment yours'})
       </Button>
       <Modal // this modal should be absolutely positioned center to the window or body
         open={openQuotes}
