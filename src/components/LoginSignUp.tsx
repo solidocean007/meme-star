@@ -18,16 +18,23 @@ import { useNavigate } from "react-router";
 const LoginSignUp = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(true); // Toggle between login and signup
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [verifyPasswordInput, setVerifyPasswordInput] = useState("");
-  const [validatedInputs, setValidatedInputs] = useState(false);
-  const [passwordsMatch, setPasswordsMatch] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
+
+  const [formState, setFormState ] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    verifyPassword: "",
+  });
+
+  const [errors, setErrors] = useState({
+    validatedInputs: true,
+    passwordsMatch: true,
+  });
+
   const user = useSelector((state: RootState) => state.auth.user);
-  console.log(password)
+
   const handleToggle = () => {
     setIsLogin(!isLogin);
   };
@@ -42,25 +49,26 @@ const LoginSignUp = () => {
   };
 
   const validateUserInputs = () => {
-    const inputsNotEmpty = [firstName, lastName, email, password, verifyPasswordInput].every(field => field !== '');
-    setValidatedInputs(inputsNotEmpty);
-  }
+    const inputsNotEmpty = Object.values(formState).every(field => field !== '');
+    setErrors(prevState => ({ ...prevState, validatedInputs: inputsNotEmpty }));
+  };
 
-  const checkIfPasswordsMatch = (firstPassword: string, secondPassword: string) => {
-    setPasswordsMatch(firstPassword === secondPassword);
+  const checkIfPasswordsMatch = () => {
+    const passwordsMatch = formState.password === formState.verifyPassword;
+    setErrors(prevState => ({ ...prevState, passwordsMatch }));
   };
 
   const handleSignUp = () => {
     validateUserInputs()
-    checkIfPasswordsMatch(password, verifyPasswordInput);
+    checkIfPasswordsMatch();
 
-    if(validatedInputs && passwordsMatch){
+    if(errors.validatedInputs && errors.passwordsMatch){
       const newUserData: NewUserType = {
-        firstName,
-        lastName,
-        email,
-        password,
-        verifyPasswordInput,
+        firstName: formState.firstName,
+        lastName: formState.lastName,
+        email: formState.email,
+        password: formState.password,
+        verifyPasswordInput: formState.verifyPassword
       };
       dispatch(signUpUser(newUserData));
     } else {
@@ -71,10 +79,18 @@ const LoginSignUp = () => {
   const submitLogin = (event: React.SyntheticEvent) => {
     event.preventDefault();
     if (isLogin) {
-      handleLogIn(email, password);
+      handleLogIn(formState.email, formState.password);
     } else {
       handleSignUp();
     }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = e.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
   };
 
   useEffect(() => {
@@ -106,8 +122,8 @@ const LoginSignUp = () => {
                 id="firstName"
                 label="First Name"
                 autoFocus
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                value={formState.firstName}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -118,8 +134,8 @@ const LoginSignUp = () => {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                value={formState.lastName}
+                onChange={handleChange}
               />
             </Grid>
           </Grid>
@@ -133,8 +149,8 @@ const LoginSignUp = () => {
           label="Email Address"
           name="email"
           autoComplete="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={formState.email}
+          onChange={handleChange}
         />
         <TextField
           variant="outlined"
@@ -146,8 +162,8 @@ const LoginSignUp = () => {
           type="password"
           id="password"
           autoComplete="current-password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={formState.password}
+          onChange={handleChange}
         />
         <TextField
           variant="outlined"
@@ -159,8 +175,8 @@ const LoginSignUp = () => {
           type="password"
           id="verifyPassword"
           autoComplete="current-password"
-          value={verifyPasswordInput}
-          onChange={(e) => setVerifyPasswordInput(e.target.value)}
+          value={formState.verifyPassword}
+          onChange={handleChange}
         />
         <Button
           type="submit"
