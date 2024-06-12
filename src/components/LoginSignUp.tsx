@@ -7,7 +7,6 @@ import {
   Button,
   Box,
   Grid,
-  Alert,
 } from "@mui/material";
 import { loginUser, signUpUser } from "../Redux/authSlice";
 import { useAppDispatch } from "../Redux/hook";
@@ -24,6 +23,9 @@ const LoginSignUp = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [verifyPasswordInput, setVerifyPasswordInput] = useState("");
+  const [validatedInputs, setValidatedInputs] = useState(false);
+  const [passwordsMatch, setPasswordsMatch] = useState(false);
   const user = useSelector((state: RootState) => state.auth.user);
   console.log(password)
   const handleToggle = () => {
@@ -39,14 +41,31 @@ const LoginSignUp = () => {
     setUserToLocalStorage(user);
   };
 
+  const validateUserInputs = () => {
+    const inputsNotEmpty = [firstName, lastName, email, password, verifyPasswordInput].every(field => field !== '');
+    setValidatedInputs(inputsNotEmpty);
+  }
+
+  const checkIfPasswordsMatch = (firstPassword: string, secondPassword: string) => {
+    setPasswordsMatch(firstPassword === secondPassword);
+  };
+
   const handleSignUp = () => {
-    const newUserData: NewUserType = {
-      firstName,
-      lastName,
-      email,
-      password,
-    };
-    dispatch(signUpUser(newUserData));
+    validateUserInputs()
+    checkIfPasswordsMatch(password, verifyPasswordInput);
+
+    if(validatedInputs && passwordsMatch){
+      const newUserData: NewUserType = {
+        firstName,
+        lastName,
+        email,
+        password,
+        verifyPasswordInput,
+      };
+      dispatch(signUpUser(newUserData));
+    } else {
+      alert("Please ensure all fields are filled out and passwords match.")
+    }
   };
 
   const submitLogin = (event: React.SyntheticEvent) => {
@@ -130,6 +149,19 @@ const LoginSignUp = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          name="verifyPassword"
+          label="Password"
+          type="password"
+          id="verifyPassword"
+          autoComplete="current-password"
+          value={verifyPasswordInput}
+          onChange={(e) => setVerifyPasswordInput(e.target.value)}
+        />
         <Button
           type="submit"
           fullWidth
@@ -146,8 +178,8 @@ const LoginSignUp = () => {
           sx={{ mt: 3, mb: 2 }}
         >
           {isLogin
-            ? "Need an account? Sign Up"
-            : "Already have an account? Login"}
+            ? "Need an account? Sign Up Here"
+            : "Already have an account? Login Here"}
         </Button>
       </Box>
     </Container>

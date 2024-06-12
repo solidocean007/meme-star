@@ -18,6 +18,7 @@ export interface NewUserType {
   lastName: string;
   email: string;
   password: string;
+  verifyPasswordInput: string;
 }
 
 export interface QuoteType {

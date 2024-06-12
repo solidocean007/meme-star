@@ -55,6 +55,13 @@
       "firstName": "Bonnie",
       "lastName": "Clark",
       "email": "bonnieclark@example.com"
+    },
+    {
+      "firstName": "Rex",
+      "lastName": "Luther",
+      "email": "rexluther@example.com",
+      "password": "passwordEasy",
+      "id": "oMVDpBP"
     }
   ],
   "memes": [
