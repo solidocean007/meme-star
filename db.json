@@ -3,50 +3,58 @@
     {
       "password": "passwordEasy",
       "id": "1",
-      "first name": "Jon",
-      "last name": "Higger"
+      "firstName": "Jon",
+      "lastName": "Higger",
+      "email": "jonhigger@example.com"
     },
     {
       "password": "passwordEasy",
       "id": "2",
-      "first name": "Clinton",
-      "last name": "Williams"
+      "firstName": "Clinton",
+      "lastName": "Williams",
+      "email": "clintonwilliams@example.com"
     },
     {
       "password": "passwordEasy",
       "id": "3",
-      "first name": "Beth",
-      "last name": "Beth"
+      "firstName": "Beth",
+      "lastName": "Williams",
+      "email": "bethwilliams@example.com"
     },
     {
       "password": "passwordEasy",
       "id": "4",
-      "first name": "Devin",
-      "last name": "Williams"
+      "firstName": "Devin",
+      "lastName": "Williams",
+      "email": "devinwilliams@example.com"
     },
     {
       "password": "passwordEasy",
       "id": "5",
-      "first name": "Kevin",
-      "last name": "Williams"
+      "firstName": "Kevin",
+      "lastName": "Williams",
+      "email": "kevinwilliams@example.com"
     },
     {
       "password": "passwordEasy",
       "id": "6",
-      "first name": "Chris",
-      "last name": "Lovelady"
+      "firstName": "Chris",
+      "lastName": "Lovelady",
+      "email": "chrislovelady@example.com"
     },
     {
       "password": "passwordEasy",
       "id": "7",
-      "first name": "Amy",
-      "last name": "Lovelady"
+      "firstName": "Amy",
+      "lastName": "Lovelady",
+      "email": "amylovelady@example.com"
     },
     {
       "password": "passwordEasy",
       "id": "8",
-      "first name": "Bonnie",
-      "last name": "Clark"
+      "firstName": "Bonnie",
+      "lastName": "Clark",
+      "email": "bonnieclark@example.com"
     }
   ],
   "memes": [

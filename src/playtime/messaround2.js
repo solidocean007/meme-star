@@ -18,24 +18,18 @@
 // console.log("Clean house");
 // console.log(`Eat ${food}`);
 // let food;
-const orderPizza = (callback) => {
-  setTimeout(() => {
-    const pizza = `🍕`
-    callback(pizza)
-  }, 2000);
-}
 
-const foodReady = (food) => {
-  console.log(`Eat the ${food}`)
-}
+// const orderPizza = (callback) => {
+//   setTimeout(() => {
+//     const pizza = `🍕`
+//     callback(pizza)
+//   }, 2000);
+// }
 
-orderPizza(foodReady);
-console.log('Clean up!')
+// const foodReady = (food) => {
+//   console.log(`Eat the ${food}`)
+// }
 
-const clickScreen = () => {
-  console.log('Clicked');
-}
-
-window.addEventListener('click', clickScreen)
-
+// orderPizza(foodReady);
+// console.log('Clean up!')
 
