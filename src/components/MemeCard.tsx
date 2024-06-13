@@ -73,7 +73,7 @@ const MemeCard = ({ meme, loggedInUser }: { meme: MemeType, loggedInUser: UsersT
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <MemeQuotes quotes={meme.allQuotes} />
+          <MemeQuotes quotes={meme.allQuotes} currentUser={loggedInUser} />
         </Box>
       </Modal>
     </Card>
