@@ -1,3 +1,4 @@
+// deleteLikedQuote.ts
 import { API_CONFIG } from "./config";
 
 export const deleteLikedQuote = async (likedQuoteId: string) => {

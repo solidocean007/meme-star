@@ -14,7 +14,7 @@ const MemeFeed: React.FC = () => {
   const { entities: memes, loading } = useSelector(
     (state: RootState) => state.memes
   );
-
+  console.log(loggedInUser)
   useEffect(() => {
     dispatch(fetchMemes()); // Argument of type 'AsyncThunkAction<any, void, AsyncThunkConfig>' is not assignable to parameter of type 'UnknownAction'
   }, [dispatch]);

@@ -31,7 +31,7 @@ export const loginUser = createAsyncThunk<UsersType, { email: string; password: 
   }
 );
 
-export const signUpUser = createAsyncThunk<NewUserType, NewUserType,{ rejectValue: string }>(
+export const signUpUser = createAsyncThunk<UsersType, NewUserType,{ rejectValue: string }>(
   'auth/signUp',
   async (userData: NewUserType, { rejectWithValue }) => {
     try {
@@ -51,6 +51,12 @@ const authSlice = createSlice({
     logout(state) {
       state.user = null;
       state.isAuthenticated = false;
+      state.status = 'idle';
+      state.error = null;
+    },
+    setUser(state, action: PayloadAction<UsersType | null>) {
+      state.user = action.payload;
+      state.isAuthenticated = action.payload !== null;
       state.status = 'idle';
       state.error = null;
     },
@@ -83,6 +89,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { logout, setUser } = authSlice.actions;
 
 export default authSlice.reducer;

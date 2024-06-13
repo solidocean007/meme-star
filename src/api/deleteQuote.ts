@@ -1,3 +1,4 @@
+// deletequote
 import { API_CONFIG } from "./config";
 
 export const deleteQuote = async (quoteId: string) => {

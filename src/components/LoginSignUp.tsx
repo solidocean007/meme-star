@@ -7,6 +7,8 @@ import {
   Button,
   Box,
   Grid,
+  InputAdornment,
+  IconButton,
 } from "@mui/material";
 import { loginUser, signUpUser } from "../Redux/authSlice";
 import { useAppDispatch } from "../Redux/hook";
@@ -14,13 +16,28 @@ import { NewUserType, UsersType } from "../Utils/types";
 import { useSelector } from "react-redux";
 import { RootState } from "../Redux/store";
 import { useNavigate } from "react-router";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const LoginSignUp = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
+  const user = useSelector((state: RootState) => state.auth.user);
 
-  const [formState, setFormState ] = useState({
+
+  useEffect(() => {
+    if (user) {
+      setUserToLocalStorage(user);
+      navigate("/"); // Redirect to meme feed if user is logged in
+    }
+  }, [user, navigate]);
+
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const [formState, setFormState] = useState({
     firstName: "",
     lastName: "",
     email: "",
@@ -33,47 +50,49 @@ const LoginSignUp = () => {
     passwordsMatch: true,
   });
 
-  const user = useSelector((state: RootState) => state.auth.user);
 
   const handleToggle = () => {
     setIsLogin(!isLogin);
   };
 
   const setUserToLocalStorage = (user: UsersType | null) => {
-    localStorage.setItem('userLoggedIn', JSON.stringify(user));
-  }
+    localStorage.setItem("userLoggedIn", JSON.stringify(user));
+  };
 
   const handleLogIn = (email: string, password: string) => {
     dispatch(loginUser({ email, password }));
-    setUserToLocalStorage(user);
   };
 
   const validateUserInputs = () => {
-    const inputsNotEmpty = Object.values(formState).every(field => field !== '');
-    setErrors(prevState => ({ ...prevState, validatedInputs: inputsNotEmpty }));
+    const inputsNotEmpty = Object.values(formState).every(
+      (field) => field !== ""
+    );
+    setErrors((prevState) => ({
+      ...prevState,
+      validatedInputs: inputsNotEmpty,
+    }));
   };
 
   const checkIfPasswordsMatch = () => {
     const passwordsMatch = formState.password === formState.verifyPassword;
-    setErrors(prevState => ({ ...prevState, passwordsMatch }));
+    setErrors((prevState) => ({ ...prevState, passwordsMatch }));
   };
 
   const handleSignUp = () => {
-    validateUserInputs()
+    validateUserInputs();
     checkIfPasswordsMatch();
 
-    if(errors.validatedInputs && errors.passwordsMatch){
+    if (errors.validatedInputs && errors.passwordsMatch) {
       const newUserData: NewUserType = {
         firstName: formState.firstName,
         lastName: formState.lastName,
         email: formState.email,
         password: formState.password,
-        verifyPasswordInput: formState.verifyPassword
+        verifyPasswordInput: formState.verifyPassword,
       };
       dispatch(signUpUser(newUserData));
-      setUserToLocalStorage(user);
     } else {
-      alert("Please ensure all fields are filled out and passwords match.")
+      alert("Please ensure all fields are filled out and passwords match.");
     }
   };
 
@@ -87,18 +106,12 @@ const LoginSignUp = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
     setFormState({
       ...formState,
       [name]: value,
     });
   };
-
-  useEffect(() => {
-    if (user) {
-      navigate('/'); // Redirect to meme feed if user is logged in
-    }
-  }, [user, navigate]);
 
   return (
     <Container maxWidth="sm">
@@ -160,25 +173,53 @@ const LoginSignUp = () => {
           fullWidth
           name="password"
           label="Password"
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           id="password"
           autoComplete="current-password"
           value={formState.password}
           onChange={handleChange}
+          InputProps={{  // This prop sets the end adornment
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleTogglePasswordVisibility}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            )
+          }}
         />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          name="verifyPassword"
-          label="Password"
-          type="password"
-          id="verifyPassword"
-          autoComplete="current-password"
-          value={formState.verifyPassword}
-          onChange={handleChange}
-        />
+        {!isLogin && (
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="verifyPassword"
+            label="Password"
+            type={showPassword ? 'text' : 'password'}
+            id="verifyPassword"
+            autoComplete="current-password"
+            value={formState.verifyPassword}
+            onChange={handleChange}
+            InputProps={{  // This prop sets the end adornment
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleTogglePasswordVisibility}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              )
+            }}
+          />
+        )}
         <Button
           type="submit"
           fullWidth
