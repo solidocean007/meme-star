@@ -32,12 +32,14 @@ export const MemeQuotes = ({ quotes, currentUser }: MemeQuotesProps) => {
     try {
       await deleteQuote(quoteId);
       alert(`${message}`)
-    } catch {
-      error?
+    } catch (error) {
+      alert(`Error: ${error}`)
     }
   };
 
   const toggleLikeQuote = () => {
+    // if the user hasn't liked the quote before call the addLikedQuote fetch put request to make one
+    // if the user already likes the quote call the deleteLikedQuote fetch delete request
     return;
   };
 

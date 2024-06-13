@@ -8,9 +8,8 @@ export const deleteLikedQuote = async (likedQuoteId: string) => {
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
-    return { message: "Quote deleted successfully" };
   } catch (error) {
-    console.error("Error deleting quote:", error);
+    console.error("Error unliking quote:", error);
     throw error;
   }
 };
