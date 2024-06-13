@@ -14,7 +14,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../Redux/store";
 import { LogoutSharp } from "@mui/icons-material";
 import { useNavigate } from "react-router";
-import { logout } from "../Redux/authSlice";
+import { loginUser, logout } from "../Redux/authSlice";
+import { useEffect } from "react";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -32,6 +33,13 @@ const HomePage = () => {
     dispatch(logout());
     navigate('/signup');
   }
+
+  useEffect(()=> {
+    const userInLocalStorage = localStorage.getItem('user')
+    if (userInLocalStorage){
+      dispatch(loginUser(userInLocalStorage));
+    }
+  },)
 
   return (
     <>

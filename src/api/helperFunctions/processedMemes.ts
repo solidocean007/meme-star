@@ -14,10 +14,11 @@ export const processMemes =({memes, users, quotes, likedQuotes, likedMemes}: pro
     ...thisMeme,
     CreatedBy: users.find((userFromDB: UsersType) => userFromDB.id === thisMeme.id),  // User who posted the meme
     allQuotes: quotes.filter((quoteFromDB: QuoteType) => quoteFromDB.memeId === thisMeme.id).map((quoteForThisMeme : QuoteType) => {
+      const userForThisQuote = users.find((userFromDB: UsersType) => userFromDB.id === quoteForThisMeme.userId);
       return {
         ...quoteForThisMeme,
-        // userNameQuote: users.find((userFromDB: UsersType) => userFromDB.id === quoteForThisMeme.userId)?.name,
-        userNameQuote: users.find((userFromDB: UsersType) => userFromDB.id === quoteForThisMeme.userId)?.name || '',   // User who wrote the quote
+        // userNameQuote: users.find((userFromDB: UsersType) => userFromDB.id === quoteForThisMeme.userId)?.firstName || '',   
+        userNameQuote: `${userForThisQuote?.firstName} ${userForThisQuote?.lastName}`,   
         quoteLikedBy: likedQuotes.filter((likedQuoteFromDB: LikedQuotesType) => likedQuoteFromDB.quoteId === quoteForThisMeme.id).map((lq: LikedQuotesType) => lq.userId)  // Array of user IDs who liked the quote
       };
     }),

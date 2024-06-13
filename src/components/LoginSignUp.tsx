@@ -71,6 +71,7 @@ const LoginSignUp = () => {
         verifyPasswordInput: formState.verifyPassword
       };
       dispatch(signUpUser(newUserData));
+      setUserToLocalStorage(user);
     } else {
       alert("Please ensure all fields are filled out and passwords match.")
     }
