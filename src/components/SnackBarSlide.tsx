@@ -1,52 +1,39 @@
-import { SlideProps, Snackbar } from "@mui/material"
+import React from "react";
+import { Slide, Snackbar, Alert, SlideProps } from "@mui/material";
 
-function SlideTransition(props: SlideProps){
-  return <Slide {...props} direction="down"/>;
+// Define the slide transition function
+function SlideTransition(props: SlideProps) {
+  return <Slide {...props} direction="down" />;
 }
 
-const handleClose = () => {
-  setState({
-    ...state,
-    open: false,
-  });
+// Define the SnackBarSlide component
+const SnackBarSlide = ({ message, type }: { message: string; type: "success" | "error" }) => {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
+
+  React.useEffect(() => {
+    setOpen(true);
+  }, [message]);
+
+  return (
+    <Snackbar
+      open={open}
+      onClose={handleClose}
+      TransitionComponent={SlideTransition}
+      autoHideDuration={3000}
+      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+    >
+      <Alert onClose={handleClose} severity={type}>
+        {message}
+      </Alert>
+    </Snackbar>
+  );
 };
 
-export const SnackBarSlide = (message) => {
-  const [state, setState] = React.useState<{
-    open: boolean;
-    Transition: React.ComponentType<
-      TransitionProps & {
-        children: React.ReactElement<any, any>;
-      }
-    >;
-  }>({
-    open: false,
-    Transition: Fade,
-  });
-
-  const handleClick =
-    (
-      Transition: React.ComponentType<
-        TransitionProps & {
-          children: React.ReactElement<any, any>;
-        }
-      >,
-    ) =>
-    () => {
-      setState({
-        open: true,
-        Transition,
-      });
-    };
-
-  return {
-    <Snackbar
-      open={state.open}
-      onClose={handleClose}
-      TransitionComponent={SlideTransition}}
-      message={message}
-      key={state.Transition.name}
-      autoHideDuration={1200}
-    />
-  }
-}
+export default SnackBarSlide;
