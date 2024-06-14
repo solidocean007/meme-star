@@ -1,4 +1,4 @@
-// src/app/store.ts
+// src/Redux/store.ts
 import { configureStore } from "@reduxjs/toolkit";
 import memeSlice from "./memeSlice";
 import authSlice from "./authSlice";

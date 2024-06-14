@@ -1,25 +1,24 @@
 import AppRoutes from "./Utils/appRoutes";
 import { BrowserRouter as Router } from "react-router-dom";
-import { Provider, useDispatch } from "react-redux";
-import { store } from "./Redux/store";
 import { Container } from "@mui/material";
 import { useEffect } from "react";
 import { setUser } from "./Redux/authSlice";
+import { useAppDispatch } from "./Redux/hook";
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
-    // Attempt to retrieve the user data from local storage
     const storedUserData = localStorage.getItem('userLoggedIn');
     if (storedUserData) {
       const userData = JSON.parse(storedUserData);
-      dispatch(setUser(userData)); // Dispatch an action to set user data in the Redux store
+      dispatch(setUser(userData));
     }
   }, [dispatch]);
+
   return (
     <>
-      <Provider store={store}>
-        <Router>
+      <Router>
           <Container
             component="main"
             maxWidth="xl"
@@ -35,7 +34,6 @@ function App() {
             <AppRoutes />
           </Container>
         </Router>
-      </Provider>
     </>
   );
 }

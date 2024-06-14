@@ -40,9 +40,11 @@ export const MemeQuotes = ({ quotes, currentUser }: MemeQuotesProps) => {
       switch (action) {
         case "like":
           await addLikedQuote(quote, currentUser.id);
+          // i need to add this likedquote to redux
           break;
         case "unlike":
           await deleteLikedQuote(quote.id);
+          // i need to delete this likedquote from redux
           break;
         case "delete":
           await deleteQuote(quote.id);
