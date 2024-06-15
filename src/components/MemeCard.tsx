@@ -9,7 +9,7 @@ import { useNavigate } from "react-router";
 // import { useSelector } from "react-redux";
 // import { RootState } from "../Redux/store";
 
-const MemeCard = ({ meme, loggedInUser }: { meme: MemeType, loggedInUser: UsersType }) => {
+const MemeCard = ({ meme, loggedInUser }: { meme: MemeType, loggedInUser: UsersType | null }) => {
   const navigate = useNavigate();
   const captionWithMostLikes = leadingQuoteForMeme(meme);
   const [openQuotes, setOpenQuotes] = useState(false);

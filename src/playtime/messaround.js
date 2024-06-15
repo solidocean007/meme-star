@@ -78,9 +78,9 @@ const onError = (error) => {
   console.log(`ERROR: ${error}`)
 }
 
-getWeather()
-  .then(displayData)
-  .catch(onError)
+// getWeather()
+//   .then(displayData)
+//   .catch(onError)
 
 // const getWeatherIcon = (weatherData) => {
 //   return new Promise(function(resolved, rejected){

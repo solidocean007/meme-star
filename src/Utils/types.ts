@@ -27,7 +27,7 @@ export interface QuoteType {
   'text': string,
   'userId': string,
   'userNameQuote': string,
-  'quoteLikedBy': string[],
+  'quoteLikes': LikedQuotesType[],
 }
 
 export interface LikedQuotesType {

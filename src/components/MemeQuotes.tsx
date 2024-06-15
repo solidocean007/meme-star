@@ -1,4 +1,3 @@
-// MemeQuotes.tsx
 import {
   Box,
   Button,
@@ -17,19 +16,21 @@ import { Delete, ThumbDown, ThumbUp } from "@mui/icons-material";
 import { deleteQuote } from "../api/deleteQuote";
 import { addLikedQuote } from "../api/addLikedQuote";
 import { deleteLikedQuote } from "../api/deleteLikedQuote";
+import { useAppDispatch } from "../Redux/hook";
+import { updateLikedQuotes } from "../Redux/memeSlice";
 
 interface MemeQuotesProps {
   quotes: QuoteType[] | undefined;
-  currentUser: UsersType;
+  currentUser: UsersType | null;
 }
 
 export const MemeQuotes = ({ quotes, currentUser }: MemeQuotesProps) => {
+  const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
   const [newCaption, setNewCaption] = useState("");
-  if (!quotes) return null;
+  if (!quotes || !currentUser) return null;
 
-  const userAlreadyQuoted =
-    quotes?.some((quote) => quote.userId === currentUser.id) ?? false;
+  const userAlreadyQuoted = quotes.some((quote) => quote.userId === currentUser.id);
 
   const handleInteraction = async (
     quote: QuoteType,
@@ -40,14 +41,18 @@ export const MemeQuotes = ({ quotes, currentUser }: MemeQuotesProps) => {
       switch (action) {
         case "like":
           await addLikedQuote(quote, currentUser.id);
-          // i need to add this likedquote to redux
+          dispatch(updateLikedQuotes({ memeId: quote.memeId, quoteId: quote.id, userId: currentUser.id, action: 'like' }));
           break;
-        case "unlike":
-          await deleteLikedQuote(quote.id);
-          // i need to delete this likedquote from redux
+          case "unlike": {
+            const likeId = quote.quoteLikes.find(like => like.userId === currentUser.id)?.id;
+            if (likeId) {
+              await deleteLikedQuote(likeId);
+              dispatch(updateLikedQuotes({ memeId: quote.memeId, quoteId: quote.id, userId: currentUser.id, action: 'unlike' }));
+            }
           break;
         case "delete":
-          await deleteQuote(quote.id);
+          await deleteQuote(quote.id)
+          dispatch(deleteQuote())// dont i need to update redux here?
           break;
         default:
           break;
@@ -73,46 +78,28 @@ export const MemeQuotes = ({ quotes, currentUser }: MemeQuotesProps) => {
               color: "text.primary",
             }}
           >
-            {quotes && quotes.length > 0 ? (
-              quotes.map((quote, index) => (
-                <ListItem key={index}>
-                  <ListItemText
-                    primary={quote.text}
-                    secondary={`by ${quote.userNameQuote}`}
-                  />
-
-                  {quote.userId === currentUser.id ? (
-                    <IconButton
-                      onClick={() => handleInteraction(quote, "delete")}
-                    >
-                      <Delete />
-                    </IconButton>
-                  ) : (
-                    <IconButton
-                      onClick={() =>
-                        handleInteraction(
-                          quote,
-                          quote.quoteLikedBy.includes(currentUser.id)
-                            ? "unlike"
-                            : "like"
-                        )
-                      }
-                    >
-                      {quote.quoteLikedBy.includes(currentUser.id) ? (
-                        <ThumbDown />
-                      ) : (
-                        <ThumbUp />
-                      )}
-                    </IconButton>
-                  )}
-                  <Typography>{quote.quoteLikedBy.length}</Typography>
-                </ListItem>
-              ))
-            ) : (
-              <ListItem>
-                <ListItemText primary="No quotes available for this meme." />
+            {quotes.map((quote, index) => (
+              <ListItem key={index}>
+                <ListItemText
+                  primary={quote.text}
+                  secondary={`by ${quote.userNameQuote}`}
+                />
+                {quote.userId === currentUser.id ? (
+                  <IconButton onClick={() => handleInteraction(quote, "delete")}>
+                    <Delete />
+                  </IconButton>
+                ) : (
+                  <IconButton onClick={() => handleInteraction(
+                      quote,
+                      quote.quoteLikes.some(like => like.userId === currentUser.id) ? "unlike" : "like"
+                    )}
+                  >
+                    {quote.quoteLikes.some(like => like.userId === currentUser.id) ? <ThumbDown /> : <ThumbUp />}
+                  </IconButton>
+                )}
+                <Typography>{quote.quoteLikes.length}</Typography>
               </ListItem>
-            )}
+            ))}
           </List>
           {!userAlreadyQuoted && (
             <Box sx={{ my: 2 }}>

@@ -1,23 +1,25 @@
 // MemeFeed.tsx
 import React, { useEffect } from "react";
 import { FixedSizeList as List } from "react-window";
-import { MemeType } from "../Utils/types";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { fetchMemes } from "../Redux/memeSlice";
 import { RootState } from "../Redux/store";
 import MemeCard from "./MemeCard";
 import { Box } from "@mui/material";
+import { useAppDispatch } from "../Redux/hook";
 
 const MemeFeed: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const loggedInUser = useSelector((state: RootState) => state.auth.user);
   const { entities: memes, loading } = useSelector(
     (state: RootState) => state.memes
   );
-  console.log(loggedInUser)
+
   useEffect(() => {
-    dispatch(fetchMemes()); // Argument of type 'AsyncThunkAction<any, void, AsyncThunkConfig>' is not assignable to parameter of type 'UnknownAction'
+    dispatch(fetchMemes());
   }, [dispatch]);
+
+  console.log(memes)
 
   if (loading === "loading") {
     return <div>Loading...</div>;

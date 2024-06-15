@@ -1,6 +1,5 @@
-// memesSlice.js
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { MemeType } from "../Utils/types";
+import { MemeType, LikedQuotesType } from "../Utils/types";
 import { getAllData } from "../api/getAllData";
 import { processMemes } from "../api/helperFunctions/processedMemes";
 
@@ -8,34 +7,26 @@ interface FetchError {
   message: string;
 }
 
-// Action payloads
-interface LikeQuotePayload {
+interface UpdateQuotePayload {
   memeId: string;
   quoteId: string;
-  userId: string;
+  likedQuote: LikedQuotesType;
+  action: 'like' | 'unlike';
 }
 
-interface DeleteQuotePayload {
-  memeId: string;
-  quoteId: string;
-}
-
-export const fetchMemes = createAsyncThunk<
-  MemeType[],
-  void,
-  { rejectValue: FetchError }
->("memes/fetchMemes", async (_, { rejectWithValue }) => {
-  try {
-    const response = await getAllData();
-    const processedMemes = processMemes(response);
-    return processedMemes;
-  } catch (error) {
-    const fetchError: FetchError = {
-      message: error instanceof Error ? error.message : "Unknown error",
-    };
-    return rejectWithValue(fetchError);
+export const fetchMemes = createAsyncThunk<MemeType[], void, { rejectValue: FetchError }>(
+  'memes/fetchMemes',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await getAllData();
+      const processedMemes = processMemes(response);
+      return processedMemes;
+    } catch (error) {
+      const fetchError: FetchError = { message: error instanceof Error ? error.message : 'Unknown error' };
+      return rejectWithValue(fetchError);
+    }
   }
-});
+);
 
 interface MemeState {
   entities: MemeType[];
@@ -54,16 +45,16 @@ const memesSlice = createSlice({
   initialState,
   reducers: {
     updateLikedQuotes: (state, action: PayloadAction<UpdateQuotePayload>) => {
-      const { memeId, quoteId, userId, action: updateAction } = action.payload;
+      const { memeId, quoteId, likedQuote, action: updateAction } = action.payload;
       const meme = state.entities.find(m => m.id === memeId);
-      const quote = meme?.allQuotes.find(q => q.id === quoteId);
+      const quote = meme?.allQuotes?.find(q => q.id === quoteId);
       if (quote) {
         switch (updateAction) {
           case 'like':
-            quote.quoteLikedBy.push(userId);
+            quote.quoteLikes.push(likedQuote);
             break;
           case 'unlike':
-            quote.quoteLikedBy = quote.quoteLikedBy.filter(id => id !== userId);
+            quote.quoteLikes = quote.quoteLikes.filter(like => like.id !== likedQuote.id);
             break;
           default:
             break;
@@ -74,7 +65,7 @@ const memesSlice = createSlice({
       const { memeId, quoteId } = action.payload;
       const meme = state.entities.find(m => m.id === memeId);
       if (meme) {
-        meme.allQuotes = meme.allQuotes.filter(q => q.id !== quoteId);
+        meme.allQuotes = meme.allQuotes?.filter(q => q.id !== quoteId);
       }
     }
   },
@@ -102,4 +93,7 @@ const memesSlice = createSlice({
   },
 });
 
+export const { updateLikedQuotes, deleteQuote } = memesSlice.actions;
+
 export default memesSlice.reducer;
+
