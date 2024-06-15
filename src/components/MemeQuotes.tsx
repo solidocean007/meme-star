@@ -10,50 +10,101 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import React, { useState } from "react";
 import { QuoteType, UsersType } from "../Utils/types";
 import { Delete, ThumbDown, ThumbUp } from "@mui/icons-material";
 import { deleteQuote } from "../api/deleteQuote";
 import { addLikedQuote } from "../api/addLikedQuote";
 import { deleteLikedQuote } from "../api/deleteLikedQuote";
 import { useAppDispatch } from "../Redux/hook";
-import { updateLikedQuotes } from "../Redux/memeSlice";
+import {
+  updateLikedQuotes,
+  deleteQuote as deleteQuoteRedux,
+} from "../Redux/memeSlice";
 
 interface MemeQuotesProps {
   quotes: QuoteType[] | undefined;
   currentUser: UsersType | null;
+  handleOpen: () => void;
 }
 
-export const MemeQuotes = ({ quotes, currentUser }: MemeQuotesProps) => {
+export const MemeQuotes = ({
+  quotes,
+  currentUser,
+  handleOpen,
+}: MemeQuotesProps) => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
   const [newCaption, setNewCaption] = useState("");
   if (!quotes || !currentUser) return null;
 
-  const userAlreadyQuoted = quotes.some((quote) => quote.userId === currentUser.id);
+  const userAlreadyQuoted = quotes.some(
+    (quote) => quote.userId === currentUser.id
+  );
 
+  const reOpenQuotes = async () => {
+    try {
+      await handleOpen();
+      console.log("attempted to reOpen");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleInteraction = async (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     quote: QuoteType,
     action: "like" | "unlike" | "delete"
   ) => {
-    setLoading(true);
+    // console.log("Event target:", event.target); // Check what is being clicked
+    // console.log("Event currentTarget:", event.currentTarget); // The element that has the event listener
+    event.preventDefault();
+    event.stopPropagation();
+
+    // setLoading(true);
     try {
       switch (action) {
-        case "like":
+        case "like": {
+          const likeResponse = await addLikedQuote(quote, currentUser.id);
           await addLikedQuote(quote, currentUser.id);
-          dispatch(updateLikedQuotes({ memeId: quote.memeId, quoteId: quote.id, userId: currentUser.id, action: 'like' }));
+          dispatch(
+            updateLikedQuotes({
+              memeId: quote.memeId,
+              quoteId: quote.id,
+              likedQuote: likeResponse,
+              action: "like",
+            })
+          );
+          handleOpen();
+
           break;
-          case "unlike": {
-            const likeId = quote.quoteLikes.find(like => like.userId === currentUser.id)?.id;
-            if (likeId) {
-              await deleteLikedQuote(likeId);
-              dispatch(updateLikedQuotes({ memeId: quote.memeId, quoteId: quote.id, userId: currentUser.id, action: 'unlike' }));
-            }
+        }
+        case "unlike": {
+          const likedQuote = quote.quoteLikes.find(
+            (like) => like.userId === currentUser.id
+          );
+          if (likedQuote) {
+            await deleteLikedQuote(likedQuote.id);
+            dispatch(
+              updateLikedQuotes({
+                memeId: quote.memeId,
+                quoteId: quote.id,
+                likedQuote: likedQuote,
+                action: "unlike",
+              })
+            );
+            handleOpen();
+          }
           break;
-        case "delete":
-          await deleteQuote(quote.id)
-          dispatch(deleteQuote())// dont i need to update redux here?
+        }
+        case "delete": {
+          await deleteQuote(quote.id);
+          dispatch(
+            deleteQuoteRedux({ memeId: quote.memeId, quoteId: quote.id })
+          );
+          handleOpen();
+
           break;
+        }
         default:
           break;
       }
@@ -84,17 +135,36 @@ export const MemeQuotes = ({ quotes, currentUser }: MemeQuotesProps) => {
                   primary={quote.text}
                   secondary={`by ${quote.userNameQuote}`}
                 />
+
                 {quote.userId === currentUser.id ? (
-                  <IconButton onClick={() => handleInteraction(quote, "delete")}>
+                  <IconButton
+                    onClick={(event) =>
+                      handleInteraction(event, quote, "delete")
+                    }
+                  >
                     <Delete />
                   </IconButton>
                 ) : (
-                  <IconButton onClick={() => handleInteraction(
-                      quote,
-                      quote.quoteLikes.some(like => like.userId === currentUser.id) ? "unlike" : "like"
-                    )}
+                  <IconButton
+                    onClick={(event) =>
+                      handleInteraction(
+                        event,
+                        quote,
+                        quote.quoteLikes.some(
+                          (like) => like.userId === currentUser.id
+                        )
+                          ? "unlike"
+                          : "like"
+                      )
+                    }
                   >
-                    {quote.quoteLikes.some(like => like.userId === currentUser.id) ? <ThumbDown /> : <ThumbUp />}
+                    {quote.quoteLikes.some(
+                      (like) => like.userId === currentUser.id
+                    ) ? (
+                      <ThumbDown />
+                    ) : (
+                      <ThumbUp />
+                    )}
                   </IconButton>
                 )}
                 <Typography>{quote.quoteLikes.length}</Typography>

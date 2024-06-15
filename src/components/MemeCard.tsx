@@ -1,30 +1,38 @@
 // MemeCard.tsx
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, CardMedia, Box, Modal, Button } from "@mui/material";
 import { MemeType, UsersType } from "../Utils/types";
 import { MemeQuotes } from "./MemeQuotes";
 import { leadingQuoteForMeme } from "../api/helperFunctions/leadingQuoteForMeme";
 import CaptionWithLikes from "./CaptionWithLikes";
 import { useNavigate } from "react-router";
-// import { useSelector } from "react-redux";
-// import { RootState } from "../Redux/store";
 
-const MemeCard = ({ meme, loggedInUser }: { meme: MemeType, loggedInUser: UsersType | null }) => {
+const MemeCard = ({
+  meme,
+  loggedInUser,
+}: {
+  meme: MemeType;
+  loggedInUser: UsersType | null;
+}) => {
   const navigate = useNavigate();
   const captionWithMostLikes = leadingQuoteForMeme(meme);
   const [openQuotes, setOpenQuotes] = useState(false);
-  // console.log("meme: ", meme);
   const handleClose = () => {
     setOpenQuotes(false);
   };
 
   const handleOpen = () => {
-    setOpenQuotes(true);
+    setOpenQuotes(prev => !prev);  // Correct way to toggle
+  };
+  
+  const handleGoToSignUp = () => {
+    navigate("/signup");
   };
 
-  const handleGoToSignUp = () => {
-    navigate('/signup')
-  }
+  useEffect(() => {
+    console.log("openQuotes is now:", openQuotes); // this should always give the current value regardless of timing right?
+  }, [openQuotes]);
+  
 
   const style = {
     position: "absolute",
@@ -38,7 +46,7 @@ const MemeCard = ({ meme, loggedInUser }: { meme: MemeType, loggedInUser: UsersT
     boxShadow: 24,
     p: 4,
   };
-  // console.log(meme.allQuotes)
+  
   return (
     <Card sx={{ maxWidth: 600, m: 2 }}>
       <CardMedia
@@ -49,6 +57,8 @@ const MemeCard = ({ meme, loggedInUser }: { meme: MemeType, loggedInUser: UsersT
         // alt={meme.altImageText}
         sx={{ position: "relative" }}
       />
+      <Button onClick={() => setOpenQuotes(!openQuotes)}>Toggle Modal</Button>
+
       <Box
         sx={{
           position: "absolute",
@@ -63,19 +73,27 @@ const MemeCard = ({ meme, loggedInUser }: { meme: MemeType, loggedInUser: UsersT
       >
         <CaptionWithLikes caption={captionWithMostLikes} />
       </Box>
-     <Button onClick={ loggedInUser ? handleOpen : handleGoToSignUp}>
-        ({loggedInUser ? `${meme.allQuotes && meme.allQuotes?.length - 1} Other Quotes. Now add yours!` : 'login to comment yours'})
+      <Button onClick={loggedInUser ? handleOpen : handleGoToSignUp}>
+        (
+        {loggedInUser
+          ? `${
+              meme.allQuotes && meme.allQuotes?.length - 1
+            } Other Quotes. Now add yours!`
+          : "login to comment yours"}
+        )
       </Button>
-      <Modal // this modal should be absolutely positioned center to the window or body
+      <Modal
         open={openQuotes}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <MemeQuotes quotes={meme.allQuotes} currentUser={loggedInUser} />
+        
+        <MemeQuotes quotes={meme.allQuotes} currentUser={loggedInUser} handleOpen={handleOpen}/>
         </Box>
       </Modal>
+      
     </Card>
   );
 };

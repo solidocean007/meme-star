@@ -11,7 +11,7 @@ const CaptionWithLikes = ({ caption }: CaptionWithLikesProps) => {
   if (!caption) return null; // Handle null case
 
   const text = caption.text;
-  const numberOfLikes = caption.quoteLikedBy.length;
+  const numberOfLikes = caption.quoteLikes.length;
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', pr: 10 }}>

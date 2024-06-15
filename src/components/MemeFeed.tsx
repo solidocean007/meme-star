@@ -19,8 +19,6 @@ const MemeFeed: React.FC = () => {
     dispatch(fetchMemes());
   }, [dispatch]);
 
-  console.log(memes)
-
   if (loading === "loading") {
     return <div>Loading...</div>;
   }

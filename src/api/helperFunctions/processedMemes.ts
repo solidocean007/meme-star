@@ -19,7 +19,7 @@ export const processMemes =({memes, users, quotes, likedQuotes, likedMemes}: pro
         ...quoteForThisMeme,
         // userNameQuote: users.find((userFromDB: UsersType) => userFromDB.id === quoteForThisMeme.userId)?.firstName || '',   
         userNameQuote: `${userForThisQuote?.firstName} ${userForThisQuote?.lastName}`,   
-        quoteLikedBy: likedQuotes.filter((likedQuoteFromDB: LikedQuotesType) => likedQuoteFromDB.quoteId === quoteForThisMeme.id).map((lq: LikedQuotesType) => lq.userId)  // Array of user IDs who liked the quote
+        quoteLikes: likedQuotes.filter((likedQuoteFromDB: LikedQuotesType) => likedQuoteFromDB.quoteId === quoteForThisMeme.id) // Array of user IDs who liked the quote
       };
     }),
     likesCount: likedMemes.filter((likedMemesFromDB: LikedMemesType) => likedMemesFromDB.memeId === thisMeme.id).length  // Total likes for the meme
