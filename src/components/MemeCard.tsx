@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Card, CardMedia, Box, Modal, Button } from "@mui/material";
 import { MemeType, UsersType } from "../Utils/types";
 import { MemeQuotes } from "./MemeQuotes";
-import { leadingQuoteForMeme } from "../api/helperFunctions/leadingQuoteForMeme";
+import { leadingQuoteForMeme } from "../helperFunctions/leadingQuoteForMeme";
 import CaptionWithLikes from "./CaptionWithLikes";
 import { useNavigate } from "react-router";
 
@@ -14,8 +14,10 @@ const MemeCard = ({
   meme: MemeType;
   loggedInUser: UsersType | null;
 }) => {
+  const theMemesQuotes = [...meme.allQuotes];
   const navigate = useNavigate();
   const captionWithMostLikes = leadingQuoteForMeme(meme);
+  const [memeQuotes, setMemeQuotes] = useState(theMemesQuotes);
   const [openQuotes, setOpenQuotes] = useState(false);
   const handleClose = () => {
     setOpenQuotes(false);
@@ -90,7 +92,7 @@ const MemeCard = ({
       >
         <Box sx={style}>
         
-        <MemeQuotes quotes={meme.allQuotes} currentUser={loggedInUser} handleOpen={handleOpen}/>
+        <MemeQuotes quotes={memeQuotes} setMemeQuotes={setMemeQuotes} currentUser={loggedInUser} handleOpen={handleOpen}/>
         </Box>
       </Modal>
       

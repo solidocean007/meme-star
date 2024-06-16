@@ -1,7 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { MemeType, LikedQuotesType } from "../Utils/types";
 import { getAllData } from "../api/getAllData";
-import { processMemes } from "../api/helperFunctions/processedMemes";
+import { processMemes } from "../helperFunctions/processedMemes";
 
 interface FetchError {
   message: string;

@@ -1,5 +1,5 @@
 // api/processMemes.js
-import { LikedMemesType, LikedQuotesType, MemeType, QuoteType, UsersType } from "../../Utils/types";
+import { LikedMemesType, LikedQuotesType, MemeType, QuoteType, UsersType } from "../Utils/types";
 
 interface processedMemesProps {
   memes: MemeType[];
