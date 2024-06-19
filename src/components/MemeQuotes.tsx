@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   CardContent,
-  CircularProgress,
   IconButton,
   List,
   ListItem,
@@ -11,113 +10,138 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import { QuoteType, UsersType } from "../Utils/types";
-import { Delete, FavoriteBorder, Fingerprint, ThumbUp, ThumbUpAltOutlined } from "@mui/icons-material";
-import { deleteQuote } from "../api/deleteQuote";
-import { addLikedQuote } from "../api/addLikedQuote";
-import { deleteLikedQuote } from "../api/deleteLikedQuote";
-import { useAppDispatch } from "../Redux/hook";
-import {
-  updateLikedQuotes,
-  deleteQuote as deleteQuoteRedux,
-} from "../Redux/memeSlice";
+import { LikedQuotesType, QuoteType, UsersType } from "../Utils/types";
+import { Delete, FavoriteBorder } from "@mui/icons-material";
 import Favorite from "@mui/icons-material/Favorite";
+import { NewQuoteType } from "./MemeCard";
 
 interface MemeQuotesProps {
-  quotes: QuoteType[] | undefined;
-  setMemeQuotes: React.Dispatch<React.SetStateAction<any[]>>;
+  memeId: string;
+  localQuotes: QuoteType[] | undefined;
+  setLocalQuotes: React.Dispatch<React.SetStateAction<QuoteType[]>>;
+  setNewQuote: React.Dispatch<React.SetStateAction<NewQuoteType | undefined>>;
   currentUser: UsersType | null;
-  handleOpen: () => void;
 }
 
 export const MemeQuotes = ({
-  quotes,
-  setMemeQuotes,
+  memeId,
+  localQuotes,
+  setLocalQuotes,
+  setNewQuote,
   currentUser,
-  handleOpen,
 }: MemeQuotesProps) => {
-  const dispatch = useAppDispatch();
-  const [loading, setLoading] = useState(false);
   const [newCaption, setNewCaption] = useState("");
-  if (!quotes || !currentUser) return null;
+  if (!localQuotes || !currentUser) return null;
 
-  const userAlreadyQuoted = quotes.some(
+  const userAlreadyQuoted = localQuotes.some(
     (quote) => quote.userId === currentUser.id
   );
 
+  const handleDeleteQuote = (quoteId: string | undefined) => {
+    const updatedQuotes = localQuotes.filter((quote) => quote.id !== quoteId);
+    setLocalQuotes(updatedQuotes);
+  };
+
+  const handleToggleFavoriteQuote = (targetQuote: QuoteType) => {
+    let foundFavorite = false;
+    const updatedQuotes = localQuotes.map(quote => {
+      // Filter out the current user's like from all quotes
+      const usersFavoriteQuote = quote.quoteLikes.filter(like => like.userId !== currentUser.id);
+      let quoteLikes = usersFavoriteQuote;
+  
+      // If it's the target quote and no favorite has been added yet, add a new like
+      if (!foundFavorite && quote.id === targetQuote.id) {
+        const newLike: LikedQuotesType = {
+          userId: currentUser.id,
+          quoteId: quote.id
+        };
+        quoteLikes = [...usersFavoriteQuote, newLike];
+        foundFavorite = true; // Ensures only one like can be added
+      }
+  
+      return { ...quote, quoteLikes };
+    });
+  
+    setLocalQuotes(updatedQuotes);
+  };
+  
+  
   
 
-  return (
-    <div>
-      {loading ? (
-        <CircularProgress />
-      ) : (
-        <CardContent>
-          <List
-            sx={{
-              width: "100%",
-              bgcolor: "background.default",
-              color: "text.primary",
-            }}
-          >
-            {quotes.map((quote, index) => (
-              <ListItem key={index}>
-                <ListItemText
-                  primary={quote.text}
-                  secondary={`by ${quote.userNameQuote}`}
-                />
+  const handleSubmitNewQuote = (memeId: string) => {
+    if (newCaption) {
+      const newQuote: QuoteType = {
+        memeId: memeId,
+        text: newCaption,
+        userId: currentUser?.id,
+        userNameQuote: `${currentUser?.firstName} ${currentUser?.lastName}`,
+        quoteLikes: [],
+      };
+      setNewQuote(newQuote);
+      setNewCaption("");
+    }
+  };
 
-                {quote.userId === currentUser.id ? (
-                  <IconButton
-                    onClick={(event) =>
-                      handleInteraction(event, quote, "delete")
-                    }
-                  >
-                    <Delete />
-                  </IconButton>
+  const currentUsersQuote = (quote: QuoteType) => {
+    return quote.userId === currentUser.id;
+  };
+
+  return (
+    <CardContent>
+      <List
+        sx={{
+          width: "100%",
+          bgcolor: "background.default",
+          color: "text.primary",
+        }}
+      >
+        {localQuotes?.map((quote, index) => (
+          <ListItem key={index}>
+            <ListItemText
+              primary={quote.text}
+              secondary={`by ${quote.userNameQuote}`}
+            />
+            {currentUser && currentUsersQuote(quote) ? (
+              <IconButton
+                onClick={() => {
+                  handleDeleteQuote(quote.id);
+                }}
+              >
+                <Delete />
+              </IconButton>
+            ) : (
+              <IconButton
+                onClick={() => {
+                  handleToggleFavoriteQuote(quote);
+                }}
+              >
+                {quote.quoteLikes.some(
+                  (like) => like.userId === currentUser?.id
+                ) ? (
+                  <FavoriteBorder />
                 ) : (
-                  <IconButton
-                    onClick={(event) =>
-                      handleInteraction(
-                        event,
-                        quote,
-                        quote.quoteLikes.some(
-                          (like) => like.userId === currentUser.id
-                        )
-                          ? "unlike"
-                          : "like"
-                      )
-                    }
-                  >
-                    {quote.quoteLikes.some(
-                      (like) => like.userId === currentUser.id
-                    ) ? (
-                      <Favorite />
-                    ) : (
-                      <FavoriteBorder />
-                    )}
-                  </IconButton>
+                  <Favorite />
                 )}
-                <Typography>{quote.quoteLikes.length}</Typography>
-              </ListItem>
-            ))}
-          </List>
-          {!userAlreadyQuoted && (
-            <Box sx={{ my: 2 }}>
-              <TextField
-                fullWidth
-                variant="outlined"
-                label="Add your two cents here"
-                value={newCaption}
-                onChange={(e) => setNewCaption(e.target.value)}
-              />
-              <Button variant="contained" color="primary">
-                Submit
-              </Button>
-            </Box>
-          )}
-        </CardContent>
+              </IconButton>
+            )}
+            <Typography>{quote.quoteLikes.length}</Typography>
+          </ListItem>
+        ))}
+      </List>
+      {!userAlreadyQuoted && (
+        <Box sx={{ my: 2 }}>
+          <TextField
+            fullWidth
+            variant="outlined"
+            label="Add your two cents here"
+            value={newCaption}
+            onChange={(e) => setNewCaption(e.target.value)}
+          />
+          <Button onClick={handleSubmitNewQuote(memeId)} type="submit" variant="contained" color="primary">
+            Submit
+          </Button>
+        </Box>
       )}
-    </div>
+    </CardContent>
   );
 };

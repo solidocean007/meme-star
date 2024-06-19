@@ -1,12 +1,12 @@
 export interface MemeType  {
-  'id': string,
+  'id'?: string,
   'imageUrl': string,
   'createdBy': UsersType,
   'allQuotes'?: QuoteType[],
 }
 
 export interface UsersType {
-  'id': string,
+  'id'?: string,
   'firstName': string,
   'lastName': string,
   'password': string,
@@ -22,23 +22,22 @@ export interface NewUserType {
 }
 
 export interface QuoteType {
-  'id': string,
+  'id'?: string | undefined,
   "memeId": string,
   'text': string,
-  'userId': string,
+  'userId': string | undefined,
   'userNameQuote': string,
   'quoteLikes': LikedQuotesType[],
 }
 
 export interface LikedQuotesType {
-  'id': string;     
-  'userId': string;
-  'quoteId': string;
+  'id'?: string;     
+  'userId': string | undefined;
+  'quoteId': string | undefined;
 }
 
-
 export interface LikedMemesType {
-  'id': string;        // Unique identifier for the like
+  'id'?: string;        // Unique identifier for the like
   'userId': string;
   'memeId': string;
 }

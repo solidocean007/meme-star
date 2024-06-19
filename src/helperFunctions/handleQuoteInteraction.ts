@@ -4,7 +4,7 @@ import { RootState } from "../Redux/store";
 import { QuoteType } from "../Utils/types";
 import { addLikedQuote } from "../api/addLikedQuote";
 
-export const handleInteraction = async (
+export const handleQuoteInteraction = async (
   event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   quote: QuoteType,
   action: "like" | "unlike" | "delete"

@@ -1,11 +1,17 @@
 // MemeCard.tsx
 import { useEffect, useState } from "react";
 import { Card, CardMedia, Box, Modal, Button } from "@mui/material";
-import { MemeType, UsersType } from "../Utils/types";
+import { LikedQuotesType, MemeType, QuoteType, UsersType } from "../Utils/types";
 import { MemeQuotes } from "./MemeQuotes";
 import { leadingQuoteForMeme } from "../helperFunctions/leadingQuoteForMeme";
 import CaptionWithLikes from "./CaptionWithLikes";
 import { useNavigate } from "react-router";
+import { handleQuoteInteraction } from "../helperFunctions/handleQuoteInteraction";
+import { LocalLaundryService } from "@mui/icons-material";
+import { addLikedQuote } from "../api/addLikedQuote";
+
+export type NewQuoteType = Omit<QuoteType, 'id'>;
+export type NewLikedQuoteType = Omit<LikedQuotesType, 'id'>;
 
 const MemeCard = ({
   meme,
@@ -14,27 +20,30 @@ const MemeCard = ({
   meme: MemeType;
   loggedInUser: UsersType | null;
 }) => {
-  const theMemesQuotes = [...meme.allQuotes];
   const navigate = useNavigate();
   const captionWithMostLikes = leadingQuoteForMeme(meme);
-  const [memeQuotes, setMemeQuotes] = useState(theMemesQuotes);
+  const [localQuotes, setLocalQuotes] = useState<QuoteType[]>(meme.allQuotes || []);
   const [openQuotes, setOpenQuotes] = useState(false);
-  const handleClose = () => {
-    setOpenQuotes(false);
-  };
+  const handleClose = () => setOpenQuotes(false);
+  const handleOpen = () => setOpenQuotes(true);
 
-  const handleOpen = () => {
-    setOpenQuotes(prev => !prev);  // Correct way to toggle
-  };
-  
   const handleGoToSignUp = () => {
     navigate("/signup");
   };
 
+  const handleAddingNewQuoteLike = (newQuoteLike: NewLikedQuoteType) => { // is it completely necessary to abstract this outside of the useEffect or should I just call the api function inside of the useEffect?
+    addLikedQuote(newQuoteLike);
+  }
+
   useEffect(() => {
-    console.log("openQuotes is now:", openQuotes); // this should always give the current value regardless of timing right?
-  }, [openQuotes]);
-  
+    if (!openQuotes) {
+      // handleQuoteInteraction(localQuotes);
+      // handleAddingNewQuote(newQuote);
+      if (newQuote !== null ) {
+        handleAddingNewQuoteLike(newQuote);
+      }
+    }
+  }, [meme.allQuotes, openQuotes, localQuotes]);
 
   const style = {
     position: "absolute",
@@ -48,7 +57,7 @@ const MemeCard = ({
     boxShadow: 24,
     p: 4,
   };
-  
+
   return (
     <Card sx={{ maxWidth: 600, m: 2 }}>
       <CardMedia
@@ -59,7 +68,6 @@ const MemeCard = ({
         // alt={meme.altImageText}
         sx={{ position: "relative" }}
       />
-      <Button onClick={() => setOpenQuotes(!openQuotes)}>Toggle Modal</Button>
 
       <Box
         sx={{
@@ -91,11 +99,15 @@ const MemeCard = ({
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-        
-        <MemeQuotes quotes={memeQuotes} setMemeQuotes={setMemeQuotes} currentUser={loggedInUser} handleOpen={handleOpen}/>
+          <MemeQuotes
+            memeId={meme.id}
+            localQuotes={localQuotes}
+            setLocalQuotes={setLocalQuotes}
+            setNewQuote={setNewQuote}
+            currentUser={loggedInUser}
+          />
         </Box>
       </Modal>
-      
     </Card>
   );
 };

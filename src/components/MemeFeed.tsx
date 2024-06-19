@@ -15,6 +15,8 @@ const MemeFeed: React.FC = () => {
     (state: RootState) => state.memes
   );
 
+  // console.log(memes, typeof(memes))
+
   useEffect(() => {
     dispatch(fetchMemes());
   }, [dispatch]);
