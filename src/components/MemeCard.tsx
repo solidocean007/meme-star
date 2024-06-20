@@ -1,17 +1,21 @@
 // MemeCard.tsx
 import { useEffect, useState } from "react";
 import { Card, CardMedia, Box, Modal, Button } from "@mui/material";
-import { LikedQuotesType, MemeType, QuoteType, UsersType } from "../Utils/types";
+import {
+  ChangeType,
+  LikedQuotesType,
+  MemeType,
+  QuoteType,
+  UsersType,
+} from "../Utils/types";
 import { MemeQuotes } from "./MemeQuotes";
 import { leadingQuoteForMeme } from "../helperFunctions/leadingQuoteForMeme";
 import CaptionWithLikes from "./CaptionWithLikes";
 import { useNavigate } from "react-router";
-import { handleQuoteInteraction } from "../helperFunctions/handleQuoteInteraction";
-import { LocalLaundryService } from "@mui/icons-material";
-import { addLikedQuote } from "../api/addLikedQuote";
+import { applyChanges } from "../helperFunctions/applyChanges";
 
-export type NewQuoteType = Omit<QuoteType, 'id'>;
-export type NewLikedQuoteType = Omit<LikedQuotesType, 'id'>;
+export type NewQuoteType = Omit<QuoteType, "id">;
+export type NewLikedQuoteType = Omit<LikedQuotesType, "id">;
 
 const MemeCard = ({
   meme,
@@ -22,8 +26,12 @@ const MemeCard = ({
 }) => {
   const navigate = useNavigate();
   const captionWithMostLikes = leadingQuoteForMeme(meme);
-  const [localQuotes, setLocalQuotes] = useState<QuoteType[]>(meme.allQuotes || []);
+  const [localQuotes, setLocalQuotes] = useState<QuoteType[]>(
+    meme.allQuotes || []
+  );
   const [openQuotes, setOpenQuotes] = useState(false);
+  const [pendingChanges, setPendingChanges] = useState<ChangeType[]>([]);
+
   const handleClose = () => setOpenQuotes(false);
   const handleOpen = () => setOpenQuotes(true);
 
@@ -31,19 +39,11 @@ const MemeCard = ({
     navigate("/signup");
   };
 
-  const handleAddingNewQuoteLike = (newQuoteLike: NewLikedQuoteType) => { // is it completely necessary to abstract this outside of the useEffect or should I just call the api function inside of the useEffect?
-    addLikedQuote(newQuoteLike);
-  }
-
   useEffect(() => {
     if (!openQuotes) {
-      // handleQuoteInteraction(localQuotes);
-      // handleAddingNewQuote(newQuote);
-      if (newQuote !== null ) {
-        handleAddingNewQuoteLike(newQuote);
-      }
+      applyChanges(pendingChanges, setPendingChanges);
     }
-  }, [meme.allQuotes, openQuotes, localQuotes]);
+  }, [ pendingChanges, openQuotes]);
 
   const style = {
     position: "absolute",
@@ -100,11 +100,11 @@ const MemeCard = ({
       >
         <Box sx={style}>
           <MemeQuotes
-            memeId={meme.id}
             localQuotes={localQuotes}
-            setLocalQuotes={setLocalQuotes}
-            setNewQuote={setNewQuote}
+            setPendingChanges={setPendingChanges}
+            memeId={meme.id}
             currentUser={loggedInUser}
+            setLocalQuotes={setLocalQuotes}
           />
         </Box>
       </Modal>

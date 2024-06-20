@@ -1,5 +1,5 @@
 export interface MemeType  {
-  'id'?: string,
+  'id': string,
   'imageUrl': string,
   'createdBy': UsersType,
   'allQuotes'?: QuoteType[],
@@ -14,11 +14,11 @@ export interface UsersType {
 }
 
 export interface NewUserType {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  verifyPasswordInput: string;
+  'firstName': string;
+  'lastName': string;
+  'email': string;
+  'password': string;
+  'verifyPasswordInput': string;
 }
 
 export interface QuoteType {
@@ -41,3 +41,10 @@ export interface LikedMemesType {
   'userId': string;
   'memeId': string;
 }
+
+export type ChangeType =
+  | { type: "addLike" | "removeLike"; data: LikedQuotesType }
+  | { type: "addQuote"; data: QuoteType }
+  | { type: "deleteQuote"; data: { quoteId: string }; }
+  | { type: "deleteLikedQuote"; data: { likedQuoteId: string }; };
+
