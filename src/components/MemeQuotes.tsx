@@ -39,8 +39,9 @@ export const MemeQuotes = ({
   const [newQuoteText, setNewQuoteText] = useState(""); // state of the text field for adding a new quote
 
   useEffect(() => {
-    console.log(pendingChanges);
-  }, [pendingChanges]);
+    console.log("pendingChanges: ", pendingChanges);
+    console.log("localQuotes: ", localQuotes);
+  }, [pendingChanges, localQuotes]);
 
   if (!localQuotes || !currentUser) return null; // if there are no quotes available close this component
 
@@ -112,6 +113,53 @@ export const MemeQuotes = ({
   };
 
   // Ensure that the newChange.data matches the LikedQuotesType structure exactly
+// const toggleFavoriteQuote = (targetQuote: QuoteType) => {
+//   if (!currentUser.id) return;
+
+//   const alreadyLiked = userLikesQuote(targetQuote);
+//   let newChange: ChangeType | null = null;
+
+//   if (!alreadyLiked && targetQuote.id) {
+//     // Ensure that this object exactly matches the LikedQuotesType
+//     newChange = {
+//       type: "addLikedQuote",
+//       data: {
+//         userId: currentUser.id,
+//         quoteId: targetQuote.id,
+//         memeId: memeId,
+//         id: undefined // Temporarily undefined, will be set by server on actual creation
+//       }
+//     };
+//   } else if (alreadyLiked?.id) {
+//     // Assuming alreadyLiked is of type LikedQuotesType and has an id
+//     newChange = {
+//       type: "deleteLikedQuote",
+//       data: { likedQuoteId: alreadyLiked.id }
+//     };
+//   }
+
+//   const existingChange = findAnyPendingChangeForQuote(targetQuote);
+
+//   if (existingChange) {
+//     const updatedChanges = pendingChanges.filter(change => change !== existingChange);
+//     setPendingChanges(updatedChanges);
+//   } else if (newChange) {
+//     setPendingChanges(prev => [...prev, newChange]);
+//   }
+
+//   // Update local quotes optimistically
+//   setLocalQuotes(localQuotes.map(quote => {
+//     if (quote.id === targetQuote.id && alreadyLiked?.id) {
+//       const updatedQuoteLikes = newChange?.type === "addLikedQuote" ? 
+//         [...quote.quoteLikes, newChange.data as LikedQuotesType] :
+//         quote.quoteLikes.filter(like => like.id !== alreadyLiked.id);
+      
+//       return { ...quote, quoteLikes: updatedQuoteLikes };
+//     }
+//     return quote;
+//   }));
+// };
+
 const toggleFavoriteQuote = (targetQuote: QuoteType) => {
   if (!currentUser.id) return;
 
@@ -119,18 +167,16 @@ const toggleFavoriteQuote = (targetQuote: QuoteType) => {
   let newChange: ChangeType | null = null;
 
   if (!alreadyLiked && targetQuote.id) {
-    // Ensure that this object exactly matches the LikedQuotesType
     newChange = {
       type: "addLikedQuote",
       data: {
         userId: currentUser.id,
         quoteId: targetQuote.id,
         memeId: memeId,
-        id: undefined // Temporarily undefined, will be set by server on actual creation
+        id: undefined // The id will be set by the server upon actual creation
       }
     };
   } else if (alreadyLiked?.id) {
-    // Assuming alreadyLiked is of type LikedQuotesType and has an id
     newChange = {
       type: "deleteLikedQuote",
       data: { likedQuoteId: alreadyLiked.id }
@@ -148,16 +194,17 @@ const toggleFavoriteQuote = (targetQuote: QuoteType) => {
 
   // Update local quotes optimistically
   setLocalQuotes(localQuotes.map(quote => {
-    if (quote.id === targetQuote.id && alreadyLiked?.id) {
+    if (quote.id === targetQuote.id) {
       const updatedQuoteLikes = newChange?.type === "addLikedQuote" ? 
-        [...quote.quoteLikes, newChange.data as LikedQuotesType] :
-        quote.quoteLikes.filter(like => like.id !== alreadyLiked.id);
+        [...quote.quoteLikes, {...newChange.data, id: undefined}] : // Add a temporary placeholder for new likes
+        quote.quoteLikes.filter(like => like.id !== alreadyLiked?.id); // Remove the like if it exists
       
       return { ...quote, quoteLikes: updatedQuoteLikes };
     }
     return quote;
   }));
 };
+
 
   
   const handleSubmitNewQuote = (memeId: string) => {
