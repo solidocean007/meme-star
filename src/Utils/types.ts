@@ -22,18 +22,19 @@ export interface NewUserType {
 }
 
 export interface QuoteType {
-  'id'?: string | undefined,
+  'id'?: string,
   "memeId": string,
   'text': string,
-  'userId': string | undefined,
+  'userId': string,
   'userNameQuote': string,
   'quoteLikes': LikedQuotesType[],
 }
 
 export interface LikedQuotesType {
   'id'?: string;     
-  'userId': string | undefined;
-  'quoteId': string | undefined;
+  'userId': string;
+  'quoteId': string;
+  'memeId': string;
 }
 
 export interface LikedMemesType {
@@ -43,7 +44,7 @@ export interface LikedMemesType {
 }
 
 export type ChangeType =
-  | { type: "addLike" | "removeLike"; data: LikedQuotesType }
+  | { type: "addLikedQuote"; data: LikedQuotesType }
   | { type: "addQuote"; data: QuoteType }
   | { type: "deleteQuote"; data: { quoteId: string }; }
   | { type: "deleteLikedQuote"; data: { likedQuoteId: string }; };

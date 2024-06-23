@@ -1,9 +1,8 @@
 // MemeCard.tsx
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Card, CardMedia, Box, Modal, Button } from "@mui/material";
 import {
   ChangeType,
-  LikedQuotesType,
   MemeType,
   QuoteType,
   UsersType,
@@ -13,9 +12,7 @@ import { leadingQuoteForMeme } from "../helperFunctions/leadingQuoteForMeme";
 import CaptionWithLikes from "./CaptionWithLikes";
 import { useNavigate } from "react-router";
 import { applyChanges } from "../helperFunctions/applyChanges";
-
-export type NewQuoteType = Omit<QuoteType, "id">;
-export type NewLikedQuoteType = Omit<LikedQuotesType, "id">;
+import { useAppDispatch } from "../Redux/hook";
 
 const MemeCard = ({
   meme,
@@ -24,39 +21,38 @@ const MemeCard = ({
   meme: MemeType;
   loggedInUser: UsersType | null;
 }) => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const captionWithMostLikes = leadingQuoteForMeme(meme);
   const [localQuotes, setLocalQuotes] = useState<QuoteType[]>(
     meme.allQuotes || []
-  );
+);
   const [openQuotes, setOpenQuotes] = useState(false);
   const [pendingChanges, setPendingChanges] = useState<ChangeType[]>([]);
 
-  const handleClose = () => setOpenQuotes(false);
+  const handleClose = () => { 
+    setOpenQuotes(false);
+    applyChanges({pendingChanges, setPendingChanges, dispatch});
+  }
   const handleOpen = () => setOpenQuotes(true);
 
   const handleGoToSignUp = () => {
     navigate("/signup");
   };
 
-  useEffect(() => {
-    if (!openQuotes) {
-      applyChanges(pendingChanges, setPendingChanges);
-    }
-  }, [ pendingChanges, openQuotes]);
-
   const style = {
     position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 400,
+    width: 600,
     // bgcolor: "#ffffff",
     bgcolor: "#ffffff",
     border: "2px solid #000",
     boxShadow: 24,
-    p: 4,
+    p: 2,
   };
+
 
   return (
     <Card sx={{ maxWidth: 600, m: 2 }}>
@@ -102,6 +98,7 @@ const MemeCard = ({
           <MemeQuotes
             localQuotes={localQuotes}
             setPendingChanges={setPendingChanges}
+            pendingChanges= {pendingChanges}
             memeId={meme.id}
             currentUser={loggedInUser}
             setLocalQuotes={setLocalQuotes}

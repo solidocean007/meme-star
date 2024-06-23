@@ -1,7 +1,7 @@
 // deleteLikedQuote.ts
 import { API_CONFIG } from "./config";
 
-export const deleteLikedQuote = async (likedQuoteId: string | undefined) => {
+export const deleteLikedQuote = async (likedQuoteId : string) => {
   try {
     const response = await fetch(`${API_CONFIG}/likedQuotes/${likedQuoteId}`, {
       method: "DELETE",

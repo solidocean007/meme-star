@@ -1,7 +1,7 @@
 // deleteQuote
 import { API_CONFIG } from "./config";
 
-export const deleteQuote = async (quoteId: string) => {
+export const deleteQuoteFromDB = async (quoteId: string) => {
   try {
     const response = await fetch(`${API_CONFIG}/quotes/${quoteId}`, {
       method: "DELETE",

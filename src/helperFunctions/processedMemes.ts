@@ -17,11 +17,10 @@ export const processMemes =({memes, users, quotes, likedQuotes, likedMemes}: pro
       const userForThisQuote = users.find((userFromDB: UsersType) => userFromDB.id === quoteForThisMeme.userId);
       return {
         ...quoteForThisMeme,
-        // userNameQuote: users.find((userFromDB: UsersType) => userFromDB.id === quoteForThisMeme.userId)?.firstName || '',   
         userNameQuote: `${userForThisQuote?.firstName} ${userForThisQuote?.lastName}`,   
-        quoteLikes: likedQuotes.filter((likedQuoteFromDB: LikedQuotesType) => likedQuoteFromDB.quoteId === quoteForThisMeme.id) // Array of user IDs who liked the quote
+        quoteLikes: likedQuotes.filter((likedQuoteFromDB: LikedQuotesType) => likedQuoteFromDB.quoteId === quoteForThisMeme.id) 
       };
     }),
-    likesCount: likedMemes.filter((likedMemesFromDB: LikedMemesType) => likedMemesFromDB.memeId === thisMeme.id).length  // Total likes for the meme
+    likesCount: likedMemes.filter((likedMemesFromDB: LikedMemesType) => likedMemesFromDB.memeId === thisMeme.id).length
   }));
 };
