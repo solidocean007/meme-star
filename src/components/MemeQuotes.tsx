@@ -12,7 +12,6 @@ import {
 import React, { useEffect, useState } from "react";
 import {
   ChangeType,
-  LikedQuotesType,
   QuoteType,
   UsersType,
 } from "../Utils/types";
@@ -51,34 +50,32 @@ export const MemeQuotes = ({
   );
 
   const currentUsersQuote = (quote: QuoteType) => {
-    // this function returns boolean if its the users quote.  seems redundant after the previous userAlreadyQuoted variable
     return quote.userId === currentUser.id;
   };
 
   const findAnyPendingChangeForQuote = (quote: QuoteType) => {
     return pendingChanges.find((change) => {
-      // Depending on the change type, check if this is the change related to the given quote
       if (change.type === "addLikedQuote") {
-        return change.data.quoteId === quote.id;  // returns true if this is the matching addLikedQuote change
+        return change.data.quoteId === quote.id;
       } else if (change.type === "deleteLikedQuote") {
-        return change.data.likedQuoteId === quote.id;  // returns true if this is the matching deleteLikedQuote change
+        return change.data.likedQuoteId === quote.id;
       }
-      return false;  // return false if neither condition is met, ensuring no irrelevant change is returned
+      return false;
     });
   }
   
 
-  const removePendingChange = (pendingChange: ChangeType) => {
-    return pendingChanges.filter((change) => {
-      return change.type === "addLikedQuote"
-        ? change.data.quoteId !==
-            (pendingChange.data as LikedQuotesType).quoteId
-        : change.type === "deleteLikedQuote"
-        ? change.data.likedQuoteId !==
-          (pendingChange.data as { likedQuoteId: string }).likedQuoteId
-        : true;
-    });
-  };
+  // const removePendingChange = (pendingChange: ChangeType) => {
+  //   return pendingChanges.filter((change) => {
+  //     return change.type === "addLikedQuote"
+  //       ? change.data.quoteId !==
+  //           (pendingChange.data as LikedQuotesType).quoteId
+  //       : change.type === "deleteLikedQuote"
+  //       ? change.data.likedQuoteId !==
+  //         (pendingChange.data as { likedQuoteId: string }).likedQuoteId
+  //       : true;
+  //   });
+  // };
 
   const userLikesQuote = (quote: QuoteType) => {
     return quote.quoteLikes.find(
@@ -86,79 +83,31 @@ export const MemeQuotes = ({
     );
   };
 
-  const createNewChange = (quote: QuoteType) => {
-    const usersLikedQuoteObj = userLikesQuote(quote);
-    // create a newChange of type removeLike and set it to pending changes
-    if (!usersLikedQuoteObj && currentUser.id && quote.id) {
-      return {
-        // define a newChange that is of the type of adding a likedQuote object
-        type: "addLikedQuote", // add type of action.  may not be necessary anymore
-        data: {
-          // define the newLikedObject with its necessary props minus id which is created on fetch PUT
-          userId: currentUser.id,
-          quoteId: quote.id,
-          memeId: memeId,
-        },
-      };
-    } else if (usersLikedQuoteObj && usersLikedQuoteObj.id) {
-      // if the user likes this quote create a change to delete it
-      return {
-        type: "deleteLikedQuote",
-        data: {
-          likedQuoteId: usersLikedQuoteObj.id,
-        },
-      };
-    }
-    return null;
-  };
-
-  // Ensure that the newChange.data matches the LikedQuotesType structure exactly
-// const toggleFavoriteQuote = (targetQuote: QuoteType) => {
-//   if (!currentUser.id) return;
-
-//   const alreadyLiked = userLikesQuote(targetQuote);
-//   let newChange: ChangeType | null = null;
-
-//   if (!alreadyLiked && targetQuote.id) {
-//     // Ensure that this object exactly matches the LikedQuotesType
-//     newChange = {
-//       type: "addLikedQuote",
-//       data: {
-//         userId: currentUser.id,
-//         quoteId: targetQuote.id,
-//         memeId: memeId,
-//         id: undefined // Temporarily undefined, will be set by server on actual creation
-//       }
-//     };
-//   } else if (alreadyLiked?.id) {
-//     // Assuming alreadyLiked is of type LikedQuotesType and has an id
-//     newChange = {
-//       type: "deleteLikedQuote",
-//       data: { likedQuoteId: alreadyLiked.id }
-//     };
-//   }
-
-//   const existingChange = findAnyPendingChangeForQuote(targetQuote);
-
-//   if (existingChange) {
-//     const updatedChanges = pendingChanges.filter(change => change !== existingChange);
-//     setPendingChanges(updatedChanges);
-//   } else if (newChange) {
-//     setPendingChanges(prev => [...prev, newChange]);
-//   }
-
-//   // Update local quotes optimistically
-//   setLocalQuotes(localQuotes.map(quote => {
-//     if (quote.id === targetQuote.id && alreadyLiked?.id) {
-//       const updatedQuoteLikes = newChange?.type === "addLikedQuote" ? 
-//         [...quote.quoteLikes, newChange.data as LikedQuotesType] :
-//         quote.quoteLikes.filter(like => like.id !== alreadyLiked.id);
-      
-//       return { ...quote, quoteLikes: updatedQuoteLikes };
-//     }
-//     return quote;
-//   }));
-// };
+  // const createNewChange = (quote: QuoteType) => {
+  //   const usersLikedQuoteObj = userLikesQuote(quote);
+  //   // create a newChange of type removeLike and set it to pending changes
+  //   if (!usersLikedQuoteObj && currentUser.id && quote.id) {
+  //     return {
+  //       // define a newChange that is of the type of adding a likedQuote object
+  //       type: "addLikedQuote", // add type of action.  may not be necessary anymore
+  //       data: {
+  //         // define the newLikedObject with its necessary props minus id which is created on fetch PUT
+  //         userId: currentUser.id,
+  //         quoteId: quote.id,
+  //         memeId: memeId,
+  //       },
+  //     };
+  //   } else if (usersLikedQuoteObj && usersLikedQuoteObj.id) {
+  //     // if the user likes this quote create a change to delete it
+  //     return {
+  //       type: "deleteLikedQuote",
+  //       data: {
+  //         likedQuoteId: usersLikedQuoteObj.id,
+  //       },
+  //     };
+  //   }
+  //   return null;
+  // };
 
 const toggleFavoriteQuote = (targetQuote: QuoteType) => {
   if (!currentUser.id) return;
@@ -179,7 +128,7 @@ const toggleFavoriteQuote = (targetQuote: QuoteType) => {
   } else if (alreadyLiked?.id) {
     newChange = {
       type: "deleteLikedQuote",
-      data: { likedQuoteId: alreadyLiked.id }
+      data: { memeId: alreadyLiked.memeId, likedQuoteId: alreadyLiked.id }
     };
   }
 
@@ -196,7 +145,6 @@ const toggleFavoriteQuote = (targetQuote: QuoteType) => {
   setLocalQuotes(localQuotes.map(quote => {
     if (quote.id === targetQuote.id) {
       const updatedQuoteLikes = newChange?.type === "addLikedQuote" ? 
-        // [...quote.quoteLikes, {...newChange.data, id: undefined}] : // Add a temporary placeholder for new likes
         [...quote.quoteLikes, {...newChange.data}] : // Add a temporary placeholder for new likes
         quote.quoteLikes.filter(like => like.id !== alreadyLiked?.id); // Remove the like if it exists
       
@@ -209,7 +157,7 @@ const toggleFavoriteQuote = (targetQuote: QuoteType) => {
 
   
   const handleSubmitNewQuote = (memeId: string) => {
-    if (newQuoteText) {
+    if (newQuoteText && currentUser.id) {
       const newChange: ChangeType = {
         type: "addQuote",
         data: {

@@ -46,6 +46,6 @@ export interface LikedMemesType {
 export type ChangeType =
   | { type: "addLikedQuote"; data: LikedQuotesType }
   | { type: "addQuote"; data: QuoteType }
-  | { type: "deleteQuote"; data: { quoteId: string }; }
-  | { type: "deleteLikedQuote"; data: { likedQuoteId: string }; };
+  | { type: "deleteQuote"; data: { quoteId: string, memeId: string }; }
+  | { type: "deleteLikedQuote"; data: {  likedQuoteId: string, memeId: string, }; };
 

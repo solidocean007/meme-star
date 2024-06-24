@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { LikedMemesType, MemeType } from "../Utils/types";
+import { LikedQuotesType, MemeType } from "../Utils/types";
 import { getAllData } from "../api/getAllData";
 import { processMemes } from "../helperFunctions/processedMemes";
 
@@ -87,13 +87,13 @@ const memesSlice = createSlice({
         text: string;
         userId: string;
         userNameQuote: string;
-        quoteLikes: LikedMemesType[];
+        quoteLikes: LikedQuotesType[];
       }>
     ) => {
-      const { id, text, userId, userNameQuote, memeId, quoteLikes } = action.payload;
-      const meme = state.entities.find((m) => m.id === memeId);
-      if (meme) {
-        meme.allQuotes?.push({id, text, userId, userNameQuote, memeId, quoteLikes})
+      const { id, memeId, text, userId, userNameQuote, quoteLikes } = action.payload;
+      const memeToAddQuoteTo = state.entities.find((m) => m.id === memeId);
+      if (memeToAddQuoteTo) {
+        memeToAddQuoteTo.allQuotes?.push({id, text, userId, userNameQuote, memeId, quoteLikes})
       }
     },
   },
