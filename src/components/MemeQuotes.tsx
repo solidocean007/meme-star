@@ -196,7 +196,8 @@ const toggleFavoriteQuote = (targetQuote: QuoteType) => {
   setLocalQuotes(localQuotes.map(quote => {
     if (quote.id === targetQuote.id) {
       const updatedQuoteLikes = newChange?.type === "addLikedQuote" ? 
-        [...quote.quoteLikes, {...newChange.data, id: undefined}] : // Add a temporary placeholder for new likes
+        // [...quote.quoteLikes, {...newChange.data, id: undefined}] : // Add a temporary placeholder for new likes
+        [...quote.quoteLikes, {...newChange.data}] : // Add a temporary placeholder for new likes
         quote.quoteLikes.filter(like => like.id !== alreadyLiked?.id); // Remove the like if it exists
       
       return { ...quote, quoteLikes: updatedQuoteLikes };
