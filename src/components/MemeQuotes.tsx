@@ -10,13 +10,12 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import {
-  ChangeType,
-  QuoteType,
-  UsersType,
-} from "../Utils/types";
+import { ChangeType, QuoteType, UsersType } from "../Utils/types";
 import { Delete, FavoriteBorder } from "@mui/icons-material";
 import Favorite from "@mui/icons-material/Favorite";
+import { toggleFavoriteQuote } from "../helperFunctions/MemeQuoteHelperFunctions/toggleFavoriteQuote";
+import { createChangeToDeleteUserQuote } from "../helperFunctions/MemeQuoteHelperFunctions/createChangeToDeleteUserQuote";
+import { DeleteConfirmationDialog } from "./DeleteConfirmationDialog";
 
 interface MemeQuotesProps {
   localQuotes: QuoteType[];
@@ -36,6 +35,18 @@ export const MemeQuotes = ({
   setLocalQuotes,
 }: MemeQuotesProps) => {
   const [newQuoteText, setNewQuoteText] = useState(""); // state of the text field for adding a new quote
+  const [openDeleteConfirm, setOpenDeleteConfirm] = useState(false);
+  const [quoteToDelete, setQuoteToDelete] = useState<QuoteType | null>(null)
+
+  const handleOpenConfirmDelete = (quote: QuoteType) => {
+    setQuoteToDelete(quote);
+    setOpenDeleteConfirm(true);
+  };
+
+  const handleCloseConfirmDelete = () => {
+  setOpenDeleteConfirm(false);
+  setQuoteToDelete(null); // Reset the quoteToDelete when closing the dialog
+};
 
   useEffect(() => {
     console.log("pendingChanges: ", pendingChanges);
@@ -53,17 +64,17 @@ export const MemeQuotes = ({
     return quote.userId === currentUser.id;
   };
 
-  const findAnyPendingChangeForQuote = (quote: QuoteType) => {
-    return pendingChanges.find((change) => {
-      if (change.type === "addLikedQuote") {
-        return change.data.quoteId === quote.id;
-      } else if (change.type === "deleteLikedQuote") {
-        return change.data.likedQuoteId === quote.id;
-      }
-      return false;
-    });
-  }
-  
+  const handleToggleFavoriteQuote = (quote: QuoteType, memeId: string) => {
+    toggleFavoriteQuote(
+      quote,
+      currentUser,
+      memeId,
+      pendingChanges,
+      setPendingChanges,
+      setLocalQuotes,
+      localQuotes
+    );
+  };
 
   // const removePendingChange = (pendingChange: ChangeType) => {
   //   return pendingChanges.filter((change) => {
@@ -76,12 +87,6 @@ export const MemeQuotes = ({
   //       : true;
   //   });
   // };
-
-  const userLikesQuote = (quote: QuoteType) => {
-    return quote.quoteLikes.find(
-      (likedQuote) => likedQuote.userId === currentUser.id
-    );
-  };
 
   // const createNewChange = (quote: QuoteType) => {
   //   const usersLikedQuoteObj = userLikesQuote(quote);
@@ -109,53 +114,27 @@ export const MemeQuotes = ({
   //   return null;
   // };
 
-const toggleFavoriteQuote = (targetQuote: QuoteType) => {
-  if (!currentUser.id) return;
-
-  const alreadyLiked = userLikesQuote(targetQuote);
-  let newChange: ChangeType | null = null;
-
-  if (!alreadyLiked && targetQuote.id) {
-    newChange = {
-      type: "addLikedQuote",
-      data: {
-        userId: currentUser.id,
-        quoteId: targetQuote.id,
-        memeId: memeId,
-        id: undefined // The id will be set by the server upon actual creation
-      }
-    };
-  } else if (alreadyLiked?.id) {
-    newChange = {
-      type: "deleteLikedQuote",
-      data: { memeId: alreadyLiked.memeId, likedQuoteId: alreadyLiked.id }
-    };
-  }
-
-  const existingChange = findAnyPendingChangeForQuote(targetQuote);
-
-  if (existingChange) {
-    const updatedChanges = pendingChanges.filter(change => change !== existingChange);
-    setPendingChanges(updatedChanges);
-  } else if (newChange) {
-    setPendingChanges(prev => [...prev, newChange]);
-  }
-
-  // Update local quotes optimistically
-  setLocalQuotes(localQuotes.map(quote => {
-    if (quote.id === targetQuote.id) {
-      const updatedQuoteLikes = newChange?.type === "addLikedQuote" ? 
-        [...quote.quoteLikes, {...newChange.data}] : // Add a temporary placeholder for new likes
-        quote.quoteLikes.filter(like => like.id !== alreadyLiked?.id); // Remove the like if it exists
-      
-      return { ...quote, quoteLikes: updatedQuoteLikes };
+  const handleConfirmDelete = () => {
+    if (quoteToDelete) {
+      handleDeleteUserQuote(quoteToDelete, quoteToDelete.memeId);
+      handleCloseConfirmDelete();
     }
-    return quote;
-  }));
-};
+  };
 
+  const handleDeleteUserQuote = (quoteToDelete: QuoteType, memeId: string) => {
+    createChangeToDeleteUserQuote(
+      quoteToDelete,
+      memeId,
+      currentUser,
+      pendingChanges,
+      setPendingChanges
+    );
+    // Correctly update the localQuotes to exclude the deleted quote
+    setLocalQuotes((currentQuotes) =>
+      currentQuotes.filter((quote) => quote.id !== quoteToDelete.id)
+    );
+  };
 
-  
   const handleSubmitNewQuote = (memeId: string) => {
     if (newQuoteText && currentUser.id) {
       const newChange: ChangeType = {
@@ -174,71 +153,78 @@ const toggleFavoriteQuote = (targetQuote: QuoteType) => {
   };
 
   return (
-    <CardContent sx={{ padding: "0" }}>
-      <List
-        sx={{
-          width: "100%",
-          bgcolor: "background.default",
-          color: "text.primary",
-        }}
-      >
-        {localQuotes?.map((quote, index) => (
-          <ListItem key={index}>
-            <ListItemText
-              primary={quote.text}
-              secondary={`by ${quote.userNameQuote}`}
-            />
+    <>
+      <CardContent sx={{ padding: "0" }}>
+        <List
+          sx={{
+            width: "100%",
+            bgcolor: "background.default",
+            color: "text.primary",
+          }}
+        >
+          {localQuotes?.map((quote, index) => (
+            <ListItem key={index}>
+              <ListItemText
+                primary={quote.text}
+                secondary={`by ${quote.userNameQuote}`}
+              />
 
-            <IconButton
-              onClick={() => {
-                {
-                  currentUser && toggleFavoriteQuote(quote);
-                }
-              }}
+              <IconButton
+                onClick={() => {
+                  {
+                    currentUser && handleToggleFavoriteQuote(quote, memeId);
+                  }
+                }}
+              >
+                {quote.quoteLikes.length > 0 &&
+                quote.quoteLikes.some(
+                  (like) => like.userId === currentUser?.id
+                ) ? (
+                  <Favorite sx={{ color: "green" }} />
+                ) : (
+                  <FavoriteBorder />
+                )}
+              </IconButton>
+              <Typography>{quote.quoteLikes.length}</Typography>
+              <Box sx={{ width: 15 }}>
+                {currentUser && currentUsersQuote(quote) && (
+                  <IconButton
+                    onClick={() => {
+                      handleOpenConfirmDelete(quote);
+                    }}
+                  >
+                    <Delete sx={{ color: "red" }} />
+                  </IconButton>
+                )}
+              </Box>
+            </ListItem>
+          ))}
+        </List>
+        {!userAlreadyQuoted && (
+          <Box sx={{ my: 2 }}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              label="Add your two cents here"
+              value={newQuoteText}
+              onChange={(e) => setNewQuoteText(e.target.value)}
+            />
+            <Button
+              onClick={() => handleSubmitNewQuote(memeId)}
+              type="submit"
+              variant="contained"
+              color="primary"
             >
-              {quote.quoteLikes.length > 0 &&
-              quote.quoteLikes.some(
-                (like) => like.userId === currentUser?.id
-              ) ? (
-                <Favorite sx={{ color: "green" }} />
-              ) : (
-                <FavoriteBorder />
-              )}
-            </IconButton>
-            <Typography>{quote.quoteLikes.length}</Typography>
-            <Box sx={{ width: 15 }}>
-              {currentUser && currentUsersQuote(quote) && (
-                <IconButton
-                  onClick={() => {
-                    toggleFavoriteQuote(quote);
-                  }}
-                >
-                  <Delete sx={{ color: "red" }} />
-                </IconButton>
-              )}
-            </Box>
-          </ListItem>
-        ))}
-      </List>
-      {!userAlreadyQuoted && (
-        <Box sx={{ my: 2 }}>
-          <TextField
-            fullWidth
-            variant="outlined"
-            label="Add your two cents here"
-            value={newQuoteText}
-            onChange={(e) => setNewQuoteText(e.target.value)}
-          />
-          <Button
-            onClick={() => handleSubmitNewQuote(memeId)}
-            type="submit"
-            variant="contained"
-            color="primary"
-          >
-            Submit
-          </Button>
-        </Box>
-      )}
-    </CardContent>
+              Submit
+            </Button>
+          </Box>
+        )}
+      </CardContent>
+      <DeleteConfirmationDialog
+        open={openDeleteConfirm}
+        onClose={handleCloseConfirmDelete}
+        onConfirm={handleConfirmDelete}
+      />
+    </>
   );
 };
