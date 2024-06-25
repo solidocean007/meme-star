@@ -1,5 +1,4 @@
 import { ChangeType, QuoteType, UsersType } from "../../Utils/types";
-import { clearQuotePendingChanges } from "./clearQutoePendingChanges";
 import { findAnyPendingChangeForQuote } from "./findAnyPendingChangeForQuote";
 
 const userLikesQuote = (quote: QuoteType, currentUser: UsersType) => {
