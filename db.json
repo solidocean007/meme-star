@@ -72,40 +72,24 @@
   ],
   "quotes": [
     {
-      "id": "2",
+      "id": "1",
       "memeId": "1",
-      "text": "My rap name is Fresh Diaper!",
-      "userId": "3"
+      "text": "About to say something dumb in 3..2..1..",
+      "userId": "2"
     },
     {
+      "id": "4",
       "memeId": "1",
-      "text": "About to say something dumb in 3...2....1...",
-      "userId": "2",
-      "userNameQuote": "Clinton Williams",
-      "quoteLikes": [],
-      "id": "5nHmfOc"
-    },
-    {
-      "memeId": "1",
-      "text": "test quote from kevin",
-      "userId": "5",
-      "userNameQuote": "Kevin Williams",
-      "quoteLikes": [],
-      "id": "Ix0IVfP"
+      "text": "Let's go Brandon!",
+      "userId": "5"
     }
   ],
   "likedQuotes": [
     {
-      "userId": "2",
-      "quoteId": "2",
+      "userId": "3",
+      "quoteId": "4",
       "memeId": "1",
-      "id": 2
-    },
-    {
-      "userId": "5",
-      "quoteId": "5nHmfOc",
-      "memeId": "1",
-      "id": 3
+      "id": 1
     }
   ],
   "likedMemes": [

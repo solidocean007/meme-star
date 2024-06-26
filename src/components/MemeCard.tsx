@@ -32,7 +32,7 @@ const MemeCard = ({
 
   const handleClose = () => { 
     setOpenQuotes(false);
-    applyChanges({ pendingChanges, setPendingChanges, dispatch });
+    applyChanges({ pendingChanges, setPendingChanges, dispatch, setLocalQuotes });
   }
   const handleOpen = () => setOpenQuotes(true);
 

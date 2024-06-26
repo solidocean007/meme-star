@@ -17,6 +17,7 @@ import { toggleFavoriteQuote } from "../helperFunctions/MemeQuoteHelperFunctions
 import { createChangeToDeleteUserQuote } from "../helperFunctions/MemeQuoteHelperFunctions/createChangeToDeleteUserQuote";
 import { DeleteConfirmationDialog } from "./DeleteConfirmationDialog";
 import { deleteLikesForDeletedQuote } from "../helperFunctions/MemeQuoteHelperFunctions/deleteLikesForDeletedQuote";
+import { v4 as uuidv4 } from 'uuid';
 
 interface MemeQuotesProps {
   localQuotes: QuoteType[];
@@ -115,9 +116,11 @@ export const MemeQuotes = ({
   
   const handleSubmitNewQuote = (memeId: string) => {
     if (newQuoteText && currentUser.id) {
+      const tempId = uuidv4();
       const newChange: ChangeType = {
         type: "addQuote",
         data: {
+          id: tempId,
           memeId: memeId,
           text: newQuoteText,
           userId: currentUser?.id,
@@ -126,6 +129,7 @@ export const MemeQuotes = ({
         },
       };
       setPendingChanges((prev) => [...prev, newChange]);
+      setLocalQuotes((prev) => [...prev, newChange.data])
       setNewQuoteText("");
     }
   };

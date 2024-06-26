@@ -17,7 +17,7 @@ export const toggleFavoriteQuote = (
   localQuotes: QuoteType[]
 ) => {
   if (!currentUser.id) return;
-
+  console.log(targetQuote)
   const alreadyLiked = userLikesQuote(targetQuote, currentUser);
   let newChange: ChangeType | null = null;
 
@@ -36,6 +36,8 @@ export const toggleFavoriteQuote = (
       type: "deleteLikedQuote",
       data: { memeId: alreadyLiked.memeId, likedQuoteId: alreadyLiked.id },
     };
+  } else if (!targetQuote.id) {
+    // what happens if the user just made this quote and we cant make a new change for addLikedQuote becuase we cant assign a quoteId
   }
 
   const existingChanges = findAnyPendingChangeForQuote(

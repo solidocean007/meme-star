@@ -2,6 +2,7 @@
 import { API_CONFIG } from "./config";
 
 export const deleteLikedQuote = async (likedQuoteId : string) => {
+  console.log(likedQuoteId)
   try {
     const response = await fetch(`${API_CONFIG}/likedQuotes/${likedQuoteId}`, {
       method: "DELETE",
@@ -10,7 +11,7 @@ export const deleteLikedQuote = async (likedQuoteId : string) => {
       throw new Error("Network response was not ok");
     }
   } catch (error) {
-    console.error("Error unliking quote:", error);
+    console.error("Error un-liking quote:", error);
     throw error;
   }
 };
