@@ -11,6 +11,8 @@
   /* Define color variables */
   --background-color: #242424; /* dark */
   --text-color: rgba(255, 255, 255, 0.87); /* light */
+  --background-page: linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%);
+  --dusty-cactus: linear-gradient(90deg, #fcff9e 0%, #c67700 100%);
 }
 
 [data-theme="light"] {
@@ -25,9 +27,8 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  /* background-color: var(--background-color); */
-  color: var(--text-color);
   font-family: var(--font-family);
+  background: var(--background-page);
 }
 
 .container {

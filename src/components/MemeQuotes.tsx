@@ -17,7 +17,6 @@ import { toggleFavoriteQuote } from "../helperFunctions/MemeQuoteHelperFunctions
 import { createChangeToDeleteUserQuote } from "../helperFunctions/MemeQuoteHelperFunctions/createChangeToDeleteUserQuote";
 import { DeleteConfirmationDialog } from "./DeleteConfirmationDialog";
 import { deleteLikesForDeletedQuote } from "../helperFunctions/MemeQuoteHelperFunctions/deleteLikesForDeletedQuote";
-import { v4 as uuidv4 } from 'uuid';
 
 interface MemeQuotesProps {
   localQuotes: QuoteType[];
@@ -26,6 +25,7 @@ interface MemeQuotesProps {
   memeId: string;
   currentUser: UsersType | null;
   setLocalQuotes: React.Dispatch<React.SetStateAction<QuoteType[]>>;
+  handleClose: () => void;
 }
 
 export const MemeQuotes = ({
@@ -35,6 +35,7 @@ export const MemeQuotes = ({
   memeId,
   currentUser,
   setLocalQuotes,
+  handleClose,
 }: MemeQuotesProps) => {
   const [newQuoteText, setNewQuoteText] = useState(""); // state of the text field for adding a new quote
   const [openDeleteConfirm, setOpenDeleteConfirm] = useState(false);
@@ -51,8 +52,6 @@ export const MemeQuotes = ({
   };
 
   useEffect(() => {
-    console.log("pendingChanges: ", pendingChanges);
-    console.log("localQuotes: ", localQuotes);
   }, [pendingChanges, localQuotes]);
 
   if (!localQuotes || !currentUser) return null; // if there are no quotes available close this component
@@ -104,23 +103,18 @@ export const MemeQuotes = ({
       type: "deleteLikedQuote",
       data: { likedQuoteId, memeId },
     }));
-  
-    // Add these changes to pendingChanges
     setPendingChanges(changes => [...changes, ...likedQuoteChanges]);
-  
-    // Correctly update the localQuotes to exclude the deleted quote
     setLocalQuotes(currentQuotes =>
       currentQuotes.filter(quote => quote.id !== quoteToDelete.id)
     );
+    handleClose();
   };
   
   const handleSubmitNewQuote = (memeId: string) => {
     if (newQuoteText && currentUser.id) {
-      const tempId = uuidv4();
       const newChange: ChangeType = {
         type: "addQuote",
         data: {
-          id: tempId,
           memeId: memeId,
           text: newQuoteText,
           userId: currentUser?.id,
@@ -131,6 +125,7 @@ export const MemeQuotes = ({
       setPendingChanges((prev) => [...prev, newChange]);
       setLocalQuotes((prev) => [...prev, newChange.data])
       setNewQuoteText("");
+      handleClose();
     }
   };
 
@@ -210,41 +205,3 @@ export const MemeQuotes = ({
     </>
   );
 };
-
-// const removePendingChange = (pendingChange: ChangeType) => {
-//   return pendingChanges.filter((change) => {
-//     return change.type === "addLikedQuote"
-//       ? change.data.quoteId !==
-//           (pendingChange.data as LikedQuotesType).quoteId
-//       : change.type === "deleteLikedQuote"
-//       ? change.data.likedQuoteId !==
-//         (pendingChange.data as { likedQuoteId: string }).likedQuoteId
-//       : true;
-//   });
-// };
-
-// const createNewChange = (quote: QuoteType) => {
-//   const usersLikedQuoteObj = userLikesQuote(quote);
-//   // create a newChange of type removeLike and set it to pending changes
-//   if (!usersLikedQuoteObj && currentUser.id && quote.id) {
-//     return {
-//       // define a newChange that is of the type of adding a likedQuote object
-//       type: "addLikedQuote", // add type of action.  may not be necessary anymore
-//       data: {
-//         // define the newLikedObject with its necessary props minus id which is created on fetch PUT
-//         userId: currentUser.id,
-//         quoteId: quote.id,
-//         memeId: memeId,
-//       },
-//     };
-//   } else if (usersLikedQuoteObj && usersLikedQuoteObj.id) {
-//     // if the user likes this quote create a change to delete it
-//     return {
-//       type: "deleteLikedQuote",
-//       data: {
-//         likedQuoteId: usersLikedQuoteObj.id,
-//       },
-//     };
-//   }
-//   return null;
-// };

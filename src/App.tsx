@@ -4,6 +4,7 @@ import { Container } from "@mui/material";
 import { useEffect } from "react";
 import { setUser } from "./Redux/authSlice";
 import { useAppDispatch } from "./Redux/hook";
+import SnackBarSlide from "./components/SnackBarSlide";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -33,6 +34,7 @@ function App() {
           >
             <AppRoutes />
           </Container>
+          <SnackBarSlide />
         </Router>
     </>
   );

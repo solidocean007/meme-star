@@ -2,11 +2,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import memeSlice from "./memeSlice";
 import authSlice from "./authSlice";
+import snackBarSlice from "./snackBarSlice";
 
 export const store = configureStore({
   reducer: {
     memes: memeSlice,
     auth: authSlice,
+    snackbar: snackBarSlice,
   },
 });
 

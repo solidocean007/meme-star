@@ -10,15 +10,16 @@ import {
 } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MemeFeed from "./MemeFeed";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../Redux/store";
 import { LogoutSharp } from "@mui/icons-material";
 import { useNavigate } from "react-router";
 import { loginUser, logout } from "../Redux/authSlice";
 import { useEffect } from "react";
+import { useAppDispatch } from "../Redux/hook";
 
 const HomePage = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const loggedInUser = useSelector((state: RootState) => state.auth.user);
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
   const navigate = useNavigate();
@@ -43,21 +44,21 @@ const HomePage = () => {
 
   return (
     <>
-      <AppBar position="static" color="primary">
+      <AppBar position="static" style={{ background: 'var(--dusty-cactus)', color: "black"  }}>
         <Toolbar>
           <IconButton
             edge="start"
             color="inherit"
             aria-label="menu"
           ></IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h2" component="div" sx={{ flexGrow: 1 }}>
             MemeStar
           </Typography>
           <IconButton color="inherit" onClick={handleGoToLoginSignUp}>
             <AccountCircle />
           </IconButton>
           {isAuthenticated && (
-            <Typography variant="h6" component="div">
+            <Typography variant="h4" component="div">
               {`${loggedInUser?.firstName} ${loggedInUser?.lastName}`}
             </Typography>
           )}
@@ -80,9 +81,7 @@ const HomePage = () => {
           justifyContent: "center",
         }}
       >
-        <Typography variant="h2" component="h1" gutterBottom align="center">
-          Welcome to MemeStar
-        </Typography>
+
 
         <MemeFeed />
 
@@ -92,7 +91,7 @@ const HomePage = () => {
               variant="contained"
               color="secondary"
               fullWidth
-              onClick={() => console.log("Go to Sign Up/Login")}
+              onClick={handleGoToLoginSignUp}
             >
               Sign Up / Log In
             </Button>
@@ -108,6 +107,7 @@ const HomePage = () => {
           py: 3,
           mt: 4,
           textAlign: "center",
+          width: "100%"
         }}
       >
         <Container maxWidth="md">

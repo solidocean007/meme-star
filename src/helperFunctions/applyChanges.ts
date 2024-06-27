@@ -11,21 +11,25 @@ import {
   deleteQuoteFromRedux,
   removeLikedQuoteFromRedux,
 } from "../Redux/memeSlice";
+import { showSnackbar } from "../Redux/snackBarSlice";
 
 interface ApplyChangesProps {
   pendingChanges: ChangeType[];
   setPendingChanges: React.Dispatch<React.SetStateAction<ChangeType[]>>;
   dispatch: AppDispatch;
-  setLocalQuotes : React.Dispatch<React.SetStateAction<QuoteType[]>>
+  setLocalQuotes: React.Dispatch<React.SetStateAction<QuoteType[]>>;
+  // setMessage: React.Dispatch<React.SetStateAction<string>>;
+  // setMessageType: React.Dispatch<React.SetStateAction<"error" | "success">>;
 }
 
 export const applyChanges = ({
   pendingChanges,
   setPendingChanges,
   dispatch,
-  setLocalQuotes
+  setLocalQuotes,
+  // setMessage,
+  // setMessageType,
 }: ApplyChangesProps) => {
- 
   if (pendingChanges.length === 0) {
     return;
   }
@@ -35,7 +39,6 @@ export const applyChanges = ({
       case "addLikedQuote":
         addLikedQuote(change.data)
           .then((response) => {
-            console.log(response);
             if (response && response.data) {
               dispatch(
                 addLikedQuoteToRedux({
@@ -44,44 +47,47 @@ export const applyChanges = ({
                   quoteId: response.data.quoteId,
                   userId: response.data.userId,
                 })
-              )
+              );
             } else {
-              setLocalQuotes((prev) => prev.filter(quote => quote.id !== change.data.id));
+              setLocalQuotes((prev) =>
+                prev.filter((quote) => quote.id !== change.data.id)
+              );
             }
           })
           .catch((error) => console.error("Error adding liked quote:", error));
         break;
-        case "deleteLikedQuote":
-          deleteLikedQuote(change.data.likedQuoteId)
-            // .then((response) => {
-            .then((response) => {
-              // if (response) { // Assuming your API gives a success status
-              console.log(response);
-                dispatch(removeLikedQuoteFromRedux({
-                  likedQuoteId: change.data.likedQuoteId
-                }));
-              // } else {
-                // console.error("Deletion not confirmed by the server");
-              // }
-            }
-          )
+      case "deleteLikedQuote":
+        deleteLikedQuote(change.data.likedQuoteId)
+          .then(() => {
+            dispatch(
+              removeLikedQuoteFromRedux({
+                likedQuoteId: change.data.likedQuoteId,
+              })
+            );
+          })
           .catch((error) =>
             console.error("Error deleting liked quote:", error)
           );
         break;
       case "addQuote":
         createQuote(change.data)
-          .then((result) =>
-            addQuoteToRedux({
-              id: result.id,
-              memeId: change.data.memeId,
-              text: change.data.text,
-              userId: change.data.userId,
-              userNameQuote: change.data.userNameQuote,
-              quoteLikes: change.data.quoteLikes,
-            })
-          )
-          .catch((error) => console.error("Error creating quote:", error));
+          .then((result) => {
+            dispatch(
+              addQuoteToRedux({
+                id: result.id,
+                memeId: change.data.memeId,
+                text: change.data.text,
+                userId: change.data.userId,
+                userNameQuote: change.data.userNameQuote,
+                quoteLikes: change.data.quoteLikes,
+              })
+            );
+            dispatch(showSnackbar({ message: "Your quote was added!", type: "success" }));
+          })
+          .catch((error) => {
+            console.error("Error creating quote:", error);
+            dispatch(showSnackbar({ message: "An error occurred while adding your quote.", type: "error" }));
+          });
         break;
       case "deleteQuote":
         deleteQuoteFromDB(change.data.quoteId)
@@ -92,10 +98,12 @@ export const applyChanges = ({
                 quoteId: change.data.quoteId,
               })
             );
+            dispatch(showSnackbar({ message: "Your quote was deleted", type: "success" }));
           })
-          .catch((error) =>
-            console.error("Error deleting quote from DB:", error)
-          );
+          .catch((error) => {
+            console.error("Error deleting quote from DB:", error);
+            dispatch(showSnackbar({ message: "An error occurred while deleting your quote.", type: "error" }));
+          });
         break;
       default:
         console.error("Unhandled change type:", change);

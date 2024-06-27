@@ -1,18 +1,14 @@
 // MemeCard.tsx
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, CardMedia, Box, Modal, Button } from "@mui/material";
-import {
-  ChangeType,
-  MemeType,
-  QuoteType,
-  UsersType,
-} from "../Utils/types";
+import { ChangeType, MemeType, QuoteType, UsersType } from "../Utils/types";
 import { MemeQuotes } from "./MemeQuotes";
 import { leadingQuoteForMeme } from "../helperFunctions/leadingQuoteForMeme";
 import CaptionWithLikes from "./CaptionWithLikes";
 import { useNavigate } from "react-router";
 import { applyChanges } from "../helperFunctions/applyChanges";
 import { useAppDispatch } from "../Redux/hook";
+import SnackBarSlide from "./SnackBarSlide";
 
 const MemeCard = ({
   meme,
@@ -26,14 +22,28 @@ const MemeCard = ({
   const captionWithMostLikes = leadingQuoteForMeme(meme);
   const [localQuotes, setLocalQuotes] = useState<QuoteType[]>(
     meme.allQuotes || []
-);
+  );
+  // const [message, setMessage] = useState("");
+  // const [messageType, setMessageType] = useState<"success" | "error">("success");
   const [openQuotes, setOpenQuotes] = useState(false);
   const [pendingChanges, setPendingChanges] = useState<ChangeType[]>([]);
 
-  const handleClose = () => { 
+  useEffect(() => {
+    if (!openQuotes && pendingChanges.length > 0) {
+      applyChanges({
+        pendingChanges,
+        setPendingChanges,
+        dispatch,
+        setLocalQuotes,
+        // setMessage,
+        // setMessageType,
+      });
+    }
+  }, [openQuotes, pendingChanges, dispatch, setLocalQuotes]);
+
+  const handleClose = () => {
     setOpenQuotes(false);
-    applyChanges({ pendingChanges, setPendingChanges, dispatch, setLocalQuotes });
-  }
+  };
   const handleOpen = () => setOpenQuotes(true);
 
   const handleGoToSignUp = () => {
@@ -53,9 +63,8 @@ const MemeCard = ({
     p: 2,
   };
 
-
   return (
-    <Card sx={{ maxWidth: 600, m: 2 }}>
+    <Card sx={{ maxWidth: 800, m: 2 }}>
       <CardMedia
         component="img"
         height="450"
@@ -65,26 +74,26 @@ const MemeCard = ({
         sx={{ position: "relative" }}
       />
 
-      <Box
+     { meme.allQuotes?.length &&  <Box
         sx={{
           position: "absolute",
-          bottom: 45,
+          bottom: 90,
           left: 15,
           width: "100%",
-          height: 40,
+          height: 80,
           // textAlign?
           bgcolor: "rgba(255, 255, 255, 0.8)", // Semi-transparent white background
-          padding: "8px",
+          padding: "10px",
         }}
       >
-        <CaptionWithLikes caption={captionWithMostLikes} />
-      </Box>
-      <Button onClick={loggedInUser ? handleOpen : handleGoToSignUp}>
+       <CaptionWithLikes caption={captionWithMostLikes} />
+      </Box>}
+      <Button sx={{ fontSize: "20px"}} onClick={loggedInUser ? handleOpen : handleGoToSignUp}>
         (
         {loggedInUser
           ? `${
-              meme.allQuotes && meme.allQuotes?.length - 1
-            } Other Quotes. Now add yours!`
+              meme.allQuotes && meme.allQuotes?.length
+            } Quotes. Now add yours!`
           : "login to comment yours"}
         )
       </Button>
@@ -98,10 +107,11 @@ const MemeCard = ({
           <MemeQuotes
             localQuotes={localQuotes}
             setPendingChanges={setPendingChanges}
-            pendingChanges= {pendingChanges}
+            pendingChanges={pendingChanges}
             memeId={meme.id}
             currentUser={loggedInUser}
             setLocalQuotes={setLocalQuotes}
+            handleClose={handleClose}
           />
         </Box>
       </Modal>

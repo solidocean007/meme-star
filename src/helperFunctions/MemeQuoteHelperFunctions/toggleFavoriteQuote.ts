@@ -17,7 +17,6 @@ export const toggleFavoriteQuote = (
   localQuotes: QuoteType[]
 ) => {
   if (!currentUser.id) return;
-  console.log(targetQuote)
   const alreadyLiked = userLikesQuote(targetQuote, currentUser);
   let newChange: ChangeType | null = null;
 

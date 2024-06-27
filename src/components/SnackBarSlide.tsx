@@ -1,25 +1,24 @@
-import React from "react";
-import { Slide, Snackbar, Alert, SlideProps } from "@mui/material";
+// SnackbarComponent.tsx
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Snackbar, Alert, Slide, SlideProps } from '@mui/material';
+import { RootState } from '../Redux/store';
+import { hideSnackbar } from '../Redux/snackBarSlice';
 
-// Define the slide transition function
 function SlideTransition(props: SlideProps) {
   return <Slide {...props} direction="down" />;
 }
 
-// Define the SnackBarSlide component
-const SnackBarSlide = ({ message, type }: { message: string; type: "success" | "error" }) => {
-  const [open, setOpen] = React.useState(false);
+const SnackBarSlide: React.FC = () => {
+  const dispatch = useDispatch();
+  const { message, type, open } = useSelector((state: RootState) => state.snackbar);
 
-  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => { // event is declared but value never read
     if (reason === 'clickaway') {
       return;
     }
-    setOpen(false);
+    dispatch(hideSnackbar());
   };
-
-  React.useEffect(() => {
-    setOpen(true);
-  }, [message]);
 
   return (
     <Snackbar

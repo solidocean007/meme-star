@@ -15,8 +15,6 @@ const MemeFeed: React.FC = () => {
     (state: RootState) => state.memes
   );
 
-  // console.log(memes, typeof(memes))
-
   useEffect(() => {
     dispatch(fetchMemes());
   }, [dispatch]);
@@ -29,8 +27,8 @@ const MemeFeed: React.FC = () => {
     <Box sx={{ width: "100%", height: 800, bgcolor: "background.paper", display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <List
         height={800}
-        width={500}
-        itemSize={500}
+        width={800}
+        itemSize={550}
         itemCount={memes.length}
         itemData={memes}
       >

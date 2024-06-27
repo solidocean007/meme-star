@@ -4,7 +4,6 @@ import { getWholeItem } from "../../api/getWholeItem";
 
 export const deleteLikesForDeletedQuote = async (quoteId: string): Promise<string[]> => {
   try {
-    console.log(quoteId, ': quoteId')
     const allQuoteLikes: LikedQuotesType[] = await getWholeItem(`/likedQuotes?id=${quoteId}`);
     // Filter out any undefined IDs and map to string array
     return allQuoteLikes

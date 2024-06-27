@@ -2,7 +2,6 @@
 import { API_CONFIG } from "./config";
 
 export const deleteLikedQuote = async (likedQuoteId : string) => {
-  console.log(likedQuoteId)
   try {
     const response = await fetch(`${API_CONFIG}/likedQuotes/${likedQuoteId}`, {
       method: "DELETE",

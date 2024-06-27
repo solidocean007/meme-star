@@ -13,8 +13,8 @@ const CaptionWithLikes = ({ caption }: CaptionWithLikesProps) => {
   const numberOfLikes = caption.quoteLikes.length;
 
   return (
-    <Box sx={{ display: "flex", alignItems: "center", pr: 10 }}>
-      <Typography variant="subtitle1" sx={{ flexGrow: 1, mr: 1 }}>
+    <Box sx={{ display: "flex", height: "100%", width: "80%", alignItems: "center", pb: 3 }}>
+      <Typography variant="h5" sx={{ flexGrow: 1, mr: 1 }}>
         {text}
       </Typography>
       {numberOfLikes > 0 && (
