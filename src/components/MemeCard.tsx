@@ -23,8 +23,7 @@ const MemeCard = ({
   const [localQuotes, setLocalQuotes] = useState<QuoteType[]>(
     meme.allQuotes || []
   );
-  // const [message, setMessage] = useState("");
-  // const [messageType, setMessageType] = useState<"success" | "error">("success");
+
   const [openQuotes, setOpenQuotes] = useState(false);
   const [pendingChanges, setPendingChanges] = useState<ChangeType[]>([]);
 
@@ -35,8 +34,6 @@ const MemeCard = ({
         setPendingChanges,
         dispatch,
         setLocalQuotes,
-        // setMessage,
-        // setMessageType,
       });
     }
   }, [openQuotes, pendingChanges, dispatch, setLocalQuotes]);
@@ -82,7 +79,7 @@ const MemeCard = ({
           width: "100%",
           height: 80,
           // textAlign?
-          bgcolor: "rgba(255, 255, 255, 0.8)", // Semi-transparent white background
+          bgcolor: "rgba(255, 255, 255, 0.8)", 
           padding: "10px",
         }}
       >

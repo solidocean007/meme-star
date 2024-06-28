@@ -3,6 +3,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { NewUserType, UsersType } from '../Utils/types';
 import loginService from '../api/auth/loginService';
 import signUpService from '../api/auth/signUpService';
+import { AppDispatch } from './store';
 
 interface AuthState {
   user: UsersType | null;
@@ -19,13 +20,21 @@ const initialState: AuthState = {
 };
 
 
-export const loginUser = createAsyncThunk<UsersType, { email: string; password: string }, { rejectValue: string }>(
+export const loginUser = createAsyncThunk<
+  UsersType | null,
+  { email: string; password: string },
+  { rejectValue: string; dispatch: AppDispatch }
+>(
   'auth/login',
-  async ({ email, password }, { rejectWithValue }) => {
+  async ({ email, password }, { rejectWithValue, dispatch }) => {
     try {
-      const data = await loginService(email, password);
-      return data;
-    } catch (error) { // unexpected any type
+      const data = await loginService(email, password, dispatch);
+      if (data) {
+        return data;
+      } else {
+        return rejectWithValue('Invalid credentials');
+      }
+    } catch (error) {
       return rejectWithValue('Failed to login');
     }
   }

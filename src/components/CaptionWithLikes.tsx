@@ -3,11 +3,11 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { QuoteType } from "../Utils/types";
 
 interface CaptionWithLikesProps {
-  caption: QuoteType | null; // Update this to allow null, matching your usage when there might be no quote.
+  caption: QuoteType | null;
 }
 
 const CaptionWithLikes = ({ caption }: CaptionWithLikesProps) => {
-  if (!caption) return null; // Handle null case
+  if (!caption) return null;
 
   const text = caption.text;
   const numberOfLikes = caption.quoteLikes.length;

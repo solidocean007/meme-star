@@ -32,12 +32,14 @@ const HomePage = () => {
 
   function handleLogout(){
     dispatch(logout());
-    navigate('/signup');
+    // navigate('/signup');
   }
 
   useEffect(()=> {
     const userInLocalStorage = localStorage.getItem('user')
+    console.log(userInLocalStorage)
     if (userInLocalStorage){
+      console.log(userInLocalStorage)
       dispatch(loginUser(userInLocalStorage));
     }
   },)
