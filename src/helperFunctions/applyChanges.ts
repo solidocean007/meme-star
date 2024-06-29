@@ -18,8 +18,6 @@ interface ApplyChangesProps {
   setPendingChanges: React.Dispatch<React.SetStateAction<ChangeType[]>>;
   dispatch: AppDispatch;
   setLocalQuotes: React.Dispatch<React.SetStateAction<QuoteType[]>>;
-  // setMessage: React.Dispatch<React.SetStateAction<string>>;
-  // setMessageType: React.Dispatch<React.SetStateAction<"error" | "success">>;
 }
 
 export const applyChanges = ({
@@ -27,8 +25,6 @@ export const applyChanges = ({
   setPendingChanges,
   dispatch,
   setLocalQuotes,
-  // setMessage,
-  // setMessageType,
 }: ApplyChangesProps) => {
   if (pendingChanges.length === 0) {
     return;

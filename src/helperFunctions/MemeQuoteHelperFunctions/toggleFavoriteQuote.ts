@@ -27,7 +27,7 @@ export const toggleFavoriteQuote = (
         userId: currentUser.id,
         quoteId: targetQuote.id,
         memeId: memeId,
-        id: undefined, // The id will be set by the server upon actual creation
+        id: undefined,
       },
     };
   } else if (alreadyLiked?.id) {
@@ -35,8 +35,6 @@ export const toggleFavoriteQuote = (
       type: "deleteLikedQuote",
       data: { memeId: alreadyLiked.memeId, likedQuoteId: alreadyLiked.id },
     };
-  } else if (!targetQuote.id) {
-    // what happens if the user just made this quote and we cant make a new change for addLikedQuote becuase we cant assign a quoteId
   }
 
   const existingChanges = findAnyPendingChangeForQuote(
@@ -44,7 +42,6 @@ export const toggleFavoriteQuote = (
     pendingChanges
   );
 
-  // Clear all other pending changes for the quote
   if (existingChanges.length > 0) {
     const updatedChanges = pendingChanges.filter(change => !existingChanges.includes(change));
     setPendingChanges(updatedChanges);
@@ -52,16 +49,13 @@ export const toggleFavoriteQuote = (
     setPendingChanges(prev => [...prev, newChange]);
   }
   
-
-  // Update local quotes optimistically
   setLocalQuotes(
     localQuotes.map((quote) => {
       if (quote.id === targetQuote.id) {
         const updatedQuoteLikes =
           newChange?.type === "addLikedQuote"
-            ? [...quote.quoteLikes, { ...newChange.data }] // Add a temporary placeholder for new likes
-            : quote.quoteLikes.filter((like) => like.id !== alreadyLiked?.id); // Remove the like if it exists
-
+            ? [...quote.quoteLikes, { ...newChange.data }]
+            : quote.quoteLikes.filter((like) => like.id !== alreadyLiked?.id);
         return { ...quote, quoteLikes: updatedQuoteLikes };
       }
       return quote;

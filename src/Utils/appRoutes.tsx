@@ -18,7 +18,6 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<LoginSignUp />} />
-        {/* <Route path="/create" element={CreateMeme} /> */}
       </Routes>
     </Container>
   );

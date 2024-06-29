@@ -8,7 +8,6 @@ import CaptionWithLikes from "./CaptionWithLikes";
 import { useNavigate } from "react-router";
 import { applyChanges } from "../helperFunctions/applyChanges";
 import { useAppDispatch } from "../Redux/hook";
-import SnackBarSlide from "./SnackBarSlide";
 
 const MemeCard = ({
   meme,
@@ -53,7 +52,6 @@ const MemeCard = ({
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 600,
-    // bgcolor: "#ffffff",
     bgcolor: "#ffffff",
     border: "2px solid #000",
     boxShadow: 24,

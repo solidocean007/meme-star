@@ -37,7 +37,7 @@ export const MemeQuotes = ({
   setLocalQuotes,
   handleClose,
 }: MemeQuotesProps) => {
-  const [newQuoteText, setNewQuoteText] = useState(""); // state of the text field for adding a new quote
+  const [newQuoteText, setNewQuoteText] = useState("");
   const [openDeleteConfirm, setOpenDeleteConfirm] = useState(false);
   const [quoteToDelete, setQuoteToDelete] = useState<QuoteType | null>(null);
 
@@ -48,16 +48,14 @@ export const MemeQuotes = ({
 
   const handleCloseConfirmDelete = () => {
     setOpenDeleteConfirm(false);
-    setQuoteToDelete(null); // Reset the quoteToDelete when closing the dialog
+    setQuoteToDelete(null);
   };
 
-  useEffect(() => {
-  }, [pendingChanges, localQuotes]);
+  useEffect(() => {}, [pendingChanges, localQuotes]);
 
-  if (!localQuotes || !currentUser) return null; // if there are no quotes available close this component
+  if (!localQuotes || !currentUser) return null;
 
   const userAlreadyQuoted = localQuotes.some(
-    // this returns the quote that was created by the user.
     (quote) => quote.userId === currentUser.id
   );
 
@@ -84,9 +82,11 @@ export const MemeQuotes = ({
     }
   };
 
-  const handleDeleteUserQuote = async (quoteToDelete: QuoteType, memeId: string) => {
+  const handleDeleteUserQuote = async (
+    quoteToDelete: QuoteType,
+    memeId: string
+  ) => {
     if (!quoteToDelete.id || !currentUser) return;
-  
     createChangeToDeleteUserQuote(
       quoteToDelete,
       memeId,
@@ -94,22 +94,22 @@ export const MemeQuotes = ({
       pendingChanges,
       setPendingChanges
     );
-  
-    // Await the fetching of liked quote ids
+
     const likedQuoteIds = await deleteLikesForDeletedQuote(quoteToDelete.id);
-  
-    // Create a change for each liked quote deletion
-    const likedQuoteChanges: ChangeType[] = likedQuoteIds.map(likedQuoteId => ({
-      type: "deleteLikedQuote",
-      data: { likedQuoteId, memeId },
-    }));
-    setPendingChanges(changes => [...changes, ...likedQuoteChanges]);
-    setLocalQuotes(currentQuotes =>
-      currentQuotes.filter(quote => quote.id !== quoteToDelete.id)
+
+    const likedQuoteChanges: ChangeType[] = likedQuoteIds.map(
+      (likedQuoteId) => ({
+        type: "deleteLikedQuote",
+        data: { likedQuoteId, memeId },
+      })
+    );
+    setPendingChanges((changes) => [...changes, ...likedQuoteChanges]);
+    setLocalQuotes((currentQuotes) =>
+      currentQuotes.filter((quote) => quote.id !== quoteToDelete.id)
     );
     handleClose();
   };
-  
+
   const handleSubmitNewQuote = (memeId: string) => {
     if (newQuoteText && currentUser.id) {
       const newChange: ChangeType = {
@@ -123,7 +123,7 @@ export const MemeQuotes = ({
         },
       };
       setPendingChanges((prev) => [...prev, newChange]);
-      setLocalQuotes((prev) => [...prev, newChange.data])
+      setLocalQuotes((prev) => [...prev, newChange.data]);
       setNewQuoteText("");
       handleClose();
     }

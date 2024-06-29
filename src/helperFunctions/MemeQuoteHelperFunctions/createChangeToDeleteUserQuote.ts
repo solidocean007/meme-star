@@ -8,7 +8,6 @@ export const createChangeToDeleteUserQuote = (
   pendingChanges: ChangeType[],
   setPendingChanges: React.Dispatch<React.SetStateAction<ChangeType[]>>
 ) => {
-  // create a change for this quote unless there already is one then delete that one
   if (!currentUser.id || !quote.id) return;
 
   const newChange: ChangeType = {
@@ -16,7 +15,6 @@ export const createChangeToDeleteUserQuote = (
     data: { quoteId: quote.id, memeId: memeId },
   };
 
-  // find all pending changes for this quote
   const allPendingChangesForThisQuote = findAnyPendingChangeForQuote(
     quote,
     pendingChanges

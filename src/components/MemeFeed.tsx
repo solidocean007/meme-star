@@ -33,9 +33,9 @@ const MemeFeed: React.FC = () => {
         itemData={memes}
       >
         {({ index, style }) => (
-          <div style={style}>
+          <Box style={style}>
             <MemeCard meme={memes[index]} loggedInUser={loggedInUser}/>
-          </div>
+          </Box>
         )}
       </List>
     </Box>

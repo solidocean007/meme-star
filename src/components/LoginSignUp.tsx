@@ -29,7 +29,7 @@ const LoginSignUp = () => {
   useEffect(() => {
     if (user) {
       setUserToLocalStorage(user);
-      navigate("/"); // Redirect to meme feed if user is logged in
+      navigate("/");
     }
   }, [user, navigate]);
 
@@ -49,7 +49,6 @@ const LoginSignUp = () => {
     validatedInputs: true,
     passwordsMatch: true,
   });
-
 
   const handleToggle = () => {
     setIsLogin(!isLogin);

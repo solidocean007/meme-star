@@ -17,6 +17,7 @@ import { useNavigate } from "react-router";
 import { loginUser, logout } from "../Redux/authSlice";
 import { useEffect } from "react";
 import { useAppDispatch } from "../Redux/hook";
+import { UsersType } from "../Utils/types";
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -32,17 +33,7 @@ const HomePage = () => {
 
   function handleLogout(){
     dispatch(logout());
-    // navigate('/signup');
   }
-
-  useEffect(()=> {
-    const userInLocalStorage = localStorage.getItem('user')
-    console.log(userInLocalStorage)
-    if (userInLocalStorage){
-      console.log(userInLocalStorage)
-      dispatch(loginUser(userInLocalStorage));
-    }
-  },)
 
   return (
     <>
