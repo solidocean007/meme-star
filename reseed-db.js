@@ -1,4 +1,10 @@
-{
+import fs from 'fs';
+import path from 'path';
+
+// Define the path to the db.json file
+const dbPath = path.join(path.resolve(), 'db.json');
+
+const data = {
   "users": [
     {
       "password": "passwordEasy",
@@ -334,4 +340,11 @@
       "id": "a15"
     }
   ]
+}
+
+try {
+  fs.writeFileSync(dbPath, JSON.stringify(data, null, 2), 'utf-8');
+  console.log('Data seeded successfully!');
+} catch (err) {
+  console.error('Failed to seed data:', err);
 }
