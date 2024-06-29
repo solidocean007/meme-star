@@ -11,13 +11,10 @@ import {
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MemeFeed from "./MemeFeed";
 import { useSelector } from "react-redux";
-import { RootState } from "../Redux/store";
+import { RootState, useAppDispatch } from "../Redux/store";
 import { LogoutSharp } from "@mui/icons-material";
 import { useNavigate } from "react-router";
-import { loginUser, logout } from "../Redux/authSlice";
-import { useEffect } from "react";
-import { useAppDispatch } from "../Redux/hook";
-import { UsersType } from "../Utils/types";
+import { logout } from "../Redux/authSlice";
 
 const HomePage = () => {
   const dispatch = useAppDispatch();

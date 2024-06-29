@@ -3,8 +3,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Container } from "@mui/material";
 import { useEffect } from "react";
 import { setUser } from "./Redux/authSlice";
-import { useAppDispatch } from "./Redux/hook";
 import SnackBarSlide from "./components/SnackBarSlide";
+import { useAppDispatch } from "./Redux/store";
 
 function App() {
   const dispatch = useAppDispatch();

@@ -1,6 +1,6 @@
 import { UsersType } from "../Utils/types";
 import loginService from "../api/auth/loginService";
-import { useAppDispatch } from "./hook";
+import { useAppDispatch } from "./store";
 
 export const useLoginService = () => {
   const dispatch = useAppDispatch();

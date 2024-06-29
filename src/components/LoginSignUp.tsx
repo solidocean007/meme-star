@@ -11,10 +11,9 @@ import {
   IconButton,
 } from "@mui/material";
 import { loginUser, signUpUser } from "../Redux/authSlice";
-import { useAppDispatch } from "../Redux/hook";
 import { NewUserType, UsersType } from "../Utils/types";
 import { useSelector } from "react-redux";
-import { RootState } from "../Redux/store";
+import { RootState, useAppDispatch } from "../Redux/store";
 import { useNavigate } from "react-router";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 

@@ -3,10 +3,9 @@ import React, { useEffect } from "react";
 import { FixedSizeList as List } from "react-window";
 import { useSelector } from "react-redux";
 import { fetchMemes } from "../Redux/memeSlice";
-import { RootState } from "../Redux/store";
+import { RootState, useAppDispatch } from "../Redux/store";
 import MemeCard from "./MemeCard";
 import { Box } from "@mui/material";
-import { useAppDispatch } from "../Redux/hook";
 
 const MemeFeed: React.FC = () => {
   const dispatch = useAppDispatch();

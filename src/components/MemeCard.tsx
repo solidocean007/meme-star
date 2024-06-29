@@ -7,7 +7,7 @@ import { leadingQuoteForMeme } from "../helperFunctions/leadingQuoteForMeme";
 import CaptionWithLikes from "./CaptionWithLikes";
 import { useNavigate } from "react-router";
 import { applyChanges } from "../helperFunctions/applyChanges";
-import { useAppDispatch } from "../Redux/hook";
+import { useAppDispatch } from "../Redux/store";
 
 const MemeCard = ({
   meme,
