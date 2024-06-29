@@ -37,12 +37,6 @@ export interface LikedQuotesType {
   'memeId': string;
 }
 
-export interface LikedMemesType {
-  'id'?: string;        // Unique identifier for the like
-  'userId': string;
-  'memeId': string;
-}
-
 export type ChangeType =
   | { type: "addLikedQuote"; data: LikedQuotesType }
   | { type: "addQuote"; data: QuoteType }

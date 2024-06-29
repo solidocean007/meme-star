@@ -1,15 +1,14 @@
 // api/processMemes.js
-import { LikedMemesType, LikedQuotesType, MemeType, QuoteType, UsersType } from "../Utils/types";
+import { LikedQuotesType, MemeType, QuoteType, UsersType } from "../Utils/types";
 
 interface processedMemesProps {
   memes: MemeType[];
   users: UsersType[];
   quotes: QuoteType[];
   likedQuotes: LikedQuotesType[];
-  likedMemes: LikedMemesType[];
 }
 
-export const processMemes =({memes, users, quotes, likedQuotes, likedMemes}: processedMemesProps) => {
+export const processMemes =({memes, users, quotes, likedQuotes}: processedMemesProps) => {
   return memes.map((thisMeme: MemeType) => ({
     ...thisMeme,
     CreatedBy: users.find((userFromDB: UsersType) => userFromDB.id === thisMeme.id),  // User who posted the meme
@@ -21,6 +20,5 @@ export const processMemes =({memes, users, quotes, likedQuotes, likedMemes}: pro
         quoteLikes: likedQuotes.filter((likedQuoteFromDB: LikedQuotesType) => likedQuoteFromDB.quoteId === quoteForThisMeme.id) 
       };
     }),
-    likesCount: likedMemes.filter((likedMemesFromDB: LikedMemesType) => likedMemesFromDB.memeId === thisMeme.id).length
   }));
 };

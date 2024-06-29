@@ -1,6 +1,6 @@
 // MemeCard.tsx
 import { useEffect, useState } from "react";
-import { Card, CardMedia, Box, Modal, Button } from "@mui/material";
+import { Card, CardMedia, Box, Modal, Button, Typography, Container } from "@mui/material";
 import { ChangeType, MemeType, QuoteType, UsersType } from "../Utils/types";
 import { MemeQuotes } from "./MemeQuotes";
 import { leadingQuoteForMeme } from "../helperFunctions/leadingQuoteForMeme";
@@ -59,7 +59,7 @@ const MemeCard = ({
   };
 
   return (
-    <Card sx={{ maxWidth: 800, m: 2 }}>
+    <Card sx={{ maxWidth: 600, m: 2 }}>
       <CardMedia
         component="img"
         height="450"
@@ -69,26 +69,35 @@ const MemeCard = ({
         sx={{ position: "relative" }}
       />
 
-     { meme.allQuotes?.length &&  <Box
-        sx={{
-          position: "absolute",
-          bottom: 90,
-          left: 15,
-          width: "100%",
-          height: 80,
-          // textAlign?
-          bgcolor: "rgba(255, 255, 255, 0.8)", 
-          padding: "10px",
-        }}
+      {meme.allQuotes?.length && (
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: 90,
+            left: 15,
+            width: "100%",
+            height: 80,
+            // textAlign?
+            bgcolor: "rgba(255, 255, 255, 0.8)",
+            padding: "10px",
+          }}
+        >
+          <Container
+            title="leading-caption"
+            onClick={loggedInUser ? handleOpen : handleGoToSignUp}
+            style={{background: "transparent"}}
+          >
+            <CaptionWithLikes caption={captionWithMostLikes} />
+          </Container>
+        </Box>
+      )}
+      <Button
+        sx={{ fontSize: "20px" }}
+        onClick={loggedInUser ? handleOpen : handleGoToSignUp}
       >
-       <CaptionWithLikes caption={captionWithMostLikes} />
-      </Box>}
-      <Button sx={{ fontSize: "20px"}} onClick={loggedInUser ? handleOpen : handleGoToSignUp}>
         (
         {loggedInUser
-          ? `${
-              meme.allQuotes && meme.allQuotes?.length
-            } Quotes. Now add yours!`
+          ? `${meme.allQuotes && meme.allQuotes?.length} Quotes. Now add yours!`
           : "login to comment yours"}
         )
       </Button>

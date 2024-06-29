@@ -231,7 +231,7 @@ const LoginSignUp = () => {
           fullWidth
           variant="text"
           onClick={handleToggle}
-          sx={{ mt: 3, mb: 2 }}
+          sx={{ mt: 3, mb: 2, color: "whitesmoke" }}
         >
           {isLogin
             ? "Need an account? Sign Up Here"

@@ -41,14 +41,14 @@ const HomePage = () => {
             color="inherit"
             aria-label="menu"
           ></IconButton>
-          <Typography variant="h2" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h3" component="div" sx={{ flexGrow: 1 }}>
             MemeStar
           </Typography>
           <IconButton color="inherit" onClick={handleGoToLoginSignUp}>
             <AccountCircle />
           </IconButton>
           {isAuthenticated && (
-            <Typography variant="h4" component="div">
+            <Typography variant="h5" component="div">
               {`${loggedInUser?.firstName} ${loggedInUser?.lastName}`}
             </Typography>
           )}

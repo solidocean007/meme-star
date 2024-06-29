@@ -26,7 +26,7 @@ const MemeFeed: React.FC = () => {
     <Box sx={{ width: "100%", height: 800, bgcolor: "background.paper", display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <List
         height={800}
-        width={800}
+        width={600}
         itemSize={550}
         itemCount={memes.length}
         itemData={memes}
