@@ -6,6 +6,7 @@ import { fetchMemes } from "../Redux/memeSlice";
 import { RootState, useAppDispatch } from "../Redux/store";
 import MemeCard from "./MemeCard";
 import { Box } from "@mui/material";
+import { showSnackbar } from "../Redux/snackBarSlice";
 
 const MemeFeed: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -15,7 +16,12 @@ const MemeFeed: React.FC = () => {
   );
 
   useEffect(() => {
-    dispatch(fetchMemes());
+    try{
+      dispatch(fetchMemes());
+
+    } catch{
+      dispatch(showSnackbar({ message: 'problem', type: "error" }));
+    }
   }, [dispatch]);
 
   if (loading === "loading") {

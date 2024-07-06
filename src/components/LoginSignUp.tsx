@@ -44,12 +44,23 @@ const LoginSignUp = () => {
     verifyPassword: "",
   });
 
+  const clearForm = () => {
+    setFormState({
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      verifyPassword: '',
+    })
+  }
+
   const [errors, setErrors] = useState({
     validatedInputs: true,
     passwordsMatch: true,
   });
 
   const handleToggle = () => {
+    clearForm();
     setIsLogin(!isLogin);
   };
 

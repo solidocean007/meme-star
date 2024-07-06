@@ -19,7 +19,9 @@ import { logout } from "../Redux/authSlice";
 const HomePage = () => {
   const dispatch = useAppDispatch();
   const loggedInUser = useSelector((state: RootState) => state.auth.user);
-  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
   const navigate = useNavigate();
 
   const handleGoToLoginSignUp = () => {
@@ -28,13 +30,16 @@ const HomePage = () => {
     }
   };
 
-  function handleLogout(){
+  function handleLogout() {
     dispatch(logout());
   }
 
   return (
     <>
-      <AppBar position="static" style={{ background: 'var(--dusty-cactus)', color: "black"  }}>
+      <AppBar
+        position="static"
+        style={{ background: "var(--dusty-cactus)", color: "black" }}
+      >
         <Toolbar>
           <IconButton
             edge="start"
@@ -58,7 +63,6 @@ const HomePage = () => {
             </IconButton>
           )}
         </Toolbar>
-       
       </AppBar>
 
       <Container
@@ -71,8 +75,6 @@ const HomePage = () => {
           justifyContent: "center",
         }}
       >
-
-
         <MemeFeed />
 
         {!isAuthenticated && (
@@ -97,7 +99,7 @@ const HomePage = () => {
           py: 3,
           mt: 4,
           textAlign: "center",
-          width: "100%"
+          width: "100%",
         }}
       >
         <Container maxWidth="md">

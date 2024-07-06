@@ -2,6 +2,8 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { LikedQuotesType, MemeType } from "../Utils/types";
 import { getAllData } from "../api/getAllData";
 import { processMemes } from "../helperFunctions/processedMemes";
+import { useAppDispatch } from "./store";
+import { showSnackbar } from "./snackBarSlice";
 
 interface FetchError {
   message: string;

@@ -21,7 +21,6 @@ const initialState: AuthState = {
 
 
 export const loginUser = createAsyncThunk<
-  // UsersType | null,
   UsersType,
   { email: string; password: string },
   { rejectValue: string; dispatch: AppDispatch }
