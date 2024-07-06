@@ -3,13 +3,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface SnackbarState {
   message: string;
-  type: 'success' | 'error';
+  type: 'success' | 'error' | 'info' | 'warning';
   open: boolean;
 }
 
 const initialState: SnackbarState = {
   message: '',
-  type: 'success',
+  type: 'info',
   open: false,
 };
 
@@ -17,7 +17,7 @@ const snackbarSlice = createSlice({
   name: 'snackbar',
   initialState,
   reducers: {
-    showSnackbar: (state, action: PayloadAction<{ message: string; type: 'success' | 'error' }>) => {
+    showSnackbar: (state, action: PayloadAction<{ message: string; type: 'success' | 'error' | 'info' | 'warning' }>) => {
       state.message = action.payload.message;
       state.type = action.payload.type;
       state.open = true;

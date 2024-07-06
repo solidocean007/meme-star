@@ -11,7 +11,7 @@ import { showSnackbar } from "../Redux/snackBarSlice";
 const MemeFeed: React.FC = () => {
   const dispatch = useAppDispatch();
   const loggedInUser = useSelector((state: RootState) => state.auth.user);
-  const { entities: memes, loading } = useSelector(
+  const { entities: memes, loading, error } = useSelector(
     (state: RootState) => state.memes
   );
 
@@ -26,6 +26,10 @@ const MemeFeed: React.FC = () => {
 
   if (loading === "loading") {
     return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
   }
 
   return (
