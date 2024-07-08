@@ -5,6 +5,8 @@ import { useEffect } from "react";
 import { setUser } from "./Redux/authSlice";
 import SnackBarSlide from "./components/SnackBarSlide";
 import { useAppDispatch } from "./Redux/store";
+import "./App.css"
+
 
 function App() {
   const dispatch = useAppDispatch();
@@ -22,7 +24,8 @@ function App() {
       <Router>
           <Container
             component="main"
-            maxWidth="xl"
+            // maxWidth="xl"
+            maxWidth={false}
             sx={{
               mt: 8,
               mb: 4,

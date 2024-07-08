@@ -1,6 +1,6 @@
 // MemeCard.tsx
 import { useEffect, useState } from "react";
-import { Card, CardMedia, Box, Modal, Button,Container } from "@mui/material";
+import { Card, CardMedia, Box, Modal, Button, Container } from "@mui/material";
 import { ChangeType, MemeType, QuoteType, UsersType } from "../Utils/types";
 import { MemeQuotes } from "./MemeQuotes";
 import { leadingQuoteForMeme } from "../helperFunctions/leadingQuoteForMeme";
@@ -84,9 +84,12 @@ const MemeCard = ({
           <Container
             title="leading-caption"
             onClick={loggedInUser ? handleOpen : handleGoToSignUp}
-            style={{background: "transparent"}}
+            style={{ background: "transparent" }}
           >
-            <CaptionWithLikes caption={captionWithMostLikes} user={loggedInUser} />
+            <CaptionWithLikes
+              caption={captionWithMostLikes}
+              user={loggedInUser}
+            />
           </Container>
         </Box>
       )}

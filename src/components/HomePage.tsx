@@ -1,4 +1,4 @@
-// HomePage.tsx
+import React, { useState } from "react";
 import {
   Container,
   Typography,
@@ -7,6 +7,9 @@ import {
   Toolbar,
   IconButton,
   Box,
+  Grid,
+  Modal,
+  Card,
 } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MemeFeed from "./MemeFeed";
@@ -15,6 +18,7 @@ import { RootState, useAppDispatch } from "../Redux/store";
 import { LogoutSharp } from "@mui/icons-material";
 import { useNavigate } from "react-router";
 import { logout } from "../Redux/authSlice";
+import LeaderBoard from "../helperFunctions/LeaderBoard";
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -23,6 +27,7 @@ const HomePage = () => {
     (state: RootState) => state.auth.isAuthenticated
   );
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
 
   const handleGoToLoginSignUp = () => {
     if (!isAuthenticated) {
@@ -30,9 +35,12 @@ const HomePage = () => {
     }
   };
 
-  function handleLogout() {
+  const handleLogout = () => {
     dispatch(logout());
-  }
+  };
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <>
@@ -66,16 +74,51 @@ const HomePage = () => {
       </AppBar>
 
       <Container
-        maxWidth="xl"
+        maxWidth={false}
         sx={{
           my: 4,
           display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
+          flexDirection: { xs: "column", md: "row" },
+          alignItems: "flex-start",
+          justifyContent: "space-between",
+          width: "100%", // Ensure full width
         }}
       >
-        <MemeFeed />
+        <Grid container spacing={2} justifyContent="center">
+          <Box display={{ xs: "block", md: "none" }} mt={2}>
+            <Button variant="contained" onClick={handleOpen}>
+              Show Leaderboard
+            </Button>
+            <Modal open={open} onClose={handleClose}>
+              <Card sx={{bgcolor: "white"}}>
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    width: 300,
+                    // bgcolor: "background.paper",
+                    // border: "2px solid #000",
+                    // boxShadow: 24,
+                    // p: 4,
+                  }}
+                >
+                  <LeaderBoard />
+                  <Button onClick={handleClose} fullWidth>
+                    Close
+                  </Button>
+                </Box>
+              </Card>
+            </Modal>
+          </Box>
+          <Grid item xs={2} md={6}>
+            <MemeFeed />
+          </Grid>
+          <Grid item xs={12} md={3} display={{ xs: "none", md: "block" }}>
+            <LeaderBoard />
+          </Grid>
+        </Grid>
 
         {!isAuthenticated && (
           <Box mt={2} width="100%">

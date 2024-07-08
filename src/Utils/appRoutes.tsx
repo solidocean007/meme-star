@@ -14,7 +14,7 @@ const style = {
 
 const AppRoutes = () => {
   return (
-    <Container component="main" maxWidth="xl" sx={style}>
+    <Container component="main" maxWidth={false} sx={style}>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<LoginSignUp />} />

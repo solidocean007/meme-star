@@ -19,9 +19,13 @@ const userLiked = user ? caption.quoteLikes.some((like: LikedQuotesType) => like
 
   return (
     <Box sx={{ display: "flex", height: "100%", width: "80%", alignItems: "center", pb: 3 }}>
+      <Box>
       <Typography variant="h5" sx={{ flexGrow: 1, mr: 1 }}>
         {text}
       </Typography>
+      <Typography variant="h6">by: {caption.userNameQuote}</Typography>
+      </Box>
+      
       {numberOfLikes > 0 && (
         <Badge badgeContent={numberOfLikes} color="primary">
           {userLiked ? <FavoriteIcon color="success" /> : <FavoriteBorderOutlined color="disabled" />}
