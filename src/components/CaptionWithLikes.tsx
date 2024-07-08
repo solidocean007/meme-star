@@ -1,13 +1,18 @@
 import { Typography, Box, Badge } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { QuoteType } from "../Utils/types";
+import { LikedQuotesType, QuoteType, UsersType } from "../Utils/types";
+import { FavoriteBorderOutlined } from "@mui/icons-material";
 
 interface CaptionWithLikesProps {
   caption: QuoteType | null;
+  user: UsersType | null;
 }
 
-const CaptionWithLikes = ({ caption }: CaptionWithLikesProps) => {
+
+const CaptionWithLikes = ({ caption, user }: CaptionWithLikesProps) => {
   if (!caption) return null;
+
+const userLiked = user ? caption.quoteLikes.some((like: LikedQuotesType) => like.userId === user.id) : false;
 
   const text = caption.text;
   const numberOfLikes = caption.quoteLikes.length;
@@ -19,7 +24,7 @@ const CaptionWithLikes = ({ caption }: CaptionWithLikesProps) => {
       </Typography>
       {numberOfLikes > 0 && (
         <Badge badgeContent={numberOfLikes} color="primary">
-          <FavoriteIcon color="success" />
+          {userLiked ? <FavoriteIcon color="success" /> : <FavoriteBorderOutlined color="disabled" />}
         </Badge>
       )}
     </Box>

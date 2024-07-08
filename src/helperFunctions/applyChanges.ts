@@ -33,18 +33,23 @@ export const applyChanges = ({
   pendingChanges.forEach((change) => {
     switch (change.type) {
       case "addLikedQuote":
+        console.log("Adding liked quote:", change.data);
         addLikedQuote(change.data)
           .then((response) => {
-            if (response && response.data) {
+            console.log("Response from addLikedQuote:", response);
+            // if (response && response.data) {
+            if (response) {
               dispatch(
                 addLikedQuoteToRedux({
                   id: response.id,
-                  memeId: response.data.memeId,
-                  quoteId: response.data.quoteId,
-                  userId: response.data.userId,
+                  memeId: response.memeId, // console log error said 'memeId' was undefined.  but it looks like it comes back in the response
+                  quoteId: response.quoteId,
+                  userId: response.userId,
                 })
               );
+              console.log("Dispatched addLikedQuoteToRedux:", response.data);
             } else {
+              console.log("Failed to add liked quote, removing from local state:", change.data.id);
               setLocalQuotes((prev) =>
                 prev.filter((quote) => quote.id !== change.data.id)
               );

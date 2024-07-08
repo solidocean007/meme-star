@@ -1,6 +1,6 @@
 // MemeCard.tsx
 import { useEffect, useState } from "react";
-import { Card, CardMedia, Box, Modal, Button, Typography, Container } from "@mui/material";
+import { Card, CardMedia, Box, Modal, Button,Container } from "@mui/material";
 import { ChangeType, MemeType, QuoteType, UsersType } from "../Utils/types";
 import { MemeQuotes } from "./MemeQuotes";
 import { leadingQuoteForMeme } from "../helperFunctions/leadingQuoteForMeme";
@@ -22,7 +22,6 @@ const MemeCard = ({
   const [localQuotes, setLocalQuotes] = useState<QuoteType[]>(
     meme.allQuotes || []
   );
-
   const [openQuotes, setOpenQuotes] = useState(false);
   const [pendingChanges, setPendingChanges] = useState<ChangeType[]>([]);
 
@@ -87,7 +86,7 @@ const MemeCard = ({
             onClick={loggedInUser ? handleOpen : handleGoToSignUp}
             style={{background: "transparent"}}
           >
-            <CaptionWithLikes caption={captionWithMostLikes} />
+            <CaptionWithLikes caption={captionWithMostLikes} user={loggedInUser} />
           </Container>
         </Box>
       )}
