@@ -13,7 +13,7 @@ const SnackBarSlide: React.FC = () => {
   const dispatch = useDispatch();
   const { message, type, open } = useSelector((state: RootState) => state.snackbar);
 
-  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => { // event is declared but value never read
+  const handleClose = (_event?: React.SyntheticEvent | Event, reason?: string) => { // event is declared but value never read
     if (reason === 'clickaway') {
       return;
     }

@@ -6,20 +6,14 @@ export interface MemeType  {
 }
 
 export interface UsersType {
-  'id'?: string,
+  'id': string,
   'firstName': string,
   'lastName': string,
   'password': string,
   'email': string
 }
 
-export interface NewUserType {
-  'firstName': string;
-  'lastName': string;
-  'email': string;
-  'password': string;
-  'verifyPasswordInput': string;
-}
+export type NewUserType = Omit<UsersType, 'id'>;
 
 export interface QuoteType {
   'id'?: string,

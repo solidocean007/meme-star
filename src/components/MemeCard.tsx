@@ -42,7 +42,7 @@ const MemeCard = ({
   const handleOpen = () => setOpenQuotes(true);
 
   const handleGoToSignUp = () => {
-    navigate("/signup");
+    navigate("/signUp");
   };
 
   const style = {

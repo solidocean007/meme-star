@@ -10,10 +10,10 @@ import {
   InputAdornment,
   IconButton,
 } from "@mui/material";
-import { loginUser, signUpUser } from "../Redux/authSlice";
-import { NewUserType, UsersType } from "../Utils/types";
+import { loginUser, signUpUser } from "../../Redux/authSlice";
+import { NewUserType, UsersType } from "../../Utils/types";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../Redux/store";
+import { RootState, useAppDispatch } from "../../Redux/store";
 import { useNavigate } from "react-router";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 

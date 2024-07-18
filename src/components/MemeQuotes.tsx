@@ -51,7 +51,6 @@ export const MemeQuotes = ({
     setQuoteToDelete(null);
   };
 
-  useEffect(() => {}, [pendingChanges, localQuotes]);
 
   if (!localQuotes || !currentUser) return null;
 
@@ -129,15 +128,17 @@ export const MemeQuotes = ({
     }
   };
 
+  const listStyle = {
+    width: "100%",
+    bgcolor: "background.default",
+    color: "text.primary",
+  };
+
   return (
     <>
       <CardContent sx={{ padding: "0" }}>
         <List
-          sx={{
-            width: "100%",
-            bgcolor: "background.default",
-            color: "text.primary",
-          }}
+          sx={listStyle}
         >
           {localQuotes?.map((quote, index) => (
             <ListItem key={index}>
