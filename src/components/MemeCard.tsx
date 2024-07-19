@@ -1,4 +1,3 @@
-// MemeCard.tsx
 import { useEffect, useState } from "react";
 import { Card, CardMedia, Box, Modal, Button, Container } from "@mui/material";
 import { ChangeType, MemeType, QuoteType, UsersType } from "../Utils/types";
@@ -51,58 +50,63 @@ const MemeCard = ({
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 600,
-    bgcolor: "#ffffff",
+    bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 24,
     p: 2,
   };
 
+  const cardMediaStyle = {
+    position: "relative",
+    height: { xs: 300, sm: 350, md: 400, lg: 450 }, // Responsive height
+    width: "100%", // Make sure the image takes full width
+  };
+
+  const captionContainerStyle = {
+    background: "rgba(255, 255, 255, 0.8)",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    width: "100%",
+  };
+
   return (
-    <Card sx={{ maxWidth: 600, m: 2 }}>
+    <Card sx={{ m: 2, position: "relative" }}>
       <CardMedia
         component="img"
-        height="450"
-        width="600"
-        image={meme.imageUrl}
-        // alt={meme.altImageText}
-        sx={{ position: "relative" }}
+        src={meme.imageUrl}
+        sx={cardMediaStyle}
       />
 
       {meme.allQuotes?.length && (
-        <Box
-          sx={{
-            position: "absolute",
-            bottom: 90,
-            left: 15,
-            width: "100%",
-            height: 80,
-            // textAlign?
-            bgcolor: "rgba(255, 255, 255, 0.8)",
-            padding: "10px",
-          }}
-        >
+        <Box sx={captionContainerStyle}>
           <Container
             title="leading-caption"
             onClick={loggedInUser ? handleOpen : handleGoToSignUp}
-            style={{ background: "transparent" }}
+            sx={{ background: "transparent" }}
           >
             <CaptionWithLikes
               caption={captionWithMostLikes}
               user={loggedInUser}
             />
+            <Button
+              sx={{
+                fontSize: { xs: 10, sm: 15, md: 20, lg: 20 }, // Responsive font size
+              }}
+              onClick={loggedInUser ? handleOpen : handleGoToSignUp}
+            >
+              {loggedInUser
+                ? `${meme.allQuotes?.length || 0} Quotes. Now add yours!`
+                : "login to comment yours"}
+            </Button>
           </Container>
         </Box>
       )}
-      <Button
-        sx={{ fontSize: "20px" }}
-        onClick={loggedInUser ? handleOpen : handleGoToSignUp}
-      >
-        (
-        {loggedInUser
-          ? `${meme.allQuotes && meme.allQuotes?.length} Quotes. Now add yours!`
-          : "login to comment yours"}
-        )
-      </Button>
+
       <Modal
         open={openQuotes}
         onClose={handleClose}
@@ -126,3 +130,4 @@ const MemeCard = ({
 };
 
 export default MemeCard;
+

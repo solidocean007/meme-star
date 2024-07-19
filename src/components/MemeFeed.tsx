@@ -7,6 +7,7 @@ import { RootState, useAppDispatch } from "../Redux/store";
 import MemeCard from "./MemeCard";
 import { Box } from "@mui/material";
 import { showSnackbar } from "../Redux/snackBarSlice";
+import useWindowDimensions from "../helperFunctions/useWindowDimensions";
 
 const MemeFeed: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -14,7 +15,17 @@ const MemeFeed: React.FC = () => {
   const { entities: memes, loading, error } = useSelector(
     (state: RootState) => state.memes
   );
+  const { width } = useWindowDimensions();
+  // Calculate item size based on window width
+  const getItemSize = (width: number) => {
+    if (width < 400) return 300;  // xSmall screens
+    if (width < 600) return 350;  // Small screens
+    if (width < 960) return 400;  // Medium screens
+    if (width < 1280) return 450; // Large screens
+    return 500;                   // Extra large screens
+  };
 
+  const itemSize = getItemSize(width);
   useEffect(() => {
     try{
       dispatch(fetchMemes());
@@ -37,7 +48,7 @@ const MemeFeed: React.FC = () => {
       <List
         height={800}
         width={600}
-        itemSize={550}
+        itemSize={itemSize}
         itemCount={memes.length}
         itemData={memes}
       >
