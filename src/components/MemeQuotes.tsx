@@ -7,6 +7,7 @@ import {
   ListItem,
   ListItemText,
   TextField,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -136,7 +137,7 @@ export const MemeQuotes = ({
 
   return (
     <>
-      <CardContent sx={{ padding: "0" }}>
+      <CardContent sx={{ padding: "0", width: "100%" }}>
         <List
           sx={listStyle}
         >
@@ -166,13 +167,15 @@ export const MemeQuotes = ({
               <Typography>{quote.quoteLikes.length}</Typography>
               <Box sx={{ width: 15 }}>
                 {currentUser && currentUsersQuote(quote) && (
-                  <IconButton
+                 <Tooltip title="Delete" arrow>
+                   <IconButton
                     onClick={() => {
                       handleOpenConfirmDelete(quote);
                     }}
                   >
                     <Delete sx={{ color: "red" }} />
                   </IconButton>
+                 </Tooltip>
                 )}
               </Box>
             </ListItem>

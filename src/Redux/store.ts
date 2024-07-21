@@ -4,12 +4,14 @@ import memeSlice from "./memeSlice";
 import authSlice from "./authSlice";
 import snackBarSlice from "./snackBarSlice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import themeSlice from "./themeSlice";
 
 export const store = configureStore({
   reducer: {
     memes: memeSlice,
     auth: authSlice,
     snackbar: snackBarSlice,
+    theme: themeSlice,
   },
 });
 

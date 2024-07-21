@@ -2,20 +2,21 @@ import { useState } from "react";
 import { Container, Button, Box, Grid, Modal, Card } from "@mui/material";
 import MemeFeed from "../MemeFeed";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../Redux/store";
+import { RootState } from "../../Redux/store";
 import { useNavigate } from "react-router";
-import { logout } from "../../Redux/authSlice";
-import LeaderBoard from "../../helperFunctions/LeaderBoard";
+import LeaderBoard from "../LeaderBoard";
 import PageLayout from "./PageLayout";
+import SideBarLayout from "./SideBarLayout";
+import HowToPlay from "../HowToPlay";
 
 const HomePage = () => {
-  const dispatch = useAppDispatch();
   const loggedInUser = useSelector((state: RootState) => state.auth.user);
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
+  const [openLeaderBoard, setOpenLeaderBoard] = useState(false);
+  const [openHowToPlay, setOpenHowToPlay] = useState(false);
 
   const handleGoToLoginSignUp = () => {
     if (!isAuthenticated) {
@@ -23,99 +24,129 @@ const HomePage = () => {
     }
   };
 
-  const handleLogout = () => {
-    dispatch(logout());
+  const handleOpenHowToPlay = () => {
+    setOpenHowToPlay(true);
   };
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleCloseHowToPlay = () => {
+    setOpenHowToPlay(false);
+  };
 
-  function handleCreateMeme() {
+  const handleCreateMeme = () => {
     navigate("/create-meme-page");
-  }
+  };
+
+  const handleOpenLeaderBoard = () => setOpenLeaderBoard(true);
+
+  const handleCloseLeaderBoard = () => setOpenLeaderBoard(false);
 
   const homePageStyle = {
-    my: 4,
-    display: "flex",
-    flexDirection: { xs: "column", md: "row" },
-    alignItems: "flex-start",
-    justifyContent: "space-between",
+    my: 1,
     width: "100%",
+    height: "100%",
   };
 
   return (
-    <>
+    <Container sx={{ margin: "0", padding: "0", height: "100%" }}>
       <PageLayout
         isAuthenticated={isAuthenticated}
         loggedInUser={loggedInUser}
         handleGoToLoginSignUp={handleGoToLoginSignUp}
-        handleLogout={handleLogout}
       >
         <Container sx={homePageStyle}>
-          <Grid container spacing={2} justifyContent="center">
-            <Box display={{ xs: "block", md: "none" }} sx={{display: "flex", justifyContent: "space-around", width: "100%" }} mt={2}>
+          {!isAuthenticated && (
+            <Box m={2} width="100%">
               <Button
                 variant="contained"
                 color="secondary"
-                onClick={handleCreateMeme}
+                fullWidth
+                onClick={handleGoToLoginSignUp}
               >
-                Create Meme
+                Sign Up / Log In
               </Button>
-              <Button variant="contained" onClick={handleOpen}>
-                Show LeaderBoard
-              </Button>
-              <Modal open={open} onClose={handleClose}>
-                <Card sx={{ bgcolor: "white" }}>
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      top: "50%",
-                      left: "50%",
-                      transform: "translate(-50%, -50%)",
-                      width: 300,
-                    }}
-                  >
-                    <LeaderBoard />
-                    <Button onClick={handleClose} fullWidth>
-                      Close
-                    </Button>
-                  </Box>
-                </Card>
-              </Modal>
             </Box>
-            <Grid item xs={12} md={6}>
-              <MemeFeed />
-            </Grid>
-            <Grid item xs={12} md={3} display={{ xs: "none", md: "block" }}>
-              <Box sx={{ mb: 2 }}>
+          )}
+          <Grid
+            container
+            spacing={1}
+            m={0}
+            p={0}
+            sx={{ height: "100%" }}
+          >
+            <Grid item xs={12} md={3}>
+              <SideBarLayout>
                 <Button
-                  variant="contained"
-                  color="secondary"
+                  variant={undefined}
+                  color="info"
                   onClick={handleCreateMeme}
                 >
                   Create Meme
                 </Button>
-              </Box>
-              <LeaderBoard />
+                <Box display={{ xs: "block", sm: "block", md: "none" }}>
+                  <Button variant={undefined} color="info" onClick={handleOpenLeaderBoard}>
+                    Show LeaderBoard
+                  </Button>
+                </Box>
+                <Box>
+                  <Button variant={undefined} color="info" onClick={handleOpenHowToPlay}>
+                    How to Play
+                  </Button>
+                </Box>
+              </SideBarLayout>
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <MemeFeed />
+            </Grid>
+            <Grid item xs={12} md={3} display={{ xs: "none", md: "block" }}>
+              <SideBarLayout>
+                <LeaderBoard />
+              </SideBarLayout>
             </Grid>
           </Grid>
         </Container>
-
-        {!isAuthenticated && (
-          <Box mt={2} width="100%">
-            <Button
-              variant="contained"
-              color="secondary"
-              fullWidth
-              onClick={handleGoToLoginSignUp}
-            >
-              Sign Up / Log In
+      </PageLayout>
+      <Modal open={openHowToPlay} onClose={handleCloseHowToPlay}>
+        <Card sx={{ bgcolor: "white" }}>
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: { xs: "95%", sm: "75%", md: "50%", lg: "25%" },
+              p: 2,
+            }}
+          >
+            <HowToPlay />
+            <Button onClick={handleCloseHowToPlay} fullWidth>
+              Close
             </Button>
           </Box>
-        )}
-      </PageLayout>
-    </>
+        </Card>
+      </Modal>
+      <Modal open={openLeaderBoard} onClose={handleCloseLeaderBoard}>
+        <Card sx={{ bgcolor: "white" }}>
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: { xs: "95%", sm: "75%", md: "50%", lg: "25%" },
+              p: 2,
+            }}
+          >
+            <LeaderBoard />
+            <Button onClick={handleCloseLeaderBoard} fullWidth>
+              Close
+            </Button>
+          </Box>
+        </Card>
+      </Modal>
+    </Container>
   );
 };
 
 export default HomePage;
+

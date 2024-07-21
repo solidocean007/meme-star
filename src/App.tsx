@@ -1,13 +1,17 @@
+import { useEffect } from "react";
 import AppRoutes from "./Utils/appRoutes";
 import { BrowserRouter as Router } from "react-router-dom";
-import { useEffect } from "react";
 import { setUser } from "./Redux/authSlice";
 import SnackBarSlide from "./components/SnackBarSlide";
-import { useAppDispatch } from "./Redux/store";
+import { RootState, useAppDispatch } from "./Redux/store";
 import "./App.css";
+import { useSelector } from "react-redux";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { darkTheme, lightTheme } from "./Utils/theme";
 
-function App() {
+const App = () => {
   const dispatch = useAppDispatch();
+  const isDarkMode = useSelector((state: RootState) => state.theme.isDarkMode);
 
   useEffect(() => {
     const storedUserData = localStorage.getItem("userLoggedIn");
@@ -18,12 +22,14 @@ function App() {
   }, [dispatch]);
 
   return (
-    <>
+    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+      <CssBaseline />
+      
       <Router>
         <AppRoutes />
         <SnackBarSlide />
       </Router>
-    </>
+    </ThemeProvider>
   );
 }
 

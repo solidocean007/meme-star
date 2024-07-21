@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import {
   AppBar,
   Toolbar,
@@ -7,15 +7,16 @@ import {
   Box,
   Container,
 } from "@mui/material";
-import { AccountCircle, LogoutSharp, Margin } from "@mui/icons-material";
+import { AccountCircle, LogoutSharp } from "@mui/icons-material";
 import { UsersType } from "../../Utils/types";
+import { useAppDispatch } from "../../Redux/store";
+import { logout } from "../../Redux/authSlice";
 
 interface PageLayoutProps {
   children: ReactNode;
   isAuthenticated: boolean;
   loggedInUser: UsersType | null;
   handleGoToLoginSignUp: () => void;
-  handleLogout: () => void;
 }
 
 const PageLayout = ({
@@ -23,24 +24,21 @@ const PageLayout = ({
   isAuthenticated,
   loggedInUser,
   handleGoToLoginSignUp,
-  handleLogout,
 }: PageLayoutProps) => {
+  const dispatch = useAppDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   const pageLayoutStyle = {
-    my: 4,
+    // my: 1,
+    m: 0,
+    p: 0,
     display: "flex",
     flexDirection: { xs: "column", md: "row" },
     alignItems: "flex-start",
     justifyContent: "space-between",
     width: "100%", // Ensure full width
-  };
-
-  const footerStyle = {
-    bgcolor: "primary.main",
-    color: "white",
-    py: 3,
-    mt: 4,
-    textAlign: "center",
-    width: "100%",
   };
 
   const headerTextStyle = {
@@ -68,11 +66,6 @@ const PageLayout = ({
         style={{ background: "var(--dusty-cactus)", color: "black" }}
       >
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-          {/* <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-          ></IconButton> */}
           <Typography variant="h1" component="div" sx={headerTextStyle}>
             MemeStar
           </Typography>
@@ -94,16 +87,11 @@ const PageLayout = ({
         </Toolbar>
       </AppBar>
 
-      <Container maxWidth={false} sx={pageLayoutStyle}>
+      {/* <Container maxWidth={false} sx={pageLayoutStyle}> */}
+      <Container sx={pageLayoutStyle}>
+      
         {children}
       </Container>
-
-      <Box component="footer" sx={footerStyle}>
-        <Container maxWidth="md">
-          <Typography variant="body1">Your daily dose of fun</Typography>
-          <Typography variant="caption">© 2024 MemeStar</Typography>
-        </Container>
-      </Box>
     </>
   );
 };

@@ -24,16 +24,13 @@ body {
   margin: 0;
   padding: 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   font-family: var(--font-family);
   background: var(--background-page);
   width: 100vw;
-}
-
-.container {
-  width: 100%;
 }
 
 h1, a, button {

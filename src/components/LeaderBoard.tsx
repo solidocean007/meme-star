@@ -2,16 +2,19 @@ import { Box, Typography, List, ListItem, ListItemText } from '@mui/material';
 import { styled } from '@mui/system';
 import { useSelector } from 'react-redux';
 import { RootState } from '../Redux/store';
-import calculateLeaderBoard from './calculateLeaderBoard';
+import calculateLeaderBoard from '../helperFunctions/calculateLeaderBoard';
 
 // Styled component for the leaderBoard container
 const LeaderBoardContainer = styled(Box)(({ theme }) => ({
   backgroundColor: 'rgba(0, 0, 0, 0.7)',
   padding: theme.spacing(2),
   borderRadius: theme.shape.borderRadius,
-  maxWidth: 300,
   margin: 'auto',
   textAlign: 'center',
+  height: '100%', // Ensure full height
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'start',
 }));
 
 // Styled component for the leaderBoard item
@@ -48,7 +51,7 @@ const LeaderBoard = () => {
   return (
     <LeaderBoardContainer>
       <Typography variant="h5" color="white" gutterBottom>
-        Leaderboard
+        Leader board
       </Typography>
       <List>
         {sortedUsers.map((entry, index) => (
