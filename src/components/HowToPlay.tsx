@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   Box,
   Typography,
@@ -6,11 +5,9 @@ import {
   CardContent,
   CardHeader,
   Grid,
-  Button,
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogActions,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import {
@@ -90,6 +87,7 @@ const HowToPlay = ({ open , onClose } : { open : boolean , onClose : () => void 
       onClose={onClose}
       scroll="paper"
       aria-labelledby="how-to-play-dialog-title"
+      onClick={onClose}
     >
       <DialogTitle id="how-to-play-dialog-title">How to Play</DialogTitle>
       <DialogContent dividers>
@@ -130,11 +128,6 @@ const HowToPlay = ({ open , onClose } : { open : boolean , onClose : () => void 
           </Grid>
         </HowToPlayContainer>
       </DialogContent>
-      {/* <DialogActions>
-        <Button onClick={onClose} color="primary">
-          Close
-        </Button>
-      </DialogActions> */}
     </Dialog>
   );
 };
