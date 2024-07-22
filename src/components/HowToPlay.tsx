@@ -28,6 +28,7 @@ const HowToPlayContainer = styled(Box)(({ theme }) => ({
   textAlign: "center",
   maxWidth: "800px",
   boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", // Custom shadow directly applied
+  background: "grey"
 }));
 
 // Styled component for each step card
@@ -88,6 +89,7 @@ const HowToPlay = ({ open , onClose } : { open : boolean , onClose : () => void 
       scroll="paper"
       aria-labelledby="how-to-play-dialog-title"
       onClick={onClose}
+      
     >
       <DialogTitle id="how-to-play-dialog-title">How to Play</DialogTitle>
       <DialogContent dividers>
