@@ -1,3 +1,4 @@
+// app.tsx
 import { useEffect } from "react";
 import AppRoutes from "./Utils/appRoutes";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -6,7 +7,7 @@ import SnackBarSlide from "./components/SnackBarSlide";
 import { RootState, useAppDispatch } from "./Redux/store";
 import "./App.css";
 import { useSelector } from "react-redux";
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { Container, CssBaseline, ThemeProvider } from "@mui/material";
 import { darkTheme, lightTheme } from "./Utils/theme";
 
 const App = () => {
@@ -24,11 +25,12 @@ const App = () => {
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <CssBaseline />
-      
-      <Router>
-        <AppRoutes />
-        <SnackBarSlide />
-      </Router>
+      <Container disableGutters maxWidth={false} sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <Router>
+          <AppRoutes />
+          <SnackBarSlide />
+        </Router>
+      </Container>
     </ThemeProvider>
   );
 }

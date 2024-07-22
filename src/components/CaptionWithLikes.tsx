@@ -6,9 +6,27 @@ import { FavoriteBorderOutlined } from "@mui/icons-material";
 interface CaptionWithLikesProps {
   caption: QuoteType | null;
   user: UsersType | null;
+  captionStyle: {
+    flexGrow: number;
+    mr: number;
+    fontSize: {
+      xs: number;
+      sm: number;
+      md: number;
+      lg: number;
+    };
+  };
+  userNameStyle: {
+    fontSize: {
+      xs: number;
+      sm: number;
+      md: number;
+      lg: number;
+    };
+  };
 }
 
-const CaptionWithLikes = ({ caption, user }: CaptionWithLikesProps) => {
+const CaptionWithLikes = ({ caption, user, captionStyle, userNameStyle }: CaptionWithLikesProps) => {
   if (!caption) return null;
 
   const userLiked = user
@@ -19,16 +37,6 @@ const CaptionWithLikes = ({ caption, user }: CaptionWithLikesProps) => {
 
   const text = caption.text;
   const numberOfLikes = caption.quoteLikes.length;
-
-  const captionStyle = {
-    flexGrow: 1,
-    mr: 1,
-    fontSize: { xs: 15, sm: 20, md: 25, lg: 25 },
-  };
-
-  const userNameQuoteStyle = {
-    fontSize: { xs: 10, sm: 15, md: 20, lg: 20 },
-  };
 
   const captionBoxStyle = {
     display: "flex",
@@ -41,7 +49,7 @@ const CaptionWithLikes = ({ caption, user }: CaptionWithLikesProps) => {
         <Typography variant="h3" sx={captionStyle}>
           {text}
         </Typography>
-        <Typography variant="h4" sx={userNameQuoteStyle}>
+        <Typography variant="h4" sx={userNameStyle}>
           by: {caption.userNameQuote}
         </Typography>
       </Box>

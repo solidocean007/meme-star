@@ -1,5 +1,6 @@
+// homepage.tsx
 import { useState } from "react";
-import { Container, Button, Box, Grid, Modal, Card } from "@mui/material";
+import { Container, Button, Box, Grid, Modal, Card, useMediaQuery } from "@mui/material";
 import MemeFeed from "../MemeFeed";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
@@ -8,6 +9,7 @@ import LeaderBoard from "../LeaderBoard";
 import PageLayout from "./PageLayout";
 import SideBarLayout from "./SideBarLayout";
 import HowToPlay from "../HowToPlay";
+import MemeFeedDesktop from "../MemeFeedDesktop";
 
 const HomePage = () => {
   const loggedInUser = useSelector((state: RootState) => state.auth.user);
@@ -40,20 +42,23 @@ const HomePage = () => {
 
   const handleCloseLeaderBoard = () => setOpenLeaderBoard(false);
 
+  const isTabletOrLarger = useMediaQuery((theme: Theme) => theme.breakpoints.up('lg'));
+
   const homePageStyle = {
     my: 1,
     width: "100%",
     height: "100%",
+
   };
 
   return (
-    <Container sx={{ margin: "0", padding: "0", height: "100%" }}>
+    <Container maxWidth={false} sx={{ margin: "0", padding: "0", height: "100%" }}>
       <PageLayout
         isAuthenticated={isAuthenticated}
         loggedInUser={loggedInUser}
         handleGoToLoginSignUp={handleGoToLoginSignUp}
       >
-        <Container sx={homePageStyle}>
+        <Container maxWidth={false} sx={homePageStyle}>
           {!isAuthenticated && (
             <Box m={2} width="100%">
               <Button
@@ -67,7 +72,7 @@ const HomePage = () => {
             </Box>
           )}
           <Grid container spacing={1} m={0} p={0} sx={{ height: "100%" }}>
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} md={1}>
               <SideBarLayout>
                 <Button
                   variant={undefined}
@@ -97,10 +102,10 @@ const HomePage = () => {
               </SideBarLayout>
             </Grid>
 
-            <Grid item xs={12} md={6}>
-              <MemeFeed />
+            <Grid item xs={12} md={9}>
+              {isTabletOrLarger ? <MemeFeedDesktop /> : <MemeFeed />}
             </Grid>
-            <Grid item xs={12} md={3} display={{ xs: "none", md: "block" }}>
+            <Grid item xs={12} md={2} display={{ xs: "none", md: "block" }}>
               <SideBarLayout>
                 <LeaderBoard />
               </SideBarLayout>

@@ -60,7 +60,7 @@ const PageLayout = ({
   };
 
   return (
-    <>
+    <div className="app-bar-container">
       <AppBar
         position="static"
         style={{ background: "var(--dusty-cactus)", color: "black" }}
@@ -69,7 +69,7 @@ const PageLayout = ({
           <Typography variant="h1" component="div" sx={headerTextStyle}>
             MemeStar
           </Typography>
-          <Box sx={{display: "flex", mr: "2rem"}}>
+          <Box sx={{ display: "flex", mr: "2rem" }}>
             <IconButton color="inherit" onClick={handleGoToLoginSignUp}>
               <AccountCircle />
             </IconButton>
@@ -87,12 +87,10 @@ const PageLayout = ({
         </Toolbar>
       </AppBar>
 
-      {/* <Container maxWidth={false} sx={pageLayoutStyle}> */}
-      <Container sx={pageLayoutStyle}>
-      
+      <Container maxWidth={false} sx={pageLayoutStyle}>
         {children}
       </Container>
-    </>
+    </div>
   );
 };
 

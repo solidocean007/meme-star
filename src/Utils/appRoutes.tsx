@@ -1,3 +1,4 @@
+// approutes
 import { Route, Routes } from "react-router";
 import HomePage from "../components/Pages/HomePage";
 import LoginSignUp from "../components/Pages/LoginSignUpPage";
@@ -7,17 +8,15 @@ import ThemeButton from "../components/ThemeButton";
 
 const AppRoutes = () => {
   return (
-    // <Container component="main" maxWidth="xl"  sx={{ px: 3 }}>
-    // <Container component="main" sx={{ px: 3 }}>
-    <Container component="main" maxWidth={false} sx={{position:"relative"}}>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/signUp" element={<LoginSignUp />} />
-        <Route path="/create-meme-page" element={<CreateMemePage />} />
-      </Routes>
-      <ThemeButton />
-    </Container>
-  );
+      <Container component="main" disableGutters maxWidth={false} sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/signUp" element={<LoginSignUp />} />
+          <Route path="/create-meme-page" element={<CreateMemePage />} />
+        </Routes>
+        <ThemeButton />
+      </Container>
+    );
 };
 
 export default AppRoutes;

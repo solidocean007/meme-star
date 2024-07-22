@@ -12,26 +12,27 @@ import useWindowDimensions from "../helperFunctions/useWindowDimensions";
 const MemeFeed: React.FC = () => {
   const dispatch = useAppDispatch();
   const loggedInUser = useSelector((state: RootState) => state.auth.user);
-  const { entities: memes, loading, error } = useSelector(
-    (state: RootState) => state.memes
-  );
+  const {
+    entities: memes,
+    loading,
+    error,
+  } = useSelector((state: RootState) => state.memes);
   const { width } = useWindowDimensions();
   // Calculate item size based on window width
   const getItemSize = (width: number) => {
-    if (width < 400) return 300;  // xSmall screens
-    if (width < 600) return 350;  // Small screens
-    if (width < 960) return 400;  // Medium screens
+    if (width < 400) return 300; // xSmall screens
+    if (width < 600) return 350; // Small screens
+    if (width < 960) return 400; // Medium screens
     if (width < 1280) return 450; // Large screens
-    return 500;                   // Extra large screens
+    return 500; // Extra large screens
   };
 
   const itemSize = getItemSize(width);
   useEffect(() => {
-    try{
+    try {
       dispatch(fetchMemes());
-
-    } catch{
-      dispatch(showSnackbar({ message: 'problem', type: "error" }));
+    } catch {
+      dispatch(showSnackbar({ message: "problem", type: "error" }));
     }
   }, [dispatch]);
 
@@ -43,8 +44,33 @@ const MemeFeed: React.FC = () => {
     return <div>Error: {error}</div>;
   }
 
+  const mobileCardMediaStyle = {
+    position: "relative",
+    height: { xs: 300, sm: 350, md: 400, lg: 450 }, // Responsive height
+    width: "100%", // Make sure the image takes full width
+  };
+
+  const mobileCaptionStyle = {
+    flexGrow: 1,
+    mr: 1,
+    fontSize: { md: 10, lg: 15 },
+  };
+
+  const mobileUserNameStyle = {
+    fontSize: {  md: 10, lg: 10 },
+  };
+
   return (
-    <Box sx={{ width: "100%", height: 800, bgcolor: "background.paper", display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <Box
+      sx={{
+        width: "100%",
+        height: 800,
+        bgcolor: "background.paper",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <List
         height={800}
         width={600}
@@ -54,7 +80,13 @@ const MemeFeed: React.FC = () => {
       >
         {({ index, style }) => (
           <Box style={style}>
-            <MemeCard meme={memes[index]} loggedInUser={loggedInUser}/>
+            <MemeCard
+              meme={memes[index]}
+              loggedInUser={loggedInUser}
+              cardMediaStyle={mobileCardMediaStyle}
+              captionStyle={mobileCaptionStyle}
+              userNameStyle={mobileUserNameStyle}
+            />
           </Box>
         )}
       </List>

@@ -11,9 +11,40 @@ import { useAppDispatch } from "../Redux/store";
 const MemeCard = ({
   meme,
   loggedInUser,
+  cardMediaStyle,
+  captionStyle,
+  userNameStyle,
 }: {
   meme: MemeType;
   loggedInUser: UsersType | null;
+  cardMediaStyle: {
+    position: string;
+    height: {
+      xs?: number;
+      sm?: number;
+      md?: number;
+      lg?: number;
+    };
+    width: string;
+  };
+  captionStyle: {
+    flexGrow: number;
+    mr: number;
+    fontSize: {
+      xs?: number;
+      sm?: number;
+      md?: number;
+      lg?: number;
+    };
+  };
+  userNameStyle: {
+    fontSize: {
+      xs?: number;
+      sm?: number;
+      md?: number;
+      lg?: number;
+    };
+  };
 }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -48,18 +79,12 @@ const MemeCard = ({
     position: "absolute",
     top: "50%",
     left: "50%",
-    width: {xs: "90%", md: "50%"},
+    width: { xs: "90%", md: "50%" },
     transform: "translate(-50%, -50%)",
     bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 24,
     p: 2,
-  };
-
-  const cardMediaStyle = {
-    position: "relative",
-    height: { xs: 300, sm: 350, md: 400, lg: 450 }, // Responsive height
-    width: "100%", // Make sure the image takes full width
   };
 
   const captionContainerStyle = {
@@ -76,11 +101,7 @@ const MemeCard = ({
 
   return (
     <Card sx={{ m: 2, position: "relative" }}>
-      <CardMedia
-        component="img"
-        src={meme.imageUrl}
-        sx={cardMediaStyle}
-      />
+      <CardMedia component="img" src={meme.imageUrl} sx={cardMediaStyle} />
 
       {meme.allQuotes?.length && (
         <Box sx={captionContainerStyle}>
@@ -92,8 +113,10 @@ const MemeCard = ({
             <CaptionWithLikes
               caption={captionWithMostLikes}
               user={loggedInUser}
+              captionStyle={captionStyle}
+              userNameStyle={userNameStyle}
             />
-            <Button
+            {/* <Button
               sx={{
                 fontSize: { xs: 10, sm: 15, md: 20, lg: 20 }, // Responsive font size
               }}
@@ -102,7 +125,7 @@ const MemeCard = ({
               {loggedInUser
                 ? `${meme.allQuotes?.length || 0} Quotes. Now add yours!`
                 : "login to comment yours"}
-            </Button>
+            </Button> */}
           </Container>
         </Box>
       )}
@@ -130,4 +153,3 @@ const MemeCard = ({
 };
 
 export default MemeCard;
-
