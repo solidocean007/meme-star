@@ -66,13 +66,7 @@ const HomePage = () => {
               </Button>
             </Box>
           )}
-          <Grid
-            container
-            spacing={1}
-            m={0}
-            p={0}
-            sx={{ height: "100%" }}
-          >
+          <Grid container spacing={1} m={0} p={0} sx={{ height: "100%" }}>
             <Grid item xs={12} md={3}>
               <SideBarLayout>
                 <Button
@@ -83,12 +77,20 @@ const HomePage = () => {
                   Create Meme
                 </Button>
                 <Box display={{ xs: "block", sm: "block", md: "none" }}>
-                  <Button variant={undefined} color="info" onClick={handleOpenLeaderBoard}>
+                  <Button
+                    variant={undefined}
+                    color="info"
+                    onClick={handleOpenLeaderBoard}
+                  >
                     Show LeaderBoard
                   </Button>
                 </Box>
                 <Box>
-                  <Button variant={undefined} color="info" onClick={handleOpenHowToPlay}>
+                  <Button
+                    variant={undefined}
+                    color="info"
+                    onClick={handleOpenHowToPlay}
+                  >
                     How to Play
                   </Button>
                 </Box>
@@ -105,48 +107,47 @@ const HomePage = () => {
             </Grid>
           </Grid>
         </Container>
+        <Modal open={openHowToPlay} onClose={handleCloseHowToPlay}>
+          <Card sx={{ bgcolor: "white" }}>
+            <Box 
+              sx={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: { xs: "95%", sm: "75%", md: "50%", lg: "25%" },
+                p: 2,
+              }}
+            >
+              <HowToPlay open={openHowToPlay} onClose={handleCloseHowToPlay} />
+              <Button onClick={handleCloseHowToPlay} fullWidth>
+                Close
+              </Button>
+            </Box>
+          </Card>
+        </Modal>
+        <Modal open={openLeaderBoard} onClose={handleCloseLeaderBoard}>
+          <Card sx={{ bgcolor: "white" }}>
+            <Box
+              sx={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: { xs: "95%", sm: "75%", md: "50%", lg: "25%" },
+                p: 2,
+              }}
+            >
+              <LeaderBoard />
+              <Button onClick={handleCloseLeaderBoard} fullWidth>
+                Close
+              </Button>
+            </Box>
+          </Card>
+        </Modal>
       </PageLayout>
-      <Modal open={openHowToPlay} onClose={handleCloseHowToPlay}>
-        <Card sx={{ bgcolor: "white" }}>
-          <Box
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: { xs: "95%", sm: "75%", md: "50%", lg: "25%" },
-              p: 2,
-            }}
-          >
-            <HowToPlay />
-            <Button onClick={handleCloseHowToPlay} fullWidth>
-              Close
-            </Button>
-          </Box>
-        </Card>
-      </Modal>
-      <Modal open={openLeaderBoard} onClose={handleCloseLeaderBoard}>
-        <Card sx={{ bgcolor: "white" }}>
-          <Box
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: { xs: "95%", sm: "75%", md: "50%", lg: "25%" },
-              p: 2,
-            }}
-          >
-            <LeaderBoard />
-            <Button onClick={handleCloseLeaderBoard} fullWidth>
-              Close
-            </Button>
-          </Box>
-        </Card>
-      </Modal>
     </Container>
   );
 };
 
 export default HomePage;
-

@@ -20,7 +20,7 @@ export const lightTheme = createTheme({
       fontWeight: 600,
     },
   },
-  spacing: 8, // Ensure spacing is included
+  spacing: 8,
 });
 
 export const darkTheme = createTheme({
@@ -42,6 +42,6 @@ export const darkTheme = createTheme({
       fontWeight: 600,
     },
   },
-  spacing: 8, // Ensure spacing is included
+  spacing: 8, 
 });
 
