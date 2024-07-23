@@ -11,6 +11,7 @@ import { AccountCircle, LogoutSharp } from "@mui/icons-material";
 import { UsersType } from "../../Utils/types";
 import { useAppDispatch } from "../../Redux/store";
 import { logout } from "../../Redux/authSlice";
+import { headerTextStyle, pageLayoutStyle, userNameStyle } from "../Styles";
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -28,35 +29,6 @@ const PageLayout = ({
   const dispatch = useAppDispatch();
   const handleLogout = () => {
     dispatch(logout());
-  };
-
-  const pageLayoutStyle = {
-    // my: 1,
-    m: 0,
-    p: 0,
-    display: "flex",
-    flexDirection: { xs: "column", md: "row" },
-    alignItems: "flex-start",
-    justifyContent: "space-between",
-    width: "100%", // Ensure full width
-  };
-
-  const headerTextStyle = {
-    // flexGrow: 1,
-    fontSize: {
-      xs: "2rem",
-      sm: "2.5rem",
-      md: "2.5rem",
-      lg: "3.5rem",
-      xl: "4rem",
-    },
-  };
-
-  const userNameStyle = {
-    fontSize: {
-      xs: "1rem",
-      sm: "1.5rem",
-    },
   };
 
   return (

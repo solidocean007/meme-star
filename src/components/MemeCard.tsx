@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card, CardMedia, Box, Modal, Button, Container } from "@mui/material";
+import { Card, CardMedia, Box, Modal, Container } from "@mui/material";
 import { ChangeType, MemeType, QuoteType, UsersType } from "../Utils/types";
 import { MemeQuotes } from "./MemeQuotes";
 import { leadingQuoteForMeme } from "../helperFunctions/leadingQuoteForMeme";
@@ -7,6 +7,11 @@ import CaptionWithLikes from "./CaptionWithLikes";
 import { useNavigate } from "react-router";
 import { applyChanges } from "../helperFunctions/applyChanges";
 import { useAppDispatch } from "../Redux/store";
+import {
+  captionStyleType,
+  cardMediaStyleType,
+  userNameStyleType,
+} from "../Utils/styleTypes";
 
 const MemeCard = ({
   meme,
@@ -17,34 +22,9 @@ const MemeCard = ({
 }: {
   meme: MemeType;
   loggedInUser: UsersType | null;
-  cardMediaStyle: {
-    position: string;
-    height: {
-      xs?: number;
-      sm?: number;
-      md?: number;
-      lg?: number;
-    };
-    width: string;
-  };
-  captionStyle: {
-    flexGrow: number;
-    mr: number;
-    fontSize: {
-      xs?: number;
-      sm?: number;
-      md?: number;
-      lg?: number;
-    };
-  };
-  userNameStyle: {
-    fontSize: {
-      xs?: number;
-      sm?: number;
-      md?: number;
-      lg?: number;
-    };
-  };
+  cardMediaStyle: cardMediaStyleType;
+  captionStyle: captionStyleType;
+  userNameStyle: userNameStyleType;
 }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -102,7 +82,6 @@ const MemeCard = ({
   return (
     <Card sx={{ m: 2, position: "relative" }}>
       <CardMedia component="img" src={meme.imageUrl} sx={cardMediaStyle} />
-
       {meme.allQuotes?.length && (
         <Box sx={captionContainerStyle}>
           <Container

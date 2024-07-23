@@ -8,6 +8,7 @@ import MemeCard from "./MemeCard";
 import { Box } from "@mui/material";
 import { showSnackbar } from "../Redux/snackBarSlice";
 import useWindowDimensions from "../helperFunctions/useWindowDimensions";
+import { mobileCaptionStyle, mobileCardMediaStyle, mobileUserNameStyle } from "./Styles";
 
 const MemeFeed: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -43,22 +44,6 @@ const MemeFeed: React.FC = () => {
   if (error) {
     return <div>Error: {error}</div>;
   }
-
-  const mobileCardMediaStyle = {
-    position: "relative",
-    height: { xs: 300, sm: 350, md: 400, lg: 450 }, // Responsive height
-    width: "100%", // Make sure the image takes full width
-  };
-
-  const mobileCaptionStyle = {
-    flexGrow: 1,
-    mr: 1,
-    fontSize: { md: 10, lg: 15 },
-  };
-
-  const mobileUserNameStyle = {
-    fontSize: {  md: 10, lg: 10 },
-  };
 
   return (
     <Box

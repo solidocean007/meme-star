@@ -5,6 +5,7 @@ import MemeCard from "./MemeCard";
 import { useEffect } from "react";
 import { fetchMemes } from "../Redux/memeSlice";
 import { showSnackbar } from "../Redux/snackBarSlice";
+import { desktopCaptionStyle, desktopCardMediaStyle, desktopUserNameStyle } from "./Styles";
 
 const MemeFeedDesktop = () => {
   const dispatch = useAppDispatch();
@@ -30,22 +31,6 @@ const MemeFeedDesktop = () => {
   if (error) {
     return <div>Error: {error}</div>;
   }
-
-  const desktopCardMediaStyle = {
-    position: "relative",
-    height: { md: 250, lg: 300 }, // Responsive height
-    width: "100%", // Make sure the image takes full width
-  };
-
-  const desktopCaptionStyle = {
-    flexGrow: 1,
-    mr: 1,
-    fontSize: { md: 10, lg: 15 },
-  };
-
-  const desktopUserNameStyle = {
-    fontSize: {  md: 10, lg: 10 },
-  };
 
   return (
     <Box sx={{ width: "100%", bgcolor: "background.paper", p: 2 }}>

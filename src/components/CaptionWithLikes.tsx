@@ -2,28 +2,13 @@ import { Typography, Box, Badge } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { LikedQuotesType, QuoteType, UsersType } from "../Utils/types";
 import { FavoriteBorderOutlined } from "@mui/icons-material";
+import { captionStyleType, userNameStyleType } from "../Utils/styleTypes";
 
 interface CaptionWithLikesProps {
   caption: QuoteType | null;
   user: UsersType | null;
-  captionStyle: {
-    flexGrow: number;
-    mr: number;
-    fontSize: {
-      xs: number;
-      sm: number;
-      md: number;
-      lg: number;
-    };
-  };
-  userNameStyle: {
-    fontSize: {
-      xs: number;
-      sm: number;
-      md: number;
-      lg: number;
-    };
-  };
+  captionStyle: captionStyleType;
+  userNameStyle: userNameStyleType;
 }
 
 const CaptionWithLikes = ({ caption, user, captionStyle, userNameStyle }: CaptionWithLikesProps) => {

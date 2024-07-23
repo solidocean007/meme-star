@@ -1,6 +1,6 @@
 // homepage.tsx
 import { useState } from "react";
-import { Container, Button, Box, Grid, Modal, Card, useMediaQuery } from "@mui/material";
+import { Container, Button, Box, Grid, Modal, Card, useMediaQuery, Typography, Theme } from "@mui/material";
 import MemeFeed from "../MemeFeed";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
@@ -10,6 +10,7 @@ import PageLayout from "./PageLayout";
 import SideBarLayout from "./SideBarLayout";
 import HowToPlay from "../HowToPlay";
 import MemeFeedDesktop from "../MemeFeedDesktop";
+import { homePageStyle, sideBarButtonStyle } from "../Styles";
 
 const HomePage = () => {
   const loggedInUser = useSelector((state: RootState) => state.auth.user);
@@ -44,13 +45,6 @@ const HomePage = () => {
 
   const isTabletOrLarger = useMediaQuery((theme: Theme) => theme.breakpoints.up('lg'));
 
-  const homePageStyle = {
-    my: 1,
-    width: "100%",
-    height: "100%",
-
-  };
-
   return (
     <Container maxWidth={false} sx={{ margin: "0", padding: "0", height: "100%" }}>
       <PageLayout
@@ -72,14 +66,14 @@ const HomePage = () => {
             </Box>
           )}
           <Grid container spacing={1} m={0} p={0} sx={{ height: "100%" }}>
-            <Grid item xs={12} md={1}>
+            <Grid item xs={12} md={1} p={0}>
               <SideBarLayout>
                 <Button
                   variant={undefined}
                   color="info"
                   onClick={handleCreateMeme}
                 >
-                  Create Meme
+                  <Typography variant="h3" sx={sideBarButtonStyle}>Create Meme</Typography>
                 </Button>
                 <Box display={{ xs: "block", sm: "block", md: "none" }}>
                   <Button
@@ -87,7 +81,7 @@ const HomePage = () => {
                     color="info"
                     onClick={handleOpenLeaderBoard}
                   >
-                    Show LeaderBoard
+                    <Typography variant="h3" sx={sideBarButtonStyle}>Show LeaderBoard</Typography>
                   </Button>
                 </Box>
                 <Box>
@@ -96,7 +90,7 @@ const HomePage = () => {
                     color="info"
                     onClick={handleOpenHowToPlay}
                   >
-                    How to Play
+                    <Typography variant="h3" sx={sideBarButtonStyle}>How to Play</Typography>
                   </Button>
                 </Box>
               </SideBarLayout>

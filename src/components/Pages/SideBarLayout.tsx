@@ -1,7 +1,5 @@
 import { ReactNode } from "react";
-import {
-  Container,
-} from "@mui/material";
+import { Container } from "@mui/material";
 
 interface SideBarLayoutProps {
   children: ReactNode;
@@ -19,16 +17,14 @@ SideBarLayoutProps) => {
     justifyContent: "start",
     width: "100%", // Ensure full width
     height: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.7)",
-    padding: "2rem",
-    // padding: theme.spacing(2),
-    // borderRadius: theme.shape.borderRadius,
+    backgroundColor: "rgba(1000, 6000, 9000, .4)",
     margin: "auto",
     textAlign: "center",
+    pt: 4,
   };
 
   return (
-    <Container maxWidth={false} sx={sideBarLayoutStyle}>
+    <Container maxWidth={false} disableGutters sx={sideBarLayoutStyle}>
       {children}
     </Container>
   );
