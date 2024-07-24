@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card, CardMedia, Box, Modal, Container } from "@mui/material";
+import { Card, CardMedia, Box, Modal, Container, Button } from "@mui/material";
 import { ChangeType, MemeType, QuoteType, UsersType } from "../Utils/types";
 import { MemeQuotes } from "./MemeQuotes";
 import { leadingQuoteForMeme } from "../helperFunctions/leadingQuoteForMeme";
@@ -82,13 +82,14 @@ const MemeCard = ({
   return (
     <Card sx={{ m: 2, position: "relative" }}>
       <CardMedia component="img" src={meme.imageUrl} sx={cardMediaStyle} />
-      {meme.allQuotes?.length && (
+      {/* {meme.allQuotes?.length && ( */}
         <Box sx={captionContainerStyle}>
           <Container
             title="leading-caption"
             onClick={loggedInUser ? handleOpen : handleGoToSignUp}
             sx={{ background: "transparent" }}
           >
+            <h5>Caption with likes</h5>
             <CaptionWithLikes
               caption={captionWithMostLikes}
               user={loggedInUser}
@@ -107,7 +108,7 @@ const MemeCard = ({
             </Button> */}
           </Container>
         </Box>
-      )}
+      {/* )} */}
 
       <Modal
         open={openQuotes}

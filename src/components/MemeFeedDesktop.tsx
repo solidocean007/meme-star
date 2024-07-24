@@ -33,7 +33,7 @@ const MemeFeedDesktop = () => {
   }
 
   return (
-    <Box sx={{ width: "100%", bgcolor: "background.paper", p: 2 }}>
+    <Box sx={{ width: "100%", p: 2 }}>
       <Grid container spacing={2}>
         {memes.map((meme, index) => (
           <Grid item lg={4} xl={3} key={index}>
