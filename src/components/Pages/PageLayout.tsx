@@ -32,7 +32,7 @@ const PageLayout = ({
   };
 
   return (
-    <div className="app-bar-container">
+    <Container maxWidth={false} sx={{height: "100%"}}>
       <AppBar
         position="static"
         style={{ background: "var(--dusty-cactus)", color: "black" }}
@@ -62,7 +62,7 @@ const PageLayout = ({
       <Container maxWidth={false} sx={pageLayoutStyle}>
         {children}
       </Container>
-    </div>
+    </Container>
   );
 };
 

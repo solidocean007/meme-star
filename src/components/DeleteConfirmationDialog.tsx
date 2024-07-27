@@ -5,9 +5,10 @@ interface DeleteConfirmationDialogProps {
   open: boolean;
   onClose: () => void;
   onConfirm: () => void;
+  messageQuestion: string;
 }
 
-export const DeleteConfirmationDialog = ({ open, onClose, onConfirm }: DeleteConfirmationDialogProps) => {
+export const DeleteConfirmationDialog = ({ open, onClose, onConfirm, messageQuestion }: DeleteConfirmationDialogProps) => {
     return (
         <Dialog
             open={open}
@@ -18,7 +19,7 @@ export const DeleteConfirmationDialog = ({ open, onClose, onConfirm }: DeleteCon
             <DialogTitle id="alert-dialog-title">{"Confirm Deletion"}</DialogTitle>
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                    Are you sure you want to delete this quote? This action cannot be undone.
+                    {messageQuestion}
                 </DialogContentText>
             </DialogContent>
             <DialogActions>

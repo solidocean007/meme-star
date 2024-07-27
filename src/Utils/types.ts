@@ -1,4 +1,10 @@
-export interface MemeType  {
+export interface MemeType {
+  'id': string,
+  'imageUrl': string,
+  'userId': string
+}
+
+export interface ProcessedMemeType  {
   'id': string,
   'imageUrl': string,
   'createdBy': UsersType,
@@ -16,7 +22,7 @@ export interface UsersType {
 export type NewUserType = Omit<UsersType, 'id'>;
 
 export interface QuoteType {
-  'id'?: string,
+  'id': string,
   "memeId": string,
   'text': string,
   'userId': string,
@@ -25,7 +31,7 @@ export interface QuoteType {
 }
 
 export interface LikedQuotesType {
-  'id'?: string;     
+  'id': string;     
   'userId': string;
   'quoteId': string;
   'memeId': string;
@@ -35,5 +41,6 @@ export type ChangeType =
   | { type: "addLikedQuote"; data: LikedQuotesType }
   | { type: "addQuote"; data: QuoteType }
   | { type: "deleteQuote"; data: { quoteId: string, memeId: string }; }
-  | { type: "deleteLikedQuote"; data: {  likedQuoteId: string, memeId: string, }; };
+  | { type: "deleteLikedQuote"; data: {  likedQuoteId: string, memeId: string, }; }
+  | { type: "deleteMeme"; data: {  memeId: string }; };
 

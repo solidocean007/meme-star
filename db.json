@@ -61,73 +61,67 @@
       "lastName": "Luther",
       "email": "rexluther@example.com",
       "password": "passwordEasy",
-      "id": "oMVDpBP"
+      "id": "9"
     }
   ],
   "memes": [
     {
       "id": "1",
-      "imageUrl": "/src/assets/images/biden-face.webp"
+      "imageUrl": "/src/assets/images/biden-face.webp",
+      "userId": "1"
     },
     {
       "id": "2",
-      "imageUrl": "/src/assets/images/cat-man.webp"
+      "imageUrl": "/src/assets/images/cat-man.webp",
+      "userId": "2"
     },
     {
       "id": "3",
-      "imageUrl": "/src/assets/images/dumbNdumber.webp"
+      "imageUrl": "/src/assets/images/dumbNdumber.webp",
+      "userId": "3"
     },
     {
       "id": "4",
-      "imageUrl": "/src/assets/images/dumbndumberyelling.webp"
-    },
-    {
-      "id": "5",
-      "imageUrl": "/src/assets/images/giant-alien.webp"
+      "imageUrl": "/src/assets/images/dumbndumberyelling.webp",
+      "userId": "4"
     },
     {
       "id": "6",
-      "imageUrl": "/src/assets/images/luka-gobert.webp"
+      "imageUrl": "/src/assets/images/luka-gobert.webp",
+      "userId": "6"
     },
     {
       "id": "7",
-      "imageUrl": "/src/assets/images/monaco.webp"
+      "imageUrl": "/src/assets/images/monaco.webp",
+      "userId": "7"
     },
     {
       "id": "8",
-      "imageUrl": "/src/assets/images/soccer.webp"
+      "imageUrl": "/src/assets/images/soccer.webp",
+      "userId": "8"
     },
     {
       "id": "9",
-      "imageUrl": "/src/assets/images/southparkgenderbender.webp"
+      "imageUrl": "/src/assets/images/southparkgenderbender.webp",
+      "userId": "9"
     },
     {
       "id": "10",
-      "imageUrl": "/src/assets/images/tornado.webp"
+      "imageUrl": "/src/assets/images/tornado.webp",
+      "userId": "1"
     },
     {
       "id": "11",
-      "imageUrl": "/src/assets/images/xeno-ripley.webp"
+      "imageUrl": "/src/assets/images/xeno-ripley.webp",
+      "userId": "2"
     }
   ],
   "quotes": [
-    {
-      "id": "1",
-      "memeId": "1",
-      "text": "About to say something dumb in 4...3..2..1..",
-      "userId": "2"
-    },
     {
       "id": "2",
       "memeId": "1",
       "text": "My rap name is Fresh Diaper!",
       "userId": "3"
-    },
-    {
-      "id": "3",
-      "memeId": "1",
-      "text": "Let's go Brandon!",
-      "userId": "5"
     },
     {
       "id": "4",
@@ -160,12 +154,6 @@
       "userId": "2"
     },
     {
-      "id": "9",
-      "memeId": "5",
-      "text": "When you see your ex at the party.",
-      "userId": "3"
-    },
-    {
       "id": "10",
       "memeId": "6",
       "text": "That awkward moment when you wear the same outfit.",
@@ -196,142 +184,114 @@
       "userId": "5"
     },
     {
-      "id": "15",
-      "memeId": "11",
-      "text": "When the cat says its time to wake up.  You wake up.",
-      "userId": "4"
-    },
-    {
+      "id": "16",
       "memeId": "2",
       "text": "test quote",
-      "userId": "5",
-      "userNameQuote": "Kevin Williams",
-      "quoteLikes": [],
-      "id": "Yo6gfmV"
+      "userId": "5"
     },
     {
+      "id": "17",
       "memeId": "2",
       "text": "the moment I wake up, before I put on my makeup",
-      "userId": "3",
-      "userNameQuote": "Beth Williams",
-      "quoteLikes": [],
-      "id": "ZZa61yI"
+      "userId": "3"
     },
     {
+      "id": "18",
       "memeId": "3",
       "text": "Wedding Crashers 2",
-      "userId": "3",
-      "userNameQuote": "Beth Williams",
-      "quoteLikes": [],
-      "id": "NNgIiS5"
+      "userId": "3"
     },
     {
+      "id": "19",
       "memeId": "4",
       "text": "I told you to stop",
-      "userId": "3",
-      "userNameQuote": "Beth Williams",
-      "quoteLikes": [],
-      "id": "2B1HXZa"
+      "userId": "3"
     },
     {
+      "id": "20",
       "memeId": "8",
       "text": "Herbalife Foreverrr",
-      "userId": "3",
-      "userNameQuote": "Beth Williams",
-      "quoteLikes": [],
-      "id": "pjyarsK"
+      "userId": "3"
     }
   ],
   "likedQuotes": [
     {
+      "id": "1",
       "userId": "1",
-      "quoteId": "1",
-      "memeId": "1",
-      "id": "a1"
+      "quoteId": null,
+      "memeId": "1"
     },
     {
+      "id": "2",
       "userId": "2",
       "quoteId": "2",
-      "memeId": "1",
-      "id": "a2"
+      "memeId": "1"
     },
     {
+      "id": "3",
       "userId": "3",
-      "quoteId": "3",
-      "memeId": "1",
-      "id": "a3"
+      "quoteId": null,
+      "memeId": "1"
     },
     {
+      "id": "4",
       "userId": "4",
       "quoteId": "5",
-      "memeId": "2",
-      "id": "a4"
+      "memeId": "2"
     },
     {
+      "id": "5",
       "userId": "5",
       "quoteId": "6",
-      "memeId": "2",
-      "id": "a5"
+      "memeId": "2"
     },
     {
+      "id": "6",
       "userId": "6",
       "quoteId": "7",
-      "memeId": "2",
-      "id": "a6"
+      "memeId": "2"
     },
     {
+      "id": "7",
       "userId": "7",
       "quoteId": "8",
-      "memeId": "3",
-      "id": "a7"
+      "memeId": "3"
     },
     {
+      "id": "a8",
       "userId": "8",
-      "quoteId": "9",
-      "memeId": "3",
-      "id": "a8"
+      "quoteId": null,
+      "memeId": "3"
     },
     {
+      "id": "9",
       "userId": "1",
       "quoteId": "10",
-      "memeId": "3",
-      "id": "a9"
+      "memeId": "3"
     },
     {
+      "id": "10",
       "userId": "2",
       "quoteId": "11",
-      "memeId": "4",
-      "id": "a10"
+      "memeId": "4"
     },
     {
+      "id": "11",
       "userId": "3",
       "quoteId": "12",
-      "memeId": "4",
-      "id": "a11"
+      "memeId": "4"
     },
     {
+      "id": "12",
       "userId": "4",
       "quoteId": "13",
-      "memeId": "4",
-      "id": "a12"
+      "memeId": "4"
     },
     {
-      "userId": "5",
-      "quoteId": "14",
-      "memeId": "5",
-      "id": "a13"
-    },
-    {
-      "userId": "6",
-      "quoteId": "15",
-      "memeId": "5",
-      "id": "a14"
-    },
-    {
+      "id": "15",
       "userId": "7",
       "quoteId": "4",
-      "memeId": "1",
-      "id": "a15"
+      "memeId": "1"
     }
   ]
 }

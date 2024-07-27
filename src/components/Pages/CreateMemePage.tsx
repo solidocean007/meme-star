@@ -19,7 +19,7 @@ export const CreateMemePage = () => {
 
   const handleGoToLoginSignUp = () => {
     if (!isAuthenticated) {
-      navigate("/signUp");
+      navigate("/login-sign-up");
     }
   };
 

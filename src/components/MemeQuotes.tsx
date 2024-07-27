@@ -10,7 +10,7 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ChangeType, QuoteType, UsersType } from "../Utils/types";
 import { Delete, FavoriteBorder } from "@mui/icons-material";
 import Favorite from "@mui/icons-material/Favorite";
@@ -115,6 +115,7 @@ export const MemeQuotes = ({
       const newChange: ChangeType = {
         type: "addQuote",
         data: {
+          id: undefined,
           memeId: memeId,
           text: newQuoteText,
           userId: currentUser?.id,
@@ -134,6 +135,7 @@ export const MemeQuotes = ({
     bgcolor: "background.default",
     color: "text.primary",
   };
+
 
   return (
     <>
@@ -205,6 +207,7 @@ export const MemeQuotes = ({
         open={openDeleteConfirm}
         onClose={handleCloseConfirmDelete}
         onConfirm={handleConfirmDelete}
+        messageQuestion="The quote will be permanently deleted."
       />
     </>
   );

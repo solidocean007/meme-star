@@ -1,6 +1,6 @@
-import { MemeType } from "../Utils/types";
+import { ProcessedMemeType } from "../Utils/types";
 
-export const leadingQuoteForMeme = (meme: MemeType) => {
+export const leadingQuoteForMeme = (meme: ProcessedMemeType) => {
     if (!meme.allQuotes?.length) return null;
   
     return meme.allQuotes.reduce((max, quote) => {

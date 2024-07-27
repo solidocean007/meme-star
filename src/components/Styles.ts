@@ -1,3 +1,5 @@
+import { Height } from "@mui/icons-material";
+
 export const pageLayoutStyle = {
   // my: 1,
   m: 0,
@@ -7,6 +9,7 @@ export const pageLayoutStyle = {
   alignItems: "flex-start",
   justifyContent: "space-between",
   width: "100%", // Ensure full width
+  Height: "100%"
 };
 
 export const homePageStyle = {
@@ -43,6 +46,18 @@ export const desktopCaptionStyle = {
   fontSize: { md: 10, lg: 15 },
 };
 
+export const portfolioCardMediaStyle = {
+  position: "relative",
+  height: { md: 250, lg: 300 },
+  width: "100%",
+};
+
+export const portfolioCaptionStyle = {
+  flexGrow: 1,
+  mr: 1,
+  fontSize: {xs:15, sm:15, md: 15, lg: 20 },
+};
+
 export const desktopUserNameStyle = {
   fontSize: { md: 10, lg: 13 },
 };
@@ -60,8 +75,22 @@ export const headerTextStyle = {
 
 export const userNameStyle = {
   fontSize: {
-    xs: "1rem",
-    sm: "1.5rem",
+    xs: 15,
+    sm: 15,
+    md: 18,
+    lg: 20,
+    xl: 35
+  },
+};
+
+
+export const portfolioUserNameStyle = {
+  fontSize: {
+    xs: 10,
+    sm: 12,
+    md: 12,
+    lg: 15,
+    xl: 15,
   },
 };
 

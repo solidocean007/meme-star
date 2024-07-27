@@ -8,19 +8,23 @@ import { deleteQuoteFromDB } from "../api/deleteQuoteFromDB";
 import {
   addLikedQuoteToRedux,
   addQuoteToRedux,
+  deleteMemeFromRedux,
   deleteQuoteFromRedux,
   removeLikedQuoteFromRedux,
 } from "../Redux/memeSlice";
 import { showSnackbar } from "../Redux/snackBarSlice";
+import { deleteMeme } from "../api/deleteMeme";
+import { deleteQuotesByMemeId } from "./deleteQuotesByMemeId";
+import { deleteLikedQuotesByMemeId } from "./deleteLikedQuotesByMemeId";
 
 interface ApplyChangesProps {
   pendingChanges: ChangeType[];
   setPendingChanges: React.Dispatch<React.SetStateAction<ChangeType[]>>;
   dispatch: AppDispatch;
-  setLocalQuotes: React.Dispatch<React.SetStateAction<QuoteType[]>>;
+  setLocalQuotes?: React.Dispatch<React.SetStateAction<QuoteType[]>>;
 }
 
-export const applyChanges = ({
+export const applyChanges = async ({
   pendingChanges,
   setPendingChanges,
   dispatch,
@@ -29,84 +33,92 @@ export const applyChanges = ({
   if (pendingChanges.length === 0) {
     return;
   }
+  console.log(pendingChanges);
 
-  pendingChanges.forEach((change) => {
-    switch (change.type) {
-      case "addLikedQuote":
-        addLikedQuote(change.data)
-          .then((response) => {
-            // if (response && response.data) {
-            if (response) {
-              dispatch(
-                addLikedQuoteToRedux({
-                  id: response.id,
-                  memeId: response.memeId, // console log error said 'memeId' was undefined.  but it looks like it comes back in the response
-                  quoteId: response.quoteId,
-                  userId: response.userId,
-                })
-              );
-            } else {
-              console.log("Failed to add liked quote, removing from local state:", change.data.id);
-              setLocalQuotes((prev) =>
-                prev.filter((quote) => quote.id !== change.data.id)
-              );
-            }
-          })
-          .catch((error) => console.error("Error adding liked quote:", error));
-        break;
-      case "deleteLikedQuote":
-        deleteLikedQuote(change.data.likedQuoteId)
-          .then(() => {
+  for (const change of pendingChanges) {
+    try {
+      switch (change.type) {
+        case "addLikedQuote":{
+          const addLikedResponse = await addLikedQuote(change.data);
+          if (addLikedResponse) {
             dispatch(
-              removeLikedQuoteFromRedux({
-                likedQuoteId: change.data.likedQuoteId,
+              addLikedQuoteToRedux({
+                id: addLikedResponse.id,
+                memeId: addLikedResponse.memeId,
+                quoteId: addLikedResponse.quoteId,
+                userId: addLikedResponse.userId,
               })
             );
-          })
-          .catch((error) =>
-            console.error("Error deleting liked quote:", error)
+          } else {
+            console.log("Failed to add liked quote, removing from local state:", change.data.id);
+            if(setLocalQuotes){setLocalQuotes((prev) =>
+              prev.filter((quote) => quote.id !== change.data.id)
+            );}
+          }
+          break;
+        }
+        case "deleteLikedQuote": {
+          await deleteLikedQuote(change.data.likedQuoteId);
+          dispatch(
+            removeLikedQuoteFromRedux({
+              memeId: change.data.memeId,
+              likedQuoteId: change.data.likedQuoteId,
+            })
           );
-        break;
-      case "addQuote":
-        createQuote(change.data)
-          .then((result) => {
-            dispatch(
-              addQuoteToRedux({
-                id: result.id,
-                memeId: change.data.memeId,
-                text: change.data.text,
-                userId: change.data.userId,
-                userNameQuote: change.data.userNameQuote,
-                quoteLikes: change.data.quoteLikes,
-              })
-            );
-            dispatch(showSnackbar({ message: "Your quote was added!", type: "success" }));
-          })
-          .catch((error) => {
-            console.error("Error creating quote:", error);
-            dispatch(showSnackbar({ message: "An error occurred while adding your quote.", type: "error" }));
+          break;
+        }
+        case "addQuote": {
+          const createQuoteResponse = await createQuote(change.data);
+          dispatch(
+            addQuoteToRedux({
+              id: createQuoteResponse.id,
+              memeId: change.data.memeId,
+              text: change.data.text,
+              userId: change.data.userId,
+              userNameQuote: change.data.userNameQuote,
+              quoteLikes: change.data.quoteLikes,
+            })
+          );
+          dispatch(showSnackbar({ message: "Your quote was added!", type: "success" }));
+          break;
+        }
+        case "deleteQuote": {
+          await deleteQuoteFromDB(change.data.quoteId);
+          dispatch(
+            deleteQuoteFromRedux({
+              memeId: change.data.memeId,
+              quoteId: change.data.quoteId,
+            })
+          );
+          dispatch(showSnackbar({ message: "Your quote was deleted", type: "success" }));
+          break;
+        }
+        case "deleteMeme": {
+          await deleteMeme(change.data.memeId);
+          const deletedQuoteIds = await deleteQuotesByMemeId(change.data.memeId);
+          const deletedLikedQuoteIds = await deleteLikedQuotesByMemeId(change.data.memeId);
+
+          deletedQuoteIds.forEach(quoteId => {
+            dispatch(deleteQuoteFromRedux({ memeId: change.data.memeId, quoteId }));
           });
-        break;
-      case "deleteQuote":
-        deleteQuoteFromDB(change.data.quoteId)
-          .then(() => {
-            dispatch(
-              deleteQuoteFromRedux({
-                memeId: change.data.memeId,
-                quoteId: change.data.quoteId,
-              })
-            );
-            dispatch(showSnackbar({ message: "Your quote was deleted", type: "success" }));
-          })
-          .catch((error) => {
-            console.error("Error deleting quote from DB:", error);
-            dispatch(showSnackbar({ message: "An error occurred while deleting your quote.", type: "error" }));
+
+          deletedLikedQuoteIds.forEach(likedQuoteId => {
+            dispatch(removeLikedQuoteFromRedux({ memeId: change.data.memeId, likedQuoteId }));
           });
-        break;
-      default:
-        console.error("Unhandled change type:", change);
+
+          dispatch(deleteMemeFromRedux({ memeId: change.data.memeId }));
+          dispatch(showSnackbar({ message: "Meme deleted successfully", type: "success" }));
+          break;
+        }
+        default:
+          console.error("Unhandled change type:", change);
+      }
+    } catch (error) {
+      console.error(`Error processing ${change.type}:`, error);
+      dispatch(showSnackbar({ message: `An error occurred while processing ${change.type}.`, type: "error" }));
     }
-  });
+  }
 
   setPendingChanges([]);
 };
+

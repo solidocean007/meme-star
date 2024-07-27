@@ -5,36 +5,31 @@ import {
   Tabs,
   Tab,
   Avatar,
-  Card,
-  Grid,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../Redux/store";
-import { getUsersMemes } from "../../api/getUsersMemes";
-import { showSnackbar } from "../../Redux/snackBarSlice";
-import { getUsersQuotes } from "../../api/getUsersQuotes";
 import { useNavigate } from "react-router";
-import { MemeType, QuoteType } from "../../Utils/types";
-import MemeCard from "../MemeCard";
-import { desktopCaptionStyle, desktopCardMediaStyle, desktopUserNameStyle } from "../Styles";
+import { ChangeType, MemeType, ProcessedMemeType, QuoteType } from "../../Utils/types";
+import ProfileQuotes from "../ProfileQuotes";
+import ProfileMemes from "../ProfileMemes";
 
-const UsersProfile = () => {
-  const dispatch = useAppDispatch();
+const UserProfile = () => {
   const loggedInUser = useSelector((state: RootState) => state.auth.user);
-  const allMemes = useSelector((state: RootState) => state.memes.entities);
-  const [showProfileMemes, setShowProfileMemes] = useState(true);
+  const [value, setValue] = React.useState(1);
+
+  const [pendingChanges, setPendingChanges] = useState<ChangeType[]>([]);
   const navigate = useNavigate();
 
   if (!loggedInUser) {
     navigate("/login-sign-up");
   }
 
-  const toggleProfileContent = () => {
-    setShowProfileMemes(!showProfileMemes);
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
   };
+ 
 
-  const userMemes = allMemes.filter(meme => meme.createdBy.id === loggedInUser?.id);
 
   // const profileCardMediaStyle = {
   //   position: "relative",
@@ -54,53 +49,27 @@ const UsersProfile = () => {
 
   return (
     <Container maxWidth={false}>
-      <Container>
-        <Box display="flex" alignItems="center">
-          <Avatar
-            alt={`${loggedInUser?.firstName} ${loggedInUser?.lastName}`}
-            src={loggedInUser.profileImage}
-          />
-          <Box ml={2}>
-            <Typography variant="h4">
-              {loggedInUser?.firstName} {loggedInUser?.lastName}
-            </Typography>
-          </Box>
+      <Box display="flex" alignItems="center">
+        <Avatar alt={`${loggedInUser?.firstName} ${loggedInUser?.lastName}`} />
+        <Box ml={2}>
+          <Typography variant="h4">
+            {loggedInUser?.firstName} {loggedInUser?.lastName}
+          </Typography>
         </Box>
-      </Container>
-      <Tabs value={!showProfileMemes} onChange={toggleProfileContent} centered>
+      </Box>
+      <Tabs value={value} onChange={handleChange} centered>
         <Tab label="Memes" />
         <Tab label="Quotes" />
       </Tabs>
       <Box mt={2} sx={{ width: "100%", p: 2 }}>
-        {showProfileMemes ? (
-          <Grid container spacing={2}>
-            {userMemes.map((meme, index) => (
-              <Grid item xs={8} sm={7} md={6} lg={5} xl={4} key={index}>
-                <MemeCard
-                  meme={meme}
-                  loggedInUser={loggedInUser}
-                  cardMediaStyle={desktopCardMediaStyle}
-                  captionStyle={desktopCaptionStyle}
-                  userNameStyle={desktopUserNameStyle}
-                />
-              </Grid>
-            ))}
-          </Grid>
+        {value === 0 ? (
+          <ProfileMemes setPendingChanges={setPendingChanges} />
         ) : (
-          <Box>
-            {userQuotes.map((quote, index) => (
-              <Box key={index} mb={2}>
-                <Typography>"{quote.text}"</Typography>
-                <Typography variant="caption">
-                  - {quote.userNameQuote}
-                </Typography>
-              </Box>
-            ))}
-          </Box>
+          <ProfileQuotes pendingChanges={pendingChanges} setPendingChanges={setPendingChanges} />
         )}
       </Box>
     </Container>
   );
 };
 
-export default UsersProfile;
+export default UserProfile;

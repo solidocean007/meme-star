@@ -1,8 +1,8 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { LikedQuotesType, MemeType } from "../Utils/types";
+import { LikedQuotesType, ProcessedMemeType } from "../Utils/types";
 import { getAllData } from "../api/getAllData";
 import { processMemes } from "../helperFunctions/processedMemes";
-import { AppDispatch, RootState} from "./store";
+import { AppDispatch } from "./store";
 import { showSnackbar } from "./snackBarSlice";
 
 interface FetchError {
@@ -10,7 +10,7 @@ interface FetchError {
 }
 
 export const fetchMemes = createAsyncThunk<
-  MemeType[],
+  ProcessedMemeType[],
   void,
   { rejectValue: FetchError; dispatch: AppDispatch }
 >(
@@ -19,6 +19,7 @@ export const fetchMemes = createAsyncThunk<
     try {
       const response = await getAllData();
       const processedMemes = processMemes(response);
+      console.log(processedMemes)
       return processedMemes;
     } catch (error) {
       const fetchError: FetchError = {
@@ -31,7 +32,7 @@ export const fetchMemes = createAsyncThunk<
 );
 
 interface MemeState {
-  entities: MemeType[];
+  entities: ProcessedMemeType[];
   loading: "idle" | "loading";
   error: string | null;
 }
@@ -64,16 +65,17 @@ const memesSlice = createSlice({
     },
     removeLikedQuoteFromRedux: (
       state,
-      action: PayloadAction<{ likedQuoteId: string }>
+      action: PayloadAction<{ memeId: string; likedQuoteId: string }>
     ) => {
-      state.entities.forEach((meme) => {
-        meme.allQuotes = meme.allQuotes || [];
-        meme.allQuotes.forEach((quote) => {
+      const { memeId, likedQuoteId } = action.payload;
+      const meme = state.entities.find((m) => m.id === memeId);
+      if (meme) {
+        meme.allQuotes?.forEach((quote) => {
           quote.quoteLikes = quote.quoteLikes.filter(
-            (like) => like.id !== action.payload.likedQuoteId
+            (like) => like.id !== likedQuoteId
           );
         });
-      });
+      }
     },
     deleteQuoteFromRedux: (
       state,
@@ -102,6 +104,12 @@ const memesSlice = createSlice({
         memeToAddQuoteTo.allQuotes?.push({id, text, userId, userNameQuote, memeId, quoteLikes})
       }
     },
+    deleteMemeFromRedux: (
+      state,
+      action: PayloadAction<{ memeId: string }>
+    ) => {
+      state.entities = state.entities.filter((meme) => meme.id !== action.payload.memeId);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -110,12 +118,12 @@ const memesSlice = createSlice({
       })
       .addCase(
         fetchMemes.fulfilled,
-        (state, action: PayloadAction<MemeType[]>) => {
+        (state, action: PayloadAction<ProcessedMemeType[]>) => {
           state.entities = action.payload;
           state.loading = "idle";
         }
       )
-      .addCase(
+      .addCase( 
         fetchMemes.rejected,
         (state, action: PayloadAction<FetchError | undefined>) => {
           state.loading = "idle";
@@ -132,6 +140,7 @@ export const {
   addLikedQuoteToRedux,
   removeLikedQuoteFromRedux,
   addQuoteToRedux,
+  deleteMemeFromRedux,
 } = memesSlice.actions;
 
 export default memesSlice.reducer;

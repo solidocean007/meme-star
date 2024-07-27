@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Card, CardMedia, Box, Modal, Container, Button } from "@mui/material";
-import { ChangeType, MemeType, QuoteType, UsersType } from "../Utils/types";
+import { Card, CardMedia, Box, Modal, Container } from "@mui/material";
+import { ChangeType, ProcessedMemeType, QuoteType, UsersType } from "../Utils/types";
 import { MemeQuotes } from "./MemeQuotes";
 import { leadingQuoteForMeme } from "../helperFunctions/leadingQuoteForMeme";
 import CaptionWithLikes from "./CaptionWithLikes";
@@ -20,7 +20,7 @@ const MemeCard = ({
   captionStyle,
   userNameStyle,
 }: {
-  meme: MemeType;
+  meme: ProcessedMemeType;
   loggedInUser: UsersType | null;
   cardMediaStyle: cardMediaStyleType;
   captionStyle: captionStyleType;
@@ -52,7 +52,7 @@ const MemeCard = ({
   const handleOpen = () => setOpenQuotes(true);
 
   const handleGoToSignUp = () => {
-    navigate("/signUp");
+    navigate("/login-sign-up");
   };
 
   const style = {
@@ -89,7 +89,6 @@ const MemeCard = ({
             onClick={loggedInUser ? handleOpen : handleGoToSignUp}
             sx={{ background: "transparent" }}
           >
-            <h5>Caption with likes</h5>
             <CaptionWithLikes
               caption={captionWithMostLikes}
               user={loggedInUser}

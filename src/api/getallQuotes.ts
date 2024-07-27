@@ -1,8 +1,8 @@
 import { API_CONFIG } from "./config";
 
-export const getAllQuotes = async () => {
+export const getQuotes = async (optional: string) => {
   try {
-    const response = await fetch(API_CONFIG + "/quotes", {
+    const response = await fetch(API_CONFIG + `/quotes/${optional}`, {
       method: "GET ",
       headers: { "Content-Type": "application/json" },
       redirect: "follow",

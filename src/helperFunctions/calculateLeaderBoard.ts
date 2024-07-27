@@ -1,10 +1,10 @@
-import { MemeType } from "../Utils/types";
+import { ProcessedMemeType } from "../Utils/types";
 
 // Define types for user points and user details
 type UserPoints = { [userId: string]: number };
 type UserDetails = { [userId: string]: { firstName: string; lastName: string } };
 
-const calculateLeaderBoard = (memes: MemeType[]): { userPoints: UserPoints; userDetails: UserDetails } => {
+const calculateLeaderBoard = (memes: ProcessedMemeType[]): { userPoints: UserPoints; userDetails: UserDetails } => {
   const userPoints: UserPoints = {};
   const userDetails: UserDetails = {};
 
