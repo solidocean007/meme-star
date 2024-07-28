@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card, CardMedia, Box, Modal, Container } from "@mui/material";
+import { Card, CardMedia, Box, Modal, Container, Button } from "@mui/material";
 import { ChangeType, ProcessedMemeType, QuoteType, UsersType } from "../Utils/types";
 import { MemeQuotes } from "./MemeQuotes";
 import { leadingQuoteForMeme } from "../helperFunctions/leadingQuoteForMeme";
@@ -95,7 +95,7 @@ const MemeCard = ({
               captionStyle={captionStyle}
               userNameStyle={userNameStyle}
             />
-            {/* <Button
+            <Button
               sx={{
                 fontSize: { xs: 10, sm: 15, md: 20, lg: 20 }, // Responsive font size
               }}
@@ -104,7 +104,7 @@ const MemeCard = ({
               {loggedInUser
                 ? `${meme.allQuotes?.length || 0} Quotes. Now add yours!`
                 : "login to comment yours"}
-            </Button> */}
+            </Button>
           </Container>
         </Box>
       {/* )} */}

@@ -81,11 +81,6 @@
       "userId": "3"
     },
     {
-      "id": "4",
-      "imageUrl": "/src/assets/images/dumbndumberyelling.webp",
-      "userId": "4"
-    },
-    {
       "id": "6",
       "imageUrl": "/src/assets/images/luka-gobert.webp",
       "userId": "6"
@@ -148,12 +143,6 @@
       "userId": "5"
     },
     {
-      "id": "8",
-      "memeId": "4",
-      "text": "Yelling at kids to get off my lawn!",
-      "userId": "2"
-    },
-    {
       "id": "10",
       "memeId": "6",
       "text": "That awkward moment when you wear the same outfit.",
@@ -202,16 +191,18 @@
       "userId": "3"
     },
     {
-      "id": "19",
-      "memeId": "4",
-      "text": "I told you to stop",
-      "userId": "3"
-    },
-    {
       "id": "20",
       "memeId": "8",
       "text": "Herbalife Foreverrr",
       "userId": "3"
+    },
+    {
+      "id": "4c1b",
+      "memeId": "11",
+      "text": "yabba dabba do",
+      "userId": "4",
+      "userNameQuote": "Devin Williams",
+      "quoteLikes": []
     }
   ],
   "likedQuotes": [
@@ -234,12 +225,6 @@
       "memeId": "1"
     },
     {
-      "id": "4",
-      "userId": "4",
-      "quoteId": "5",
-      "memeId": "2"
-    },
-    {
       "id": "5",
       "userId": "5",
       "quoteId": "6",
@@ -254,7 +239,7 @@
     {
       "id": "7",
       "userId": "7",
-      "quoteId": "8",
+      "quoteId": null,
       "memeId": "3"
     },
     {
@@ -270,28 +255,64 @@
       "memeId": "3"
     },
     {
-      "id": "10",
-      "userId": "2",
-      "quoteId": "11",
-      "memeId": "4"
-    },
-    {
-      "id": "11",
-      "userId": "3",
-      "quoteId": "12",
-      "memeId": "4"
-    },
-    {
-      "id": "12",
-      "userId": "4",
-      "quoteId": "13",
-      "memeId": "4"
-    },
-    {
       "id": "15",
       "userId": "7",
       "quoteId": "4",
       "memeId": "1"
+    },
+    {
+      "id": "4363",
+      "userId": "4",
+      "quoteId": "13",
+      "memeId": "9"
+    },
+    {
+      "id": "2ec9",
+      "userId": "4",
+      "quoteId": "12",
+      "memeId": "8"
+    },
+    {
+      "id": "a1f9",
+      "userId": "4",
+      "quoteId": "14",
+      "memeId": "10"
+    },
+    {
+      "id": "20e4",
+      "userId": "4",
+      "quoteId": "11",
+      "memeId": "7"
+    },
+    {
+      "id": "59ee",
+      "userId": "4",
+      "quoteId": "4",
+      "memeId": "2"
+    },
+    {
+      "id": "ee85",
+      "userId": "4",
+      "quoteId": "16",
+      "memeId": "2"
+    },
+    {
+      "id": "cb91",
+      "userId": "4",
+      "quoteId": "5",
+      "memeId": "2"
+    },
+    {
+      "id": "3f88",
+      "userId": "4",
+      "quoteId": "4",
+      "memeId": "2"
+    },
+    {
+      "id": "1fe3",
+      "userId": "4",
+      "quoteId": "7",
+      "memeId": "3"
     }
   ]
 }

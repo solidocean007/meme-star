@@ -3,6 +3,8 @@ import { styled } from '@mui/system';
 import { useSelector } from 'react-redux';
 import { RootState } from '../Redux/store';
 import calculateLeaderBoard from '../helperFunctions/calculateLeaderBoard';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import './leaderboard.css'
 
 // Styled component for the leaderBoard container
 const LeaderBoardContainer = styled(Box)(({ theme }) => ({
@@ -25,6 +27,9 @@ const LeaderBoardItem = styled(ListItem)(({ theme }) => ({
   margin: theme.spacing(1, 0),
   padding: theme.spacing(1),
   borderRadius: theme.shape.borderRadius,
+  transition: 'background-color 0.5s, transform 0.5s',
+  position: 'relative', // Required for the glare effect
+  overflow: 'hidden', // Required for the glare effect
 }));
 
 const LeaderBoard = () => {
@@ -54,17 +59,26 @@ const LeaderBoard = () => {
         Leader board
       </Typography>
       <List>
-        {sortedUsers.map((entry, index) => (
-          <LeaderBoardItem key={entry.userId}>
-            <ListItemText
-              primary={`${index + 1}. ${entry.user.firstName} ${entry.user.lastName}`}
-              primaryTypographyProps={{ color: 'white' }}
-            />
-            <Typography variant="h6" color="green">
-              {entry.points}
-            </Typography>
-          </LeaderBoardItem>
-        ))}
+        <TransitionGroup>
+          {sortedUsers.map((entry, index) => (
+            <CSSTransition
+              key={entry.userId}
+              timeout={500}
+              classNames="leader-item"
+            >
+              <LeaderBoardItem className={index === 0 ? 'top-player' : ''}>
+                <ListItemText
+                  primary={`${index + 1}. ${entry.user.firstName} ${entry.user.lastName}`}
+                  primaryTypographyProps={{ color: 'white' }}
+                />
+                <Typography variant="h6" color="green">
+                  {entry.points}
+                </Typography>
+                {index === 0 && <div className="glare"></div>}
+              </LeaderBoardItem>
+            </CSSTransition>
+          ))}
+        </TransitionGroup>
       </List>
     </LeaderBoardContainer>
   );

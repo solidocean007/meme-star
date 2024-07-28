@@ -1,0 +1,72 @@
+/* LeaderBoard.css */
+.leader-item-enter {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.leader-item-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 500ms, transform 500ms;
+}
+
+.leader-item-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.leader-item-exit-active {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 500ms, transform 500ms;
+}
+
+/* Rainbow animation for the top player */
+@keyframes rainbow {
+  0% { background-color: red; }
+  5% { background-color: orange; }
+  10% { background-color: yellow; }
+  15% { background-color: green; }
+  20% { background-color: blue; }
+  25% { background-color: indigo; }
+  30% { background-color: violet; }
+  40% { background-color: red; }
+  45% { background-color: red; }
+  50% { background-color: orange; }
+  55% { background-color: yellow; }
+  60% { background-color: green; }
+  70% { background-color: blue; }
+  80% { background-color: indigo; }
+  90% { background-color: violet; }
+  100% { background-color: red; }
+}
+
+/* Glare animation */
+@keyframes glare {
+  0% {
+    left: -80%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 80%;
+  }
+}
+
+.top-player {
+  animation: rainbow 6s linear;
+}
+
+.glare {
+  position: absolute;
+  top: 0;
+  left: -135%;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: skewX(-70deg);
+  animation: glare 3s linear 2;
+}
+
+
