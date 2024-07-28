@@ -1,22 +1,16 @@
-import {
-  Box,
-  Container,
-  Typography,
-  Tabs,
-  Tab,
-  Avatar,
-} from "@mui/material";
+import { Box, Container, Typography, Tabs, Tab, Avatar, styled } from "@mui/material";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../Redux/store";
+import { RootState } from "../../Redux/store";
 import { useNavigate } from "react-router";
-import { ChangeType, MemeType, ProcessedMemeType, QuoteType } from "../../Utils/types";
+import { ChangeType } from "../../Utils/types";
 import ProfileQuotes from "../ProfileQuotes";
 import ProfileMemes from "../ProfileMemes";
+import { TabsSerrated } from "./TabsSerrated";
 
 const UserProfile = () => {
   const loggedInUser = useSelector((state: RootState) => state.auth.user);
-  const [value, setValue] = React.useState(1);
+  const [value, setValue] = React.useState(0);
 
   const [pendingChanges, setPendingChanges] = useState<ChangeType[]>([]);
   const navigate = useNavigate();
@@ -28,8 +22,6 @@ const UserProfile = () => {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
- 
-
 
   // const profileCardMediaStyle = {
   //   position: "relative",
@@ -48,7 +40,7 @@ const UserProfile = () => {
   // };
 
   return (
-    <Container maxWidth={false}>
+    <Container sx={{ width: "100%", p: 2 }}>
       <Box display="flex" alignItems="center">
         <Avatar alt={`${loggedInUser?.firstName} ${loggedInUser?.lastName}`} />
         <Box ml={2}>
@@ -57,15 +49,17 @@ const UserProfile = () => {
           </Typography>
         </Box>
       </Box>
-      <Tabs value={value} onChange={handleChange} centered>
-        <Tab label="Memes" />
-        <Tab label="Quotes" />
-      </Tabs>
+
       <Box mt={2} sx={{ width: "100%", p: 2 }}>
+        
+      <TabsSerrated value={value} onChange={handleChange} />
         {value === 0 ? (
           <ProfileMemes setPendingChanges={setPendingChanges} />
         ) : (
-          <ProfileQuotes pendingChanges={pendingChanges} setPendingChanges={setPendingChanges} />
+          <ProfileQuotes
+            pendingChanges={pendingChanges}
+            setPendingChanges={setPendingChanges}
+          />
         )}
       </Box>
     </Container>

@@ -139,7 +139,7 @@ export const MemeQuotes = ({
 
   return (
     <>
-      <CardContent sx={{ padding: "0", width: "100%" }}>
+      <CardContent sx={{ padding: "0", width: "100%"}}>
         <List
           sx={listStyle}
         >

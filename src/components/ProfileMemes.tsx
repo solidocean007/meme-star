@@ -101,7 +101,7 @@ const ProfileMemes = ({
       : "The selected meme will be permanently deleted.";
 
   return (
-    <Container maxWidth={false}>
+    <Container maxWidth={false} sx={{ background: "green"}}>
       <Button
         onClick={handleDeleteSelected}
         disabled={selectedMemes.size === 0}

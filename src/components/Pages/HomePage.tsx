@@ -64,7 +64,8 @@ const HomePage = () => {
   );
 
   return (
-    <Container
+    <div className="homepage">
+       <Container
       maxWidth={false}
       sx={{ margin: "0", padding: "0", height: "100%" }}
     >
@@ -191,6 +192,8 @@ const HomePage = () => {
         </Card>
       </Modal>
     </Container>
+    </div>
+   
   );
 };
 

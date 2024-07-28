@@ -114,7 +114,7 @@ const ProfileQuotes = ({ setPendingChanges }: ProfileQuotesProps) => {
   const messageQuestion = selectedQuotes.size > 1 ? `The ${selectedQuotes.size} selected quotes will be permanently deleted` : "The selected quote will be permanently deleted."
 
   return (
-    <Container>
+    <Container  maxWidth={false} sx={{ background: "green"}}>
       <Button onClick={handleDeleteSelected} disabled={selectedQuotes.size === 0}>
         Delete Selected
       </Button>
