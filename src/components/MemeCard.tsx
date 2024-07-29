@@ -82,7 +82,7 @@ const MemeCard = ({
   return (
     <Card sx={{ m: 2, position: "relative" }}>
       <CardMedia component="img" src={meme.imageUrl} sx={cardMediaStyle} />
-      {/* {meme.allQuotes?.length && ( */}
+      {meme.allQuotes?.length && (
         <Box sx={captionContainerStyle}>
           <Container
             title="leading-caption"
@@ -97,17 +97,20 @@ const MemeCard = ({
             />
             <Button
               sx={{
-                fontSize: { xs: 10, sm: 15, md: 20, lg: 20 }, // Responsive font size
+                fontSize: { xs: 8, sm: 8, md: 10, lg: 13 }, // Responsive font size
               }}
               onClick={loggedInUser ? handleOpen : handleGoToSignUp}
             >
-              {loggedInUser
+              {loggedInUser && meme.allQuotes.find((quote) => quote.userId == loggedInUser.id)
+                ? null
+                : `${meme.allQuotes?.length || 0} Quotes. Now add yours!`}
+              {/* {loggedInUser && meme.allQuotes.find((quote) => quote.userId !== loggedInUser.id)
                 ? `${meme.allQuotes?.length || 0} Quotes. Now add yours!`
-                : "login to comment yours"}
+                : "login to comment yours"} */}
             </Button>
           </Container>
         </Box>
-      {/* )} */}
+       )} 
 
       <Modal
         open={openQuotes}

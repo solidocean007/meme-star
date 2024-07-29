@@ -16,7 +16,8 @@ SideBarLayoutProps) => {
     alignItems: "center",
     justifyContent: "start",
     width: "100%", // Ensure full width
-    height: "100%",
+    height: {xs: 'auto', md:"100vh" },
+    mb: "150px",
     backgroundColor: "rgba(1000, 6000, 9000, .4)",
     margin: "auto",
     textAlign: "center",

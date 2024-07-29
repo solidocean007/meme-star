@@ -104,11 +104,6 @@
       "id": "10",
       "imageUrl": "/src/assets/images/tornado.webp",
       "userId": "1"
-    },
-    {
-      "id": "11",
-      "imageUrl": "/src/assets/images/xeno-ripley.webp",
-      "userId": "2"
     }
   ],
   "quotes": [
@@ -195,14 +190,6 @@
       "memeId": "8",
       "text": "Herbalife Foreverrr",
       "userId": "3"
-    },
-    {
-      "id": "4c1b",
-      "memeId": "11",
-      "text": "yabba dabba do",
-      "userId": "4",
-      "userNameQuote": "Devin Williams",
-      "quoteLikes": []
     }
   ],
   "likedQuotes": [

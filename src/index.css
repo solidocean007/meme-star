@@ -34,7 +34,7 @@ body {
   flex-direction: column;
   justify-content: stretch;
   align-items: stretch;
-  min-height: 100vh;
+  min-height: 100%;
   font-family: var(--font-family);
   background: var(--background-page);
 }
