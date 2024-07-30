@@ -18,7 +18,8 @@ SideBarLayoutProps) => {
     width: "100%", // Ensure full width
     height: {xs: 'auto', md:"100vh" },
     mb: "150px",
-    backgroundColor: "rgba(1000, 6000, 9000, .4)",
+    // backgroundColor: "rgba(1000, 6000, 9000, .4)",
+    background: "rgba(1000, 6000, 9000, .5)",
     margin: "auto",
     textAlign: "center",
     pt: 4,

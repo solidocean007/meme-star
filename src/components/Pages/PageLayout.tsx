@@ -6,6 +6,8 @@ import {
   IconButton,
   Box,
   Container,
+  useTheme,
+  Theme,
 } from "@mui/material";
 import { AccountCircle, LogoutSharp } from "@mui/icons-material";
 import { UsersType } from "../../Utils/types";
@@ -30,12 +32,13 @@ const PageLayout = ({
   const handleLogout = () => {
     dispatch(logout());
   };
+  const theme = useTheme<Theme>();
 
   return (
     <Container maxWidth={false} sx={{height: "100vh"}}>
       <AppBar
         position="static"
-        style={{ background: "var(--dusty-cactus)", color: "black" }}
+        sx={{ backgroundColor: theme.palette.background.default, color: theme.palette.text.primary, p: 2 }}
       >
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography variant="h1" component="div" sx={headerTextStyle}>

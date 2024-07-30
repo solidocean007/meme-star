@@ -1,30 +1,6 @@
-export interface captionStyleType  {
-  flexGrow: number;
-  mr: number;
-  fontSize: {
-    xs?: number;
-    sm?: number;
-    md?: number;
-    lg?: number;
-  };
-}
+import { SxProps, Theme } from '@mui/material';
 
-export interface userNameStyleType {
-  fontSize: {
-    xs?: number;
-    sm?: number;
-    md?: number;
-    lg?: number;
-  };
-}
-
-export interface cardMediaStyleType {
-  position: string;
-  height: {
-    xs?: number;
-    sm?: number;
-    md?: number;
-    lg?: number;
-  };
-  width: string;
-}
+// Define types for styles using SxProps<Theme>
+export type CaptionStyleType = SxProps<Theme>;
+export type UserNameStyleType = SxProps<Theme>;
+export type CardMediaStyleType = SxProps<Theme>;

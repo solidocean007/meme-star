@@ -23,7 +23,7 @@ const LeaderBoardContainer = styled(Box)(({ theme }) => ({
 const LeaderBoardItem = styled(ListItem)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'space-between',
-  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+  backgroundColor: 'rgba(255, 255, 255, 0.3)',
   margin: theme.spacing(1, 0),
   padding: theme.spacing(1),
   borderRadius: theme.shape.borderRadius,

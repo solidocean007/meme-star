@@ -17,13 +17,16 @@ import { RootState } from "../../Redux/store";
 import { useNavigate } from "react-router";
 import LeaderBoard from "../LeaderBoard";
 import PageLayout from "./PageLayout";
-import SideBarLayout from "./SideBarLayout";
+import SideBarLayout from "../SideBarLayout";
 import HowToPlay from "../HowToPlay";
 import MemeFeedDesktop from "../MemeFeedDesktop";
 import { homePageStyle, sideBarButtonStyle } from "../Styles";
 import UsersProfile from "./UserProfile";
+import { useTheme } from "@emotion/react";
 
 const HomePage = () => {
+  const isDarkMode = useSelector((state: RootState) => state.theme.isDarkMode);
+  const theme = useTheme();
   const loggedInUser = useSelector((state: RootState) => state.auth.user);
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
@@ -95,7 +98,7 @@ const HomePage = () => {
                     color="info"
                     onClick={handleCreateMeme}
                   >
-                    <Typography variant="h3" sx={sideBarButtonStyle}>
+                    <Typography  variant="h3" sx={sideBarButtonStyle}>
                       Create Meme
                     </Typography>
                   </Button>

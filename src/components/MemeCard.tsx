@@ -7,11 +7,10 @@ import CaptionWithLikes from "./CaptionWithLikes";
 import { useNavigate } from "react-router";
 import { applyChanges } from "../helperFunctions/applyChanges";
 import { useAppDispatch } from "../Redux/store";
-import {
-  captionStyleType,
-  cardMediaStyleType,
-  userNameStyleType,
-} from "../Utils/styleTypes";
+import { Theme } from "@mui/material/styles";
+
+import { useTheme } from "@emotion/react";
+import { CaptionStyleType, CardMediaStyleType, UserNameStyleType } from "../Utils/styleTypes";
 
 const MemeCard = ({
   meme,
@@ -22,9 +21,9 @@ const MemeCard = ({
 }: {
   meme: ProcessedMemeType;
   loggedInUser: UsersType | null;
-  cardMediaStyle: cardMediaStyleType;
-  captionStyle: captionStyleType;
-  userNameStyle: userNameStyleType;
+  cardMediaStyle: CardMediaStyleType;
+  captionStyle: CaptionStyleType;
+  userNameStyle: UserNameStyleType;
 }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -34,6 +33,7 @@ const MemeCard = ({
   );
   const [openQuotes, setOpenQuotes] = useState(false);
   const [pendingChanges, setPendingChanges] = useState<ChangeType[]>([]);
+  const theme = useTheme() as Theme;
 
   useEffect(() => {
     if (!openQuotes && pendingChanges.length > 0) {
@@ -68,7 +68,7 @@ const MemeCard = ({
   };
 
   const captionContainerStyle = {
-    background: "rgba(255, 255, 255, 0.8)",
+    background: theme.palette.mode === 'dark' ? "rgba(0, 0, 0, 0.8)" : "rgba(255, 255, 255, 0.8)",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -79,7 +79,10 @@ const MemeCard = ({
     width: "100%",
   };
 
+  
+
   return (
+
     <Card sx={{ m: 2, position: "relative" }}>
       <CardMedia component="img" src={meme.imageUrl} sx={cardMediaStyle} />
       {meme.allQuotes?.length && (

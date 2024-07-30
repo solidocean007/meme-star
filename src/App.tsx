@@ -13,6 +13,7 @@ import { darkTheme, lightTheme } from "./Utils/theme";
 const App = () => {
   const dispatch = useAppDispatch();
   const isDarkMode = useSelector((state: RootState) => state.theme.isDarkMode);
+  const theme = isDarkMode ? darkTheme : lightTheme;
 
   useEffect(() => {
     const storedUserData = localStorage.getItem("userLoggedIn");
@@ -23,7 +24,7 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container disableGutters maxWidth={false} sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
         <Router>

@@ -1,4 +1,4 @@
-import { Height } from "@mui/icons-material";
+import { SxProps, Theme } from "@mui/material";
 
 export const pageLayoutStyle = {
   // my: 1,
@@ -18,7 +18,7 @@ export const homePageStyle = {
   height: "100%",
 };
 
-export const mobileCardMediaStyle = {
+export const mobileCardMediaStyle: SxProps<Theme> = {
   position: "relative",
   height: { xs: 300, sm: 350, md: 400, lg: 450 },
   width: "100%",
@@ -34,7 +34,7 @@ export const mobileUserNameStyle = {
   fontSize: { xs: 15, sm: 20 },
 };
 
-export const desktopCardMediaStyle = {
+export const desktopCardMediaStyle:  SxProps<Theme> = {
   position: "relative",
   height: { md: 250, lg: 300 },
   width: "100%",
@@ -96,7 +96,6 @@ export const portfolioUserNameStyle = {
 
 export const sideBarButtonStyle = {
   marginBottom: 4,
-  color: "white",
   fontSize: {
     xs: 10,
     sm: 15,
