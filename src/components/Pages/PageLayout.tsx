@@ -69,13 +69,9 @@ const PageLayout = ({
     }
   };
 
-  // const handleShowProfile = () => {
-  //   setShowProfile(!showProfile);
-  // };
-
   const handleShowProfile = () => {
     setShowProfile((prevShowProfile) => !prevShowProfile);
-  }
+  };
 
   const handleOpenHowToPlay = () => {
     setOpenHowToPlay(true);
@@ -100,16 +96,40 @@ const PageLayout = ({
         }}
       >
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography variant="h1" component="div" sx={headerTextStyle} color={theme.palette.text.secondary}>
+          <Typography
+            variant="h1"
+            component="div"
+            sx={headerTextStyle}
+            color={theme.palette.text.secondary}
+          >
             MemeStar
           </Typography>
-          <Box sx={{ display: "flex", mr: "2rem" }}>
-          <IconButton  onClick={handleGoToLoginSignUp} color="primary">
-              <AccountCircle />
+
+          <Box sx={{ display: "flex", alignItems: "center", mr: "2rem" }}>
+            <IconButton onClick={handleGoToLoginSignUp} color="primary">
+              <AccountCircle
+                sx={{ fontSize: { xs: "20", sm: "25", md: "30", lg: "40px" } }}
+              />
             </IconButton>
+            {!isAuthenticated && (
+              <Button
+                color="primary"
+                variant="contained"
+                onClick={handleGoToLoginSignUp}
+                sx={sideBarButtonStyle}
+              >
+                Sign Up / Log In
+              </Button>
+            )}
+
             {isAuthenticated && (
               <Box sx={{ mr: 2, display: "flex", alignItems: "center" }}>
-                <Typography variant="h2" component="div" sx={userNameStyle} color={theme.palette.text.secondary}>
+                <Typography
+                  variant="h2"
+                  component="div"
+                  sx={userNameStyle}
+                  color={theme.palette.text.secondary}
+                >
                   {`${loggedInUser?.firstName} ${loggedInUser?.lastName}`}
                 </Typography>
                 <IconButton onClick={handleLogout} color="primary">
@@ -125,7 +145,11 @@ const PageLayout = ({
         <Grid item xs={12} md={1} p={0}>
           <SideBarLayout>
             <Button variant={undefined} color="info" onClick={handleCreateMeme}>
-              <Typography variant="h3" sx={sideBarButtonStyle} color={theme.palette.text.primary}>
+              <Typography
+                variant="h3"
+                sx={sideBarButtonStyle}
+                color={theme.palette.text.primary}
+              >
                 Create Meme
               </Typography>
             </Button>
@@ -135,7 +159,11 @@ const PageLayout = ({
                 color="info"
                 onClick={handleOpenLeaderBoard}
               >
-                <Typography variant="h3" sx={sideBarButtonStyle} color={theme.palette.text.primary}>
+                <Typography
+                  variant="h3"
+                  sx={sideBarButtonStyle}
+                  color={theme.palette.text.primary}
+                >
                   Show LeaderBoard
                 </Typography>
               </Button>
@@ -146,7 +174,11 @@ const PageLayout = ({
                 color="info"
                 onClick={handleShowProfile}
               >
-                <Typography variant="h3" sx={sideBarButtonStyle} color={theme.palette.text.primary}>
+                <Typography
+                  variant="h3"
+                  sx={sideBarButtonStyle}
+                  color={theme.palette.text.primary}
+                >
                   {!showProfile ? "Profile" : "Close Profile"}
                 </Typography>
               </Button>
@@ -157,19 +189,23 @@ const PageLayout = ({
                 color="info"
                 onClick={handleOpenHowToPlay}
               >
-                <Typography variant="h3" sx={sideBarButtonStyle} color={theme.palette.text.primary}>
+                <Typography
+                  variant="h3"
+                  sx={sideBarButtonStyle}
+                  color={theme.palette.text.primary}
+                >
                   How to Play
                 </Typography>
               </Button>
             </Box>
           </SideBarLayout>
         </Grid>
-        <Grid item xs={12} md={9} sx={{ height: "100%" }}>
+        <Grid item xs={12} md={8} sx={{ height: "100%" }}>
           <Container maxWidth={false} disableGutters sx={pageLayoutStyle}>
             {children}
           </Container>
         </Grid>
-        <Grid item xs={12} md={2} display={{ xs: "none", md: "block" }}>
+        <Grid item xs={12} md={3} display={{ xs: "none", md: "block" }}>
           <SideBarLayout>
             <LeaderBoard />
           </SideBarLayout>

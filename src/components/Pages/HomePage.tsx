@@ -10,7 +10,6 @@ import {
 import MemeFeed from "../MemeFeed";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
-import { useNavigate } from "react-router";
 import PageLayout from "./PageLayout";
 import MemeFeedDesktop from "../MemeFeedDesktop";
 import { homePageStyle } from "../Styles";
@@ -23,15 +22,8 @@ const HomePage = () => {
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
-  const navigate = useNavigate();
   const [showProfile, setShowProfile] = useState(false);
   console.log(showProfile);
-
-  const handleGoToLoginSignUp = () => {
-    if (!isAuthenticated) {
-      navigate("/login-sign-up");
-    }
-  };
 
   useEffect(() => {
     console.log(showProfile)
@@ -50,21 +42,11 @@ const HomePage = () => {
         showProfile={showProfile}
         setShowProfile={setShowProfile}
       >
-        <Container maxWidth={false} sx={homePageStyle}>
-          {!isAuthenticated && (
-            <Box m={2} width="100%">
-              <Button
-                variant="contained"
-                color="secondary"
-                fullWidth
-                onClick={handleGoToLoginSignUp}
-              >
-                Sign Up / Log In
-              </Button>
-            </Box>
-          )}
-          <Grid container spacing={1} m={0} p={0} sx={{ height: "100%" }}>
-            <Grid item xs={12} md={12} sx={{ height: "100%" }}>
+        <Container disableGutters maxWidth={false} sx={homePageStyle}>
+          
+          <Grid container spacing={0} m={0} p={0} sx={{ height: "100%" }}>
+            {/* <Grid item xs={11} md={11} sx={{ height: "100%" }}> */}
+            <Grid item sx={{ height: "100%" }}>
               {showProfile ? (
                 <UsersProfile />
               ) : isTabletOrLarger ? (

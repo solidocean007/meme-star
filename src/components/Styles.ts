@@ -36,7 +36,7 @@ export const mobileUserNameStyle = {
 
 export const desktopCardMediaStyle:  SxProps<Theme> = {
   position: "relative",
-  height: { md: 300, lg: 350 },
+  height: { md: 250, lg: 300 },
   width: "100%",
 };
 
@@ -95,13 +95,13 @@ export const portfolioUserNameStyle = {
 };
 
 export const sideBarButtonStyle = {
-  marginBottom: 4,
+  // marginBottom: 4,
   fontSize: {
-    xs: 10,
-    sm: 15,
-    md: 20,
-    lg: 25,
-    xl: 15,
+    xs: 5,
+    sm: 5,
+    md: 7,
+    lg: 10,
+    xl: 17,
   },
   fontWeight: 900,
   textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)',

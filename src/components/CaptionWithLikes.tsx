@@ -34,7 +34,7 @@ const CaptionWithLikes = ({ caption, user, captionStyle, userNameStyle }: Captio
         <Typography variant="h3" sx={captionStyle} color={theme.palette.text.secondary}>
           {text}
         </Typography>
-        <Typography variant="h4" sx={userNameStyle} sx={captionStyle} color={theme.palette.text.secondary}>
+        <Typography variant="h4" sx={userNameStyle} color={theme.palette.text.secondary}>
           by: {caption.userNameQuote}
         </Typography>
       </Box>

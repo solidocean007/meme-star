@@ -26,7 +26,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Container disableGutters maxWidth={false} sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <Container maxWidth={false} sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
         <Router>
           <AppRoutes />
           <SnackBarSlide />

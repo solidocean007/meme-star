@@ -83,7 +83,7 @@ const MemeCard = ({
 
   return (
 
-    <Card sx={{ m: 2, position: "relative" }}>
+    <Card sx={{ position: "relative" }}>
       <CardMedia component="img" src={meme.imageUrl} sx={cardMediaStyle} />
       {meme.allQuotes?.length && (
         <Box sx={captionContainerStyle}>

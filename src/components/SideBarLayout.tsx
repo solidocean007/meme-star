@@ -19,16 +19,16 @@ const SideBarLayout = ({ children }: SideBarLayoutProps) => {
     alignItems: "center",
     justifyContent: "start",
     width: "100%",
-    height: { xs: "auto", md: "100vh" },
+    height: "100%",
     backgroundColor: theme.palette.background.paper,
     color: theme.palette.text.primary,
-    p: 2,
+    p: 0,
     margin: "auto",
     textAlign: "center",
     pt: 4,
   };
 
-  return <Container sx={sideBarLayoutStyle}>{children}</Container>;
+  return <Container disableGutters sx={sideBarLayoutStyle}>{children}</Container>;
 };
 
 export default SideBarLayout;
