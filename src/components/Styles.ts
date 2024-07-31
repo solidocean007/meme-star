@@ -36,8 +36,8 @@ export const mobileUserNameStyle = {
 
 export const desktopCardMediaStyle:  SxProps<Theme> = {
   position: "relative",
-  height: { md: 250, lg: 300 },
-  width: "100%",
+  height: { md: 150, lg: 200 },
+  width: "auto",
 };
 
 export const desktopCaptionStyle = {

@@ -200,7 +200,7 @@ const PageLayout = ({
             </Box>
           </SideBarLayout>
         </Grid>
-        <Grid item xs={12} md={8} sx={{ height: "100%" }}>
+        <Grid item xs={12} md={6} sx={{ height: "100%" }}>
           <Container maxWidth={false} disableGutters sx={pageLayoutStyle}>
             {children}
           </Container>
