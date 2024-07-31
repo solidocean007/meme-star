@@ -3,18 +3,24 @@ import { createTheme, PaletteOptions } from '@mui/material/styles';
 const lightPalette: PaletteOptions = {
   mode: 'light',
   primary: {
-    main: '#1976d2',
+    main: '#005EA6', // Blue
   },
   secondary: {
-    main: '#dc004e',
+    main: '#F6D7A8', // Light Orange
   },
   background: {
-    default: '#e9d8d8',
-    paper: '#ffffff',
+    default: '#DEE2E6',
+    paper: '#95A5A6',
   },
   text: {
-    primary: '#333333',
-    secondary: 'rgba(0, 0, 0, 0.54)',
+    // primary: '#2C2C2C', // Dark grey for primary text
+    primary: '#FFFFFF', // Dark grey for primary text
+    secondary: '#6C757D', // Lighter grey for secondary text
+  },
+  action: {
+    active: '#005EA6', // Blue
+    hover: '#78ACFD', // Light Blue
+    selected: '#F6D7A8', // Light Orange
   },
 };
 
@@ -66,5 +72,3 @@ export const darkTheme = createTheme({
   typography,
   spacing: 8,
 });
-
-

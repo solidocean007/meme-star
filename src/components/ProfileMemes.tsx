@@ -1,4 +1,4 @@
-import { Checkbox, Container, Grid, Button } from "@mui/material";
+import { Checkbox, Container, Grid, Button, useTheme, Theme } from "@mui/material";
 import MemeCard from "./MemeCard";
 import { applyChanges } from "../helperFunctions/applyChanges";
 import { ChangeType, ProcessedMemeType } from "../Utils/types";
@@ -19,6 +19,8 @@ interface ProfileMemesProps {
 const ProfileMemes = ({
   setPendingChanges,
 }: ProfileMemesProps) => {
+  const theme = useTheme<Theme>();
+
   const loggedInUser = useSelector((state: RootState) => state.auth.user);
   const allMemes = useSelector((state: RootState) => state.memes.entities);
   const dispatch = useAppDispatch();
@@ -101,7 +103,7 @@ const ProfileMemes = ({
       : "The selected meme will be permanently deleted.";
 
   return (
-    <Container maxWidth={false} sx={{ background: "green"}}>
+    <Container maxWidth={false} sx={{ background: theme.palette.background.paper}}>
       <Button
         onClick={handleDeleteSelected}
         disabled={selectedMemes.size === 0}

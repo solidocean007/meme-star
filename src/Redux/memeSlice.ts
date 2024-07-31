@@ -19,7 +19,6 @@ export const fetchMemes = createAsyncThunk<
     try {
       const response = await getAllData();
       const processedMemes = processMemes(response);
-      console.log(processedMemes)
       return processedMemes;
     } catch (error) {
       const fetchError: FetchError = {

@@ -4,6 +4,7 @@ import { styled } from "@mui/material/styles";
 import Tab, { tabClasses } from "@mui/material/Tab";
 import Tabs, { tabsClasses } from "@mui/material/Tabs";
 import Toolbar from "@mui/material/Toolbar";
+import { useTheme } from "@emotion/react";
 
 const TabItem = styled(Tab)(({ theme }) => ({
   opacity: 1,
@@ -47,7 +48,7 @@ const TabItem = styled(Tab)(({ theme }) => ({
       "linear-gradient(to top right, rgba(0,0,0,0.2), rgba(0,0,0,0.2) 45%, transparent, transparent 64%)",
   },
   [`&.${tabClasses.selected}`]: {
-    color: (theme.vars || theme).palette.text.primary,
+    color: theme.palette.background.paper,
     zIndex: 100,
     "&:before": {
       // backgroundColor: "#fff",

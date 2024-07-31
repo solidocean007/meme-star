@@ -9,7 +9,7 @@ export const pageLayoutStyle = {
   alignItems: "flex-start",
   justifyContent: "space-between",
   width: "100%", // Ensure full width
-  Height: "100%"
+  height: "100%"
 };
 
 export const homePageStyle = {
@@ -36,7 +36,7 @@ export const mobileUserNameStyle = {
 
 export const desktopCardMediaStyle:  SxProps<Theme> = {
   position: "relative",
-  height: { md: 250, lg: 300 },
+  height: { md: 300, lg: 350 },
   width: "100%",
 };
 
@@ -104,6 +104,6 @@ export const sideBarButtonStyle = {
     xl: 15,
   },
   fontWeight: 900,
-  textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)', // Adding a subtle shadow for thickness
-  letterSpacing: '0.5px', // Optional: Add some letter spacing
+  textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)',
+  letterSpacing: '0.5px',
 };

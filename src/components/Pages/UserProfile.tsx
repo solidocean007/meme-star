@@ -1,4 +1,4 @@
-import { Box, Container, Typography, Tabs, Tab, Avatar, styled } from "@mui/material";
+import { Box, Container, Typography, Tabs, Tab, Avatar, styled, useTheme, Theme } from "@mui/material";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
@@ -6,9 +6,10 @@ import { useNavigate } from "react-router";
 import { ChangeType } from "../../Utils/types";
 import ProfileQuotes from "../ProfileQuotes";
 import ProfileMemes from "../ProfileMemes";
-import { TabsSerrated } from "./TabsSerrated";
+import { TabsSerrated } from "../TabsSerrated";
 
 const UserProfile = () => {
+  const theme = useTheme<Theme>();
   const loggedInUser = useSelector((state: RootState) => state.auth.user);
   const [value, setValue] = React.useState(0);
 
@@ -44,7 +45,7 @@ const UserProfile = () => {
       <Box display="flex" alignItems="center">
         <Avatar alt={`${loggedInUser?.firstName} ${loggedInUser?.lastName}`} />
         <Box ml={2}>
-          <Typography variant="h4">
+          <Typography variant="h4" color="primary">
             {loggedInUser?.firstName} {loggedInUser?.lastName}
           </Typography>
         </Box>
