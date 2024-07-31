@@ -84,7 +84,7 @@ const PageLayout = ({
   return (
     <Container
       maxWidth={false}
-      disableGutters
+      // disableGutters
       sx={{ width: "100vw", height: "100vh" }}
     >
       <AppBar
@@ -92,7 +92,8 @@ const PageLayout = ({
         sx={{
           backgroundColor: theme.palette.background.default,
           color: theme.palette.text.primary,
-          p: 2,
+          p: 1,
+          maxWidth: "90%",
         }}
       >
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -200,10 +201,8 @@ const PageLayout = ({
             </Box>
           </SideBarLayout>
         </Grid>
-        <Grid item xs={12} md={6} sx={{ height: "100%" }}>
-          <Container maxWidth={false} disableGutters sx={pageLayoutStyle}>
-            {children}
-          </Container>
+        <Grid item xs={12} md={6} sx={pageLayoutStyle}>
+          {children}
         </Grid>
         <Grid item xs={12} md={3} display={{ xs: "none", md: "block" }}>
           <SideBarLayout>

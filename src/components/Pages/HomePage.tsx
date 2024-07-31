@@ -26,41 +26,29 @@ const HomePage = () => {
   console.log(showProfile);
 
   useEffect(() => {
-    console.log(showProfile)
-  },[showProfile])
-
+    console.log(showProfile);
+  }, [showProfile]);
 
   const isTabletOrLarger = useMediaQuery((theme: Theme) =>
     theme.breakpoints.up("lg")
   );
 
   return (
-    <div className="homepage">
-      <PageLayout
-        isAuthenticated={isAuthenticated}
-        loggedInUser={loggedInUser}
-        showProfile={showProfile}
-        setShowProfile={setShowProfile}
-      >
-        <Container disableGutters maxWidth={false} sx={homePageStyle}>
-          
-          <Grid container spacing={0} m={0} p={0} sx={{ height: "100%" }}>
-            {/* <Grid item xs={11} md={11} sx={{ height: "100%" }}> */}
-            <Grid item sx={{ height: "100%" }}>
-              {showProfile ? (
-                <UsersProfile />
-              ) : isTabletOrLarger ? (
-                <MemeFeedDesktop />
-              ) : (
-                <MemeFeed />
-              )}
-            </Grid>
-          </Grid>
-        </Container>
-      </PageLayout>
-    </div>
+    <PageLayout
+      isAuthenticated={isAuthenticated}
+      loggedInUser={loggedInUser}
+      showProfile={showProfile}
+      setShowProfile={setShowProfile}
+    >
+      {showProfile ? (
+        <UsersProfile />
+      ) : isTabletOrLarger ? (
+        <MemeFeedDesktop />
+      ) : (
+        <MemeFeed />
+      )}
+    </PageLayout>
   );
 };
 
 export default HomePage;
-

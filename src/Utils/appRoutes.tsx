@@ -8,7 +8,8 @@ import ThemeButton from "../components/ThemeButton";
 
 const AppRoutes = () => {
   return (
-      <Container component="main" maxWidth={false} sx={{ flex: 1, display: 'flex', flexDirection: 'column', height: "100vh" }}>
+      // <Container component="main" maxWidth={false} sx={{ flex: 1, display: 'flex', flexDirection: 'column', height: "100vh" }}>
+      <Container component="main" >
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login-sign-up" element={<LoginSignUp />} />

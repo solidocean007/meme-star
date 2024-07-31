@@ -9,7 +9,7 @@ export const pageLayoutStyle = {
   alignItems: "flex-start",
   justifyContent: "space-between",
   width: "100%", // Ensure full width
-  height: "100%"
+  height: "100%",
 };
 
 export const homePageStyle = {
@@ -34,7 +34,7 @@ export const mobileUserNameStyle = {
   fontSize: { xs: 15, sm: 20 },
 };
 
-export const desktopCardMediaStyle:  SxProps<Theme> = {
+export const desktopCardMediaStyle: SxProps<Theme> = {
   position: "relative",
   height: { md: 150, lg: 200 },
   width: "auto",
@@ -55,7 +55,7 @@ export const portfolioCardMediaStyle = {
 export const portfolioCaptionStyle = {
   flexGrow: 1,
   mr: 1,
-  fontSize: {xs:15, sm:15, md: 15, lg: 20 },
+  fontSize: { xs: 15, sm: 15, md: 15, lg: 20 },
 };
 
 export const desktopUserNameStyle = {
@@ -63,7 +63,7 @@ export const desktopUserNameStyle = {
 };
 
 export const headerTextStyle = {
-   flexGrow: 1,
+  flexGrow: 1,
   fontSize: {
     xs: "2rem",
     sm: "2.5rem",
@@ -79,10 +79,9 @@ export const userNameStyle = {
     sm: 15,
     md: 18,
     lg: 20,
-    xl: 35
+    xl: 35,
   },
 };
-
 
 export const portfolioUserNameStyle = {
   fontSize: {
@@ -104,6 +103,6 @@ export const sideBarButtonStyle = {
     xl: 17,
   },
   fontWeight: 900,
-  textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)',
-  letterSpacing: '0.5px',
+  textShadow: "1px 1px 2px rgba(0, 0, 0, 0.3)",
+  letterSpacing: "0.5px",
 };
