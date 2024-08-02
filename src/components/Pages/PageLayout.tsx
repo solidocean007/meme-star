@@ -27,9 +27,7 @@ import SideBarLayout from "../MenuBarLayout";
 import LeaderBoard from "../LeaderBoard";
 import HowToPlay from "../HowToPlay";
 import { useNavigate } from "react-router";
-import TopBarLayout from "../TopBarLayout";
-import { MenuSelections } from "../MenuSelections";
-import MenuBarLayout from "../MenuBarLayout";
+import NavigationBar from "../NavigationBar";
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -174,11 +172,11 @@ const PageLayout = ({
         }}
       >
         <Box sx={{ width: { sm: "100%", lg: "15%" }, p: 2 }}>
-          <MenuBarLayout>
-            <Box
+          <NavigationBar>
+          <Box
               sx={{
                 display: "flex",
-                flexDirection: { md: "row", lg: "column" },
+                flexDirection: { sm: "row", md: "column", lg: "column", xl: "column" },
                 justifyContent: "center",
                 alignItems: "center",
                 p: 1,
@@ -232,7 +230,7 @@ const PageLayout = ({
                   </Typography>
                 </Button>
             </Box>
-          </MenuBarLayout>
+          </NavigationBar>
         </Box>
         <Box
           sx={{
