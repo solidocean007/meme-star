@@ -171,7 +171,7 @@ const PageLayout = ({
           p: 0,
         }}
       >
-        <Box sx={{ width: { sm: "100%", lg: "15%" }, p: 2 }}>
+        <Box sx={{ width: { sm: "100%", lg: "15%" }, p: 0 }}>
           <NavigationBar>
           <Box
               sx={{

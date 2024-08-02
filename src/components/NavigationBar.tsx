@@ -21,71 +21,70 @@ const NavigationBar = ({ children }: NavigationBarProps) => {
     theme.breakpoints.up("md")
   );
 
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+  const handleDrawerToggle = () => {
+    setDrawerOpen(!drawerOpen);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  return isTabletOrLarger ? (
-    <Drawer
-      variant="permanent"
-      sx={{
-        width: 240,
-        flexShrink: 0,
-        [`& .MuiDrawer-paper`]: {
-          width: 240,
-          boxSizing: "border-box",
-          backgroundColor: theme.palette.background.default,
-          mt: 10,
-        },
-      }}
-    >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "start",
-          width: "100%",
-          height: "100vh",
-          p: 2,
-          pt: 4,
-        }}
-      >
-        {children}
-      </Box>
-    </Drawer>
-  ) : (
-    <Box sx={{ display: "flex", justifyContent: "space-between", p: 2 }}>
-      <IconButton
-        id="menu-button"
-        aria-controls="menu"
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
-      >
-        <MenuIcon />
-      </IconButton>
-      <Menu
-        id="menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          "aria-labelledby": "menu-button",
-        }}
-      >
-        {React.Children.map(children, (child) => (
-          <MenuItem onClick={handleClose}>{child}</MenuItem>
-        ))}
-      </Menu>
-    </Box>
+  return (
+    <>
+      {isTabletOrLarger ? (
+        <Box
+          sx={{
+            width: 240,
+            flexShrink: 0,
+            height: "100vh",
+            backgroundColor: theme.palette.background.default,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "start",
+            p: 2,
+            pt: 4,
+          }}
+        >
+          {children}
+        </Box>
+      ) : (
+        <Box sx={{width: "100%", display: "flex", justifyContent: "center", p: "0" }}>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+          >
+            <MenuIcon  sx={{ fontSize: "50px" }} />
+          </IconButton>
+          <Drawer
+            anchor="top"
+            open={drawerOpen}
+            onClose={handleDrawerToggle}
+            sx={{
+              [`& .MuiDrawer-paper`]: {
+                boxSizing: "border-box",
+                width: "100%",
+                backgroundColor: theme.palette.background.default,
+              },
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "start",
+                p: 2,
+                pt: 4,
+              }}
+              onClick={handleDrawerToggle}
+            >
+              {children}
+            </Box>
+          </Drawer>
+        </Box>
+      )}
+    </>
   );
 };
 
