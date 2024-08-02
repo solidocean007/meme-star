@@ -12,11 +12,9 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
 import PageLayout from "./PageLayout";
 import MemeFeedDesktop from "../MemeFeedDesktop";
-import { homePageStyle } from "../Styles";
 import UsersProfile from "./UserProfile";
 
 const HomePage = () => {
-  // const isDarkMode = useSelector((state: RootState) => state.theme.isDarkMode);
 
   const loggedInUser = useSelector((state: RootState) => state.auth.user);
   const isAuthenticated = useSelector(
@@ -39,6 +37,7 @@ const HomePage = () => {
       loggedInUser={loggedInUser}
       showProfile={showProfile}
       setShowProfile={setShowProfile}
+      isTabletOrLarger={isTabletOrLarger}
     >
       {showProfile ? (
         <UsersProfile />

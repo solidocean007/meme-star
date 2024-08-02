@@ -26,7 +26,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Container maxWidth={false} sx={{ height: '100vh'}}>
+      <Container maxWidth={false}>
         <Router>
           <AppRoutes />
           <SnackBarSlide />
@@ -34,6 +34,6 @@ const App = () => {
       </Container>
     </ThemeProvider>
   );
-}
+};
 
 export default App;

@@ -1,4 +1,4 @@
-// sidebarlayout.tsx
+// TopBarLayout.tsx
 import { ReactNode } from "react";
 import {
   Container,
@@ -6,29 +6,28 @@ import {
   useTheme,
 } from "@mui/material";
 
-interface SideBarLayoutProps {
+interface TopBarLayoutProps {
   children: ReactNode;
 }
 
-const SideBarLayout = ({ children }: SideBarLayoutProps) => {
+const TopBarLayout = ({ children }: TopBarLayoutProps) => {
   const theme = useTheme<Theme>();
 
-  const sideBarLayoutStyle = {
+  const topBarLayoutStyle = {
     display: "flex",
-    flexDirection: { xs: "row", md: "column" },
+    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "start",
+    justifyContent: "space-around",
     width: "100%",
     height: "100%",
     backgroundColor: theme.palette.background.paper,
     color: theme.palette.text.primary,
-    p: 0,
+    pt: {sx: 1, md: 2, lg: 3, xl: 4  },
     margin: "auto",
     textAlign: "center",
-    pt: 4,
   };
 
-  return <Container disableGutters sx={sideBarLayoutStyle}>{children}</Container>;
+  return <Container disableGutters sx={topBarLayoutStyle}>{children}</Container>;
 };
 
-export default SideBarLayout;
+export default TopBarLayout;

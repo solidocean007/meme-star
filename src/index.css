@@ -30,8 +30,8 @@ html, body, #root {
 body {
   display: flex;
   flex-direction: column;
-  justify-content: stretch;
-  align-items: stretch;
+  /* justify-content: stretch; */
+  /* align-items: stretch; */
   min-height: 100%;
   font-family: var(--font-family);
   /* background: var(--background-page); */
