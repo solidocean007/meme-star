@@ -19,6 +19,7 @@ import { useAppDispatch } from "../../Redux/store";
 import { logout } from "../../Redux/authSlice";
 import {
   headerTextStyle,
+  menuButtonStyle,
   pageLayoutStyle,
   sideBarButtonStyle,
   userNameStyle,
@@ -87,8 +88,6 @@ const PageLayout = ({
   const handleCloseHowToPlay = () => {
     setOpenHowToPlay(false);
   };
-
-  const menuButtonStyle = { p: 1, m: 2, width: "90%"};
 
   return (
     <Container

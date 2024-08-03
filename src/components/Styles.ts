@@ -18,6 +18,8 @@ export const homePageStyle = {
   height: "100%",
 };
 
+export const menuButtonStyle = { p: 1, m: 2, width: "90%"};
+
 export const mobileCardMediaStyle: SxProps<Theme> = {
   position: "relative",
   height: { xs: 300, sm: 350, md: 400, lg: 450 },

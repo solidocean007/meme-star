@@ -4,7 +4,6 @@ import { styled } from "@mui/material/styles";
 import Tab, { tabClasses } from "@mui/material/Tab";
 import Tabs, { tabsClasses } from "@mui/material/Tabs";
 import Toolbar from "@mui/material/Toolbar";
-import { useTheme } from "@emotion/react";
 
 const TabItem = styled(Tab)(({ theme }) => ({
   opacity: 1,
@@ -12,7 +11,6 @@ const TabItem = styled(Tab)(({ theme }) => ({
   paddingTop: theme.spacing(2.5),
   minHeight: theme.spacing(7),
   color: "#fff",
-  // background: "rgba(255, 255, 255, 0)",
   background: "transparent",
   transition: "0.2s",
   zIndex: "var(--_zIndex)",
@@ -30,8 +28,8 @@ const TabItem = styled(Tab)(({ theme }) => ({
     left: 0,
   },
   "&:before": {
-    // backgroundColor: (theme.vars || theme).palette.grey[500], // Property 'vars' does not exist on type 'Theme'
-    backgroundColor: "blue", // Property 'vars' does not exist on type 'Theme'
+    backgroundColor: theme.palette.grey[500], // Property 'vars' does not exist on type 'Theme'
+    // backgroundColor: "blue", // Property 'vars' does not exist on type 'Theme'
     transform: "skewY(-6deg)",
     transformOrigin: "100%",
     zIndex: -1,
@@ -48,11 +46,12 @@ const TabItem = styled(Tab)(({ theme }) => ({
       "linear-gradient(to top right, rgba(0,0,0,0.2), rgba(0,0,0,0.2) 45%, transparent, transparent 64%)",
   },
   [`&.${tabClasses.selected}`]: {
-    color: theme.palette.background.paper,
+    // color: theme.palette.background.default,
+    color: 'whitesmoke',
     zIndex: 100,
     "&:before": {
       // backgroundColor: "#fff",
-      backgroundColor: "green",
+      backgroundColor: theme.palette.background.paper,
       boxShadow: "3px 3px 8px 0 rgba(0,0,0,0.38)",
     },
     "&:after": {

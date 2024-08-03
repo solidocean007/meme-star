@@ -34,7 +34,7 @@ const MemeFeedDesktop = () => {
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Grid sx={{ display: "flex", justifyContent: "space-around" }} container spacing={1}>
+      <Grid sx={{ display: "flex", justifyContent: "start" }} container spacing={1}>
         {memes.map((meme, index) => (
           <Grid item md={6} lg={5} xl={4} key={index}>
             <MemeCard

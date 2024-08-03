@@ -1,4 +1,13 @@
-import { Button, Checkbox, Container, Grid, Typography } from "@mui/material";
+import {
+  Button,
+  Checkbox,
+  Container,
+  Grid,
+  styled,
+  Theme,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../Redux/store";
 import { useEffect, useState } from "react";
@@ -6,6 +15,7 @@ import { ChangeType, QuoteType } from "../Utils/types";
 import { deleteProfileQuotes } from "../api/deleteProfileQuotes";
 import { DeleteConfirmationDialog } from "./DeleteConfirmationDialog";
 import { applyChanges } from "../helperFunctions/applyChanges";
+import { menuButtonStyle } from "./Styles";
 
 interface QuoteWithImageType extends QuoteType {
   memeImageUrl: string;
@@ -13,7 +23,7 @@ interface QuoteWithImageType extends QuoteType {
 
 interface ProfileQuotesProps {
   pendingChanges: ChangeType[];
-  setPendingChanges: React.Dispatch<React.SetStateAction<ChangeType[]>>
+  setPendingChanges: React.Dispatch<React.SetStateAction<ChangeType[]>>;
 }
 
 interface selectedQuoteType {
@@ -22,34 +32,52 @@ interface selectedQuoteType {
 }
 
 const ProfileQuotes = ({ setPendingChanges }: ProfileQuotesProps) => {
+  // const ProfileQuotes = ({  setPendingChanges }: ProfileQuotesProps) => {
   const loggedInUser = useSelector((state: RootState) => state.auth.user);
   const allMemes = useSelector((state: RootState) => state.memes.entities);
   const dispatch = useAppDispatch();
-  const [selectedQuotes, setSelectedQuotes] = useState<Set<selectedQuoteType>>(new Set());
+  const [selectedQuotes, setSelectedQuotes] = useState<Set<selectedQuoteType>>(
+    new Set()
+  );
   const [dialogOpen, setDialogOpen] = useState(false);
   const [profileQuotes, setProfileQuotes] = useState<QuoteWithImageType[]>([]);
+  const theme = useTheme<Theme>();
 
   useEffect(() => {
     if (!loggedInUser) {
       return;
     }
 
-    const usersQuotes: QuoteWithImageType[] = allMemes.reduce((acc: QuoteWithImageType[], meme) => {
-      const userQuotes = meme.allQuotes?.filter(quote => quote.userId === loggedInUser?.id) || [];
-      return acc.concat(userQuotes.map(quote => ({ ...quote, memeImageUrl: meme.imageUrl, memeId: meme.id })));
-    }, []);
+    const usersQuotes: QuoteWithImageType[] = allMemes.reduce(
+      (acc: QuoteWithImageType[], meme) => {
+        const userQuotes =
+          meme.allQuotes?.filter(
+            (quote) => quote.userId === loggedInUser?.id
+          ) || [];
+        return acc.concat(
+          userQuotes.map((quote) => ({
+            ...quote,
+            memeImageUrl: meme.imageUrl,
+            memeId: meme.id,
+          }))
+        );
+      },
+      []
+    );
 
     console.log(selectedQuotes);
 
     setProfileQuotes(usersQuotes);
-  },[allMemes, loggedInUser, selectedQuotes])
+  }, [allMemes, loggedInUser, selectedQuotes]);
 
   const handleSelectQuote = (quoteId: string, memeId: string) => {
     setSelectedQuotes((prev) => {
       const newSelectedQuotes = new Set(prev);
       const quote = { quoteId, memeId };
-      if (Array.from(newSelectedQuotes).some(item => item.quoteId === quoteId)) {
-        newSelectedQuotes.forEach(item => {
+      if (
+        Array.from(newSelectedQuotes).some((item) => item.quoteId === quoteId)
+      ) {
+        newSelectedQuotes.forEach((item) => {
           if (item.quoteId === quoteId) {
             newSelectedQuotes.delete(item);
           }
@@ -79,7 +107,10 @@ const ProfileQuotes = ({ setPendingChanges }: ProfileQuotesProps) => {
       for (const selectedQuote of selectedQuotes) {
         const newChange: ChangeType = {
           type: "deleteQuote",
-          data: { memeId: selectedQuote.memeId, quoteId: selectedQuote.quoteId },
+          data: {
+            memeId: selectedQuote.memeId,
+            quoteId: selectedQuote.quoteId,
+          },
         };
         removeQuoteFromLocalState(selectedQuote.quoteId);
         newChanges.push(newChange);
@@ -111,19 +142,40 @@ const ProfileQuotes = ({ setPendingChanges }: ProfileQuotesProps) => {
     width: 100,
   };
 
-  const messageQuestion = selectedQuotes.size > 1 ? `The ${selectedQuotes.size} selected quotes will be permanently deleted` : "The selected quote will be permanently deleted."
+  const messageQuestion =
+    selectedQuotes.size > 1
+      ? `The ${selectedQuotes.size} selected quotes will be permanently deleted`
+      : "The selected quote will be permanently deleted.";
 
   return (
-    <Container  maxWidth={false} sx={{ background: "green"}}>
-      <Button onClick={handleDeleteSelected} disabled={selectedQuotes.size === 0}>
+    <Container
+      maxWidth={false}
+      sx={{ background: theme.palette.background.paper }}
+    >
+      <Button
+        variant="contained"
+        onClick={handleDeleteSelected}
+        disabled={selectedQuotes.size === 0}
+        sx={menuButtonStyle}
+      >
         Delete Selected
       </Button>
       <Grid container spacing={2}>
         {profileQuotes.map((quote: QuoteWithImageType, index) => (
-          <Grid container item xs={12} spacing={1} key={index} alignItems="center" style={{ borderBottom: "1px solid #ddd", padding: "10px 0" }}>
+          <Grid
+            container
+            item
+            xs={12}
+            spacing={1}
+            key={index}
+            alignItems="center"
+            style={{ padding: "10px 0" }}
+          >
             <Grid item xs={1}>
-            <Checkbox
-                checked={Array.from(selectedQuotes).some(item => item.quoteId === quote.id)}
+              <Checkbox
+                checked={Array.from(selectedQuotes).some(
+                  (item) => item.quoteId === quote.id
+                )}
                 onChange={() => handleSelectQuote(quote.id, quote.memeId)}
               />
             </Grid>
@@ -131,7 +183,13 @@ const ProfileQuotes = ({ setPendingChanges }: ProfileQuotesProps) => {
               <Typography>"{quote.text}"</Typography>
             </Grid>
             <Grid item xs={4}>
-              {quote.memeImageUrl && <img src={quote.memeImageUrl} alt="Meme" style={quoteImageStyle} />}
+              {quote.memeImageUrl && (
+                <img
+                  src={quote.memeImageUrl}
+                  alt="Meme"
+                  style={quoteImageStyle}
+                />
+              )}
             </Grid>
           </Grid>
         ))}

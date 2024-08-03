@@ -7,6 +7,7 @@ import { RootState, useAppDispatch } from "../Redux/store";
 import { useEffect, useState } from "react";
 import { DeleteConfirmationDialog } from "./DeleteConfirmationDialog";
 import {
+  menuButtonStyle,
   portfolioCaptionStyle,
   portfolioCardMediaStyle,
   portfolioUserNameStyle,
@@ -103,14 +104,16 @@ const ProfileMemes = ({
       : "The selected meme will be permanently deleted.";
 
   return (
-    <Container maxWidth={false} sx={{ background: theme.palette.background.paper}}>
+    <Container maxWidth={false} sx={{ background: theme.palette.background.paper, borderRadius: "5px"}}>
       <Button
+      variant="contained"
         onClick={handleDeleteSelected}
         disabled={selectedMemes.size === 0}
+        sx={menuButtonStyle}
       >
         Delete Selected
       </Button>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} >
         {profileMemes.length === 0 && <h1>No Memes</h1>}
         {profileMemes.map((meme: ProcessedMemeType, index) => (
           <Grid
@@ -124,7 +127,7 @@ const ProfileMemes = ({
             spacing={1}
             key={index}
             alignItems="center"
-            style={{ borderBottom: "1px solid #ddd", padding: "10px 0" }}
+            style={{ padding: "10px 0" }}
           >
             <Grid item xs={1}>
               <Checkbox
