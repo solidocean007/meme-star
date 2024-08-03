@@ -1,31 +1,18 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../Redux/store";
-import { logout } from "../../Redux/authSlice";
+// import { useSelector } from "react-redux";
+// import { RootState, useAppDispatch } from "../Redux/store";
+// import { logout } from "../Redux/authSlice";
 import { Box, Button, Card, Container, TextField, Typography } from "@mui/material";
-import PageLayout from "./PageLayout";
-import { useNavigate } from "react-router";
 
-export const CreateMemePage = () => {
-  const dispatch = useAppDispatch();
-  const loggedInUser = useSelector((state: RootState) => state.auth.user);
-  const isAuthenticated = useSelector(
-    (state: RootState) => state.auth.isAuthenticated
-  );
-  const navigate = useNavigate();
+export const CreateMeme = () => {
+  // const dispatch = useAppDispatch();
+  // const loggedInUser = useSelector((state: RootState) => state.auth.user);
+  // const isAuthenticated = useSelector(
+  //   (state: RootState) => state.auth.isAuthenticated
+  // );
   
   const [image, setImage] = useState<File | null>(null);
   const [quote, setQuote] = useState("");
-
-  const handleGoToLoginSignUp = () => {
-    if (!isAuthenticated) {
-      navigate("/login-sign-up");
-    }
-  };
-
-  const handleLogout = () => {
-    dispatch(logout());
-  };
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -44,13 +31,7 @@ export const CreateMemePage = () => {
   };
 
   return (
-    <PageLayout
-      isAuthenticated={isAuthenticated}
-      loggedInUser={loggedInUser}
-      handleGoToLoginSignUp={handleGoToLoginSignUp}
-      handleLogout={handleLogout}
-    >
-      <Container>
+    <Container>
         <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
           <Card sx={{ p: 3, width: "100%", maxWidth: 600 }}>
             <Typography variant="h4" sx={{ mb: 2 }}>Create Meme</Typography>
@@ -97,9 +78,8 @@ export const CreateMemePage = () => {
           </Card>
         </Box>
       </Container>
-    </PageLayout>
   );
 };
 
-export default CreateMemePage;
+export default CreateMeme;
 

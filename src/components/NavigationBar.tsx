@@ -41,7 +41,8 @@ const NavigationBar = ({ children }: NavigationBarProps) => {
             alignItems: "center",
             justifyContent: "start",
             p: 2,
-            pt: 4,
+            pt: 2,
+            mt: 2,
           }}
         >
           {children}

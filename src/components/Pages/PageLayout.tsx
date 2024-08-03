@@ -36,6 +36,8 @@ interface PageLayoutProps {
   setShowProfile: React.Dispatch<React.SetStateAction<boolean>>;
   showProfile: boolean;
   isTabletOrLarger: boolean;
+  showCreateMeme: boolean;
+  setShowCreateMeme: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const PageLayout = ({
@@ -45,21 +47,24 @@ const PageLayout = ({
   setShowProfile,
   showProfile,
   isTabletOrLarger,
+  showCreateMeme,
+  setShowCreateMeme
 }: PageLayoutProps) => {
   // const isDarkMode = useSelector((state: RootState) => state.theme.isDarkMode);
 
   const dispatch = useAppDispatch();
   const [openLeaderBoard, setOpenLeaderBoard] = useState(false);
   const [openHowToPlay, setOpenHowToPlay] = useState(false);
+  
+
   const handleLogout = () => {
     dispatch(logout());
   };
   const theme = useTheme<Theme>();
   const navigate = useNavigate();
 
-  const handleCreateMeme = () => {
-    navigate("/create-meme-page");
-  };
+  const handleCreateMeme = () =>  setShowCreateMeme((prev)=> !prev)
+
 
   const handleOpenLeaderBoard = () => setOpenLeaderBoard(true);
 
@@ -161,11 +166,11 @@ const PageLayout = ({
           flexDirection: {
             xs: "column",
             sm: "column",
-            md: "column",
+            md: "row",
             lg: "row",
           },
           justifyContent: "start",
-          alignItems: "stretch",
+          alignItems: "start",
           width: "100%",
           height: "100%",
           p: 0,
@@ -193,7 +198,7 @@ const PageLayout = ({
                     variant="h4"
                     color={theme.palette.text.primary}
                   >
-                    Create Meme
+                    {!showCreateMeme ? "Create Meme" : "Home"}
                   </Typography>
                 </Button>
 
@@ -241,9 +246,10 @@ const PageLayout = ({
           {children}
         </Box>
        {isTabletOrLarger &&  <Box sx={{ display: { xs: "none", lg: "block" }, width: "20%", p: 2 }}>
-          <SideBarLayout>
+          {/* <SideBarLayout>
             <LeaderBoard />
-          </SideBarLayout>
+          </SideBarLayout> */}
+            <LeaderBoard />
         </Box>}
       </Container>
 
