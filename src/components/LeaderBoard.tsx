@@ -1,4 +1,4 @@
-import { Box, Typography, List, ListItem, ListItemText } from '@mui/material';
+import { Box, Typography, List, ListItem, ListItemText, useTheme, Theme } from '@mui/material';
 import { styled } from '@mui/system';
 import { useSelector } from 'react-redux';
 import { RootState } from '../Redux/store';
@@ -30,11 +30,12 @@ const LeaderBoardItem = styled(ListItem)(({ theme }) => ({
   transition: 'background-color 0.5s, transform 0.5s',
   position: 'relative', // Required for the glare effect
   overflow: 'hidden', // Required for the glare effect
+  // color: "white"
 }));
 
 const LeaderBoard = () => {
   const { entities: memes, loading, error } = useSelector((state: RootState) => state.memes);
-
+  const theme = useTheme<Theme>();
   const { userPoints, userDetails } = calculateLeaderBoard(memes);
 
   const sortedUsers = Object.keys(userPoints)
@@ -71,7 +72,7 @@ const LeaderBoard = () => {
                   primary={`${index + 1}. ${entry.user.firstName} ${entry.user.lastName}`}
                   primaryTypographyProps={{ color: 'white' }}
                 />
-                <Typography variant="h6" color="green">
+                <Typography variant="h6" color={theme.palette.primary}>
                   {entry.points}
                 </Typography>
                 {index === 0 && <div className="glare"></div>}
