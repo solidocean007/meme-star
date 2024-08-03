@@ -76,11 +76,6 @@
       "userId": "2"
     },
     {
-      "id": "3",
-      "imageUrl": "/src/assets/images/dumbNdumber.webp",
-      "userId": "3"
-    },
-    {
       "id": "6",
       "imageUrl": "/src/assets/images/luka-gobert.webp",
       "userId": "6"
@@ -127,13 +122,13 @@
     },
     {
       "id": "6",
-      "memeId": "3",
+      "memeId": null,
       "text": "When it takes too long to get the joke.",
       "userId": "1"
     },
     {
       "id": "7",
-      "memeId": "3",
+      "memeId": null,
       "text": "That one friend who’s always overdramatic.",
       "userId": "5"
     },
@@ -181,7 +176,7 @@
     },
     {
       "id": "18",
-      "memeId": "3",
+      "memeId": null,
       "text": "Wedding Crashers 2",
       "userId": "3"
     },
@@ -222,24 +217,6 @@
       "userId": "6",
       "quoteId": "7",
       "memeId": "2"
-    },
-    {
-      "id": "7",
-      "userId": "7",
-      "quoteId": null,
-      "memeId": "3"
-    },
-    {
-      "id": "a8",
-      "userId": "8",
-      "quoteId": null,
-      "memeId": "3"
-    },
-    {
-      "id": "9",
-      "userId": "1",
-      "quoteId": "10",
-      "memeId": "3"
     },
     {
       "id": "15",
@@ -294,12 +271,6 @@
       "userId": "4",
       "quoteId": "4",
       "memeId": "2"
-    },
-    {
-      "id": "1fe3",
-      "userId": "4",
-      "quoteId": "7",
-      "memeId": "3"
     }
   ]
 }
