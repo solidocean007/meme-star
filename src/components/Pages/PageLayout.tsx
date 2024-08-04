@@ -20,11 +20,9 @@ import { logout } from "../../Redux/authSlice";
 import {
   headerTextStyle,
   menuButtonStyle,
-  pageLayoutStyle,
   sideBarButtonStyle,
   userNameStyle,
 } from "../Styles";
-import SideBarLayout from "../MenuBarLayout";
 import LeaderBoard from "../LeaderBoard";
 import HowToPlay from "../HowToPlay";
 import { useNavigate } from "react-router";
@@ -49,14 +47,13 @@ const PageLayout = ({
   showProfile,
   isTabletOrLarger,
   showCreateMeme,
-  setShowCreateMeme
+  setShowCreateMeme,
 }: PageLayoutProps) => {
   // const isDarkMode = useSelector((state: RootState) => state.theme.isDarkMode);
 
   const dispatch = useAppDispatch();
   const [openLeaderBoard, setOpenLeaderBoard] = useState(false);
   const [openHowToPlay, setOpenHowToPlay] = useState(false);
-  
 
   const handleLogout = () => {
     dispatch(logout());
@@ -64,8 +61,7 @@ const PageLayout = ({
   const theme = useTheme<Theme>();
   const navigate = useNavigate();
 
-  const handleCreateMeme = () =>  setShowCreateMeme((prev)=> !prev)
-
+  const handleCreateMeme = () => setShowCreateMeme((prev) => !prev);
 
   const handleOpenLeaderBoard = () => setOpenLeaderBoard(true);
 
@@ -175,81 +171,88 @@ const PageLayout = ({
           p: 0,
         }}
       >
-        <Box sx={{ width: { sm: "100%", lg: "15%" }, p: 0 }}>
+        <Box>
           <NavigationBar>
-          <Box
+            <Box
               sx={{
                 display: "flex",
-                flexDirection: { sm: "row", md: "column", lg: "column", xl: "column" },
+                flexDirection: {
+                  xs: "column",
+                  sm: "column",
+                  md: "column",
+                  lg: "column",
+                  xl: "column",
+                },
                 justifyContent: "center",
                 alignItems: "center",
                 p: 1,
-                maxWidth: "100%"
+                // maxWidth: "50%",
               }}
             >
-               <Button
-                  variant="contained"
-                  color="info"
-                  onClick={handleCreateMeme}
-                  sx={menuButtonStyle}
-                >
-                  <Typography
-                    variant="h4"
-                    color={theme.palette.text.primary}
-                  >
-                    {!showCreateMeme ? "Create Meme" : "Home"}
-                  </Typography>
-                </Button>
-
-              {!isTabletOrLarger && (
-                <Button
+              <Button
                 variant="contained"
                 color="info"
-                onClick={handleOpenLeaderBoard}
+                onClick={handleCreateMeme}
                 sx={menuButtonStyle}
               >
                 <Typography variant="h4" color={theme.palette.text.primary}>
-                  LeaderBoard
+                  {!showCreateMeme ? "Create Meme" : "Home"}
                 </Typography>
               </Button>
-              )}
-              <Button
-                  variant="contained"
-                  color="info"
-                  onClick={handleShowProfile}
-                  sx={menuButtonStyle}
-                >
-                  <Typography variant="h4" color={theme.palette.text.primary}>
-                    {!showProfile ? "Profile" : "Close Profile"}
-                  </Typography>
-                </Button>
+
+              {!isTabletOrLarger && (
                 <Button
                   variant="contained"
                   color="info"
-                  onClick={handleOpenHowToPlay}
+                  onClick={handleOpenLeaderBoard}
                   sx={menuButtonStyle}
                 >
                   <Typography variant="h4" color={theme.palette.text.primary}>
-                    How to Play
+                    LeaderBoard
                   </Typography>
                 </Button>
+              )}
+              <Button
+                variant="contained"
+                color="info"
+                onClick={handleShowProfile}
+                sx={menuButtonStyle}
+              >
+                <Typography variant="h4" color={theme.palette.text.primary}>
+                  {!showProfile ? "Profile" : "Close Profile"}
+                </Typography>
+              </Button>
+              <Button
+                variant="contained"
+                color="info"
+                onClick={handleOpenHowToPlay}
+                sx={menuButtonStyle}
+              >
+                <Typography variant="h4" color={theme.palette.text.primary}>
+                  How to Play
+                </Typography>
+              </Button>
             </Box>
           </NavigationBar>
         </Box>
         <Box
           sx={{
-            width: { xs: "95%", md: "80%", lg: "65" },
+            width: { xs: "95%", md: "80%", lg: "65%" },
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
             p: 2,
           }}
         >
           {children}
         </Box>
-       {isTabletOrLarger &&  <Box sx={{ display: { xs: "none", lg: "block" }, width: "20%", p: 2 }}>
-          {/* <SideBarLayout>
+        {isTabletOrLarger && (
+          <Box
+            sx={{ display: { xs: "none", lg: "block" }, width: "20%", p: 2 }}
+          >
             <LeaderBoard />
-          </SideBarLayout> */}
-            <LeaderBoard />
-        </Box>}
+          </Box>
+        )}
       </Container>
 
       {openHowToPlay && (

@@ -55,7 +55,7 @@ const NavigationBar = ({ children }: NavigationBarProps) => {
             edge="start"
             onClick={handleDrawerToggle}
           >
-            <MenuIcon  sx={{ fontSize: "50px" }} />
+            <MenuIcon  sx={{ fontSize: "50px", color: theme.palette.text.secondary }} />
           </IconButton>
           <Drawer
             anchor="top"
