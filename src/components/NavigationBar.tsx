@@ -1,10 +1,8 @@
-import React, { ReactNode, useState } from "react";
+import { ReactNode, useState } from "react";
 import {
   Drawer,
   Box,
   IconButton,
-  Menu,
-  MenuItem,
   useTheme,
   useMediaQuery,
   Theme,

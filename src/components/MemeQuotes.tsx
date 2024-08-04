@@ -52,7 +52,6 @@ export const MemeQuotes = ({
     setQuoteToDelete(null);
   };
 
-
   if (!localQuotes || !currentUser) return null;
 
   const userAlreadyQuoted = localQuotes.some(
@@ -136,13 +135,10 @@ export const MemeQuotes = ({
     color: "text.primary",
   };
 
-
   return (
     <>
-      <CardContent sx={{ padding: "0", width: "100%"}}>
-        <List
-          sx={listStyle}
-        >
+      <CardContent sx={{ padding: "0", width: "100%" }}>
+        <List sx={listStyle}>
           {localQuotes?.map((quote, index) => (
             <ListItem key={index}>
               <ListItemText
@@ -169,15 +165,15 @@ export const MemeQuotes = ({
               <Typography>{quote.quoteLikes.length}</Typography>
               <Box sx={{ width: 15 }}>
                 {currentUser && currentUsersQuote(quote) && (
-                 <Tooltip title="Delete" arrow>
-                   <IconButton
-                    onClick={() => {
-                      handleOpenConfirmDelete(quote);
-                    }}
-                  >
-                    <Delete sx={{ color: "red" }} />
-                  </IconButton>
-                 </Tooltip>
+                  <Tooltip title="Delete" arrow>
+                    <IconButton
+                      onClick={() => {
+                        handleOpenConfirmDelete(quote);
+                      }}
+                    >
+                      <Delete sx={{ color: "red" }} />
+                    </IconButton>
+                  </Tooltip>
                 )}
               </Box>
             </ListItem>

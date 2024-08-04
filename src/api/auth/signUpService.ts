@@ -2,22 +2,21 @@
 import { NewUserType } from "../../Utils/types";
 import { API_CONFIG } from "../config";
 
-const signUpService = async ( userData: NewUserType ) => {
+const signUpService = async (userData: NewUserType) => {
   try {
     const response = await fetch(`${API_CONFIG}/users`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(userData)
+      body: JSON.stringify(userData),
     });
 
     if (!response.ok) {
-      throw new Error('Sign up failed');
+      throw new Error("Sign up failed");
     }
 
-    const result = await response.json();
-    return result;
+    return await response.json();
   } catch (error) {
     console.error("error", error);
     throw error;

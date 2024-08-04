@@ -2,9 +2,7 @@
 import { LikedQuotesType, QuoteType } from "../Utils/types";
 import { API_CONFIG } from "./config";
 
-export const createQuote = async (
-  newQuote: QuoteType | LikedQuotesType,
-) => {
+export const createQuote = async (newQuote: QuoteType | LikedQuotesType) => {
   try {
     const response = await fetch(API_CONFIG + "/quotes", {
       method: "POST",
@@ -14,8 +12,7 @@ export const createQuote = async (
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
-    const result = await response.json();
-    return result;
+    return await response.json();
   } catch (error) {
     console.error("error", error);
     throw error;

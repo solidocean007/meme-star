@@ -64,7 +64,7 @@ const memesSlice = createSlice({
     },
     removeLikedQuoteFromRedux: (
       state,
-      action: PayloadAction<{ memeId: string; likedQuoteId: string }>
+      action: PayloadAction<{ memeId: string; likedQuoteId: string | undefined }>
     ) => {
       const { memeId, likedQuoteId } = action.payload;
       const meme = state.entities.find((m) => m.id === memeId);
@@ -78,7 +78,7 @@ const memesSlice = createSlice({
     },
     deleteQuoteFromRedux: (
       state,
-      action: PayloadAction<{ memeId: string; quoteId: string }>
+      action: PayloadAction<{ memeId: string; quoteId: string | undefined }>
     ) => {
       const { memeId, quoteId } = action.payload;
       const meme = state.entities.find((m) => m.id === memeId);

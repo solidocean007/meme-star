@@ -22,13 +22,18 @@ export interface UsersType {
 export type NewUserType = Omit<UsersType, 'id'>;
 
 export interface QuoteType {
-  'id': string,
+  'id': string | undefined,
   "memeId": string,
   'text': string,
   'userId': string,
   'userNameQuote': string,
   'quoteLikes': LikedQuotesType[],
 }
+
+export type ProcessedQuoteType = QuoteType & {
+  userNameQuote: string;
+  quoteLikes: LikedQuotesType[];
+};
 
 export interface LikedQuotesType {
   'id': string;     
