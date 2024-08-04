@@ -55,8 +55,8 @@ const LoginSignUp = () => {
   }
 
   const [errors, setErrors] = useState({
-    validatedInputs: true,
-    passwordsMatch: true,
+    validatedInputs: false,
+    passwordsMatch: false,
   });
 
   const handleToggle = () => {
