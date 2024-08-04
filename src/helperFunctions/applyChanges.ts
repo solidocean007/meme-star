@@ -95,12 +95,12 @@ export const applyChanges = async ({
         }
         case "deleteMeme": {
           await deleteMeme(change.data.memeId);
-          // const deletedQuoteIds = await deleteQuotesByMemeId(change.data.memeId);
+          const deletedQuoteIds = await deleteQuotesByMemeId(change.data.memeId);
           const deletedLikedQuoteIds = await deleteLikedQuotesByMemeId(change.data.memeId);
 
-          // deletedQuoteIds.forEach(quoteId => {
-          //   dispatch(deleteQuoteFromRedux({ memeId: change.data.memeId, quoteId }));
-          // });
+          deletedQuoteIds.forEach(quoteId => {
+            dispatch(deleteQuoteFromRedux({ memeId: change.data.memeId, quoteId }));
+          });
 
           deletedLikedQuoteIds.forEach(likedQuoteId => {
             dispatch(removeLikedQuoteFromRedux({ memeId: change.data.memeId, likedQuoteId }));

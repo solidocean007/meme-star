@@ -14,7 +14,8 @@ const AppRoutes = () => {
         display: "flex",
         flexDirection: "column",
         height: "100vh",
-        maxWidth: "100vw"
+        maxWidth: "100vw",
+        justifyContent: "center"
       }}
     >
       <Routes>
