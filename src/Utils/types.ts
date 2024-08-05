@@ -1,5 +1,5 @@
 export interface MemeType {
-  'id': string,
+  'id': string | undefined,
   'imageUrl': string,
   'userId': string
 }
@@ -47,5 +47,6 @@ export type ChangeType =
   | { type: "addQuote"; data: QuoteType }
   | { type: "deleteQuote"; data: { quoteId: string, memeId: string }; }
   | { type: "deleteLikedQuote"; data: {  likedQuoteId: string, memeId: string, }; }
-  | { type: "deleteMeme"; data: {  memeId: string }; };
+  | { type: "deleteMeme"; data: {  memeId: string }; }
+  | { type: "addMeme"; data: MemeType; };
 

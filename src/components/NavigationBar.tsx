@@ -30,7 +30,6 @@ const NavigationBar = ({ children }: NavigationBarProps) => {
       {isTabletOrLarger ? (
         <Box
           sx={{
-            width: 240,
             flexShrink: 0,
             height: "100vh",
             backgroundColor: theme.palette.background.default,
@@ -38,7 +37,7 @@ const NavigationBar = ({ children }: NavigationBarProps) => {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "start",
-            p: 2,
+            p: 0,
             pt: 2,
             mt: 2,
           }}
@@ -73,7 +72,7 @@ const NavigationBar = ({ children }: NavigationBarProps) => {
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "start",
-                p: 2,
+                p: 0,
                 pt: 4,
               }}
               onClick={handleDrawerToggle}

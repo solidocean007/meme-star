@@ -1,16 +1,53 @@
 import { SxProps, Theme } from "@mui/material";
 
 export const pageLayoutStyle = {
-  // my: 1,
-  m: 0,
   p: 0,
+  m: 1,
   display: "flex",
-  flexDirection: { xs: "column", md: "row" },
-  alignItems: "flex-start",
-  justifyContent: "space-between",
-  width: "100%", // Ensure full width
+  flexDirection: "column",
+  width: "100%",
   height: "100%",
 };
+
+export const navigationBarStyle = {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  p: 1,
+}
+
+export const pageContainerStyle = {
+  display: "flex",
+  flexDirection: {
+    xs: "column",
+    sm: "column",
+    md: "row",
+    lg: "row",
+  },
+  justifyContent: "start",
+  alignItems: "start",
+  width: "100%",
+  height: "100%",
+  p: 0,
+}
+
+export const pageMemeFeedBox = {
+  width: { xs: "95%", md: "80%", lg: "65%" },
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  p: 2,
+}
+
+export const modalStyle = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: { xs: "95%", sm: "75%", md: "50%", lg: "25%" },
+  p: 2,
+}
 
 export const homePageStyle = {
   my: 1,
@@ -108,3 +145,17 @@ export const sideBarButtonStyle = {
   textShadow: "1px 1px 2px rgba(0, 0, 0, 0.3)",
   letterSpacing: "0.5px",
 };
+
+export const memeQuoteContainerStyle = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  width: { xs: "90%", md: "50%" },
+  transform: "translate(-50%, -50%)",
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 2,
+};
+
+

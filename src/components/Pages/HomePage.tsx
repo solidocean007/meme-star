@@ -1,9 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
-  Container,
-  Button,
-  Box,
-  Grid,
   useMediaQuery,
   Theme,
 } from "@mui/material";

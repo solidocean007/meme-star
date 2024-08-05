@@ -3,7 +3,6 @@ import {
   Checkbox,
   Container,
   Grid,
-  styled,
   Theme,
   Typography,
   useTheme,
@@ -12,7 +11,6 @@ import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../Redux/store";
 import { useEffect, useState } from "react";
 import { ChangeType, QuoteType } from "../Utils/types";
-import { deleteProfileQuotes } from "../api/deleteProfileQuotes";
 import { DeleteConfirmationDialog } from "./DeleteConfirmationDialog";
 import { applyChanges } from "../helperFunctions/applyChanges";
 import { menuButtonStyle } from "./Styles";
@@ -70,7 +68,8 @@ const ProfileQuotes = ({ setPendingChanges }: ProfileQuotesProps) => {
     setProfileQuotes(usersQuotes);
   }, [allMemes, loggedInUser, selectedQuotes]);
 
-  const handleSelectQuote = (quoteId: string, memeId: string) => {
+  const handleSelectQuote = (quoteId: string | undefined, memeId: string) => {
+    if (!quoteId) return;
     setSelectedQuotes((prev) => {
       const newSelectedQuotes = new Set(prev);
       const quote = { quoteId, memeId };

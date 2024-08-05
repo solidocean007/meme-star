@@ -8,7 +8,11 @@ import MemeCard from "./MemeCard";
 import { Box } from "@mui/material";
 import { showSnackbar } from "../Redux/snackBarSlice";
 import useWindowDimensions from "../helperFunctions/useWindowDimensions";
-import { mobileCaptionStyle, mobileCardMediaStyle, mobileUserNameStyle } from "./Styles";
+import {
+  mobileCaptionStyle,
+  mobileCardMediaStyle,
+  mobileUserNameStyle,
+} from "./Styles";
 
 const MemeFeed: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -46,16 +50,7 @@ const MemeFeed: React.FC = () => {
   }
 
   return (
-    <Box
-      sx={{
-        width: "100%",
-        height: "100%",
-        bgcolor: "background.default",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
+    <Box>
       <List
         height={800}
         width={600}

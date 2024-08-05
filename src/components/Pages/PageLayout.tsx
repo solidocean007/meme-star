@@ -1,4 +1,3 @@
-// pagelayout.tsx
 import { ReactNode, useState } from "react";
 import {
   AppBar,
@@ -20,6 +19,11 @@ import { logout } from "../../Redux/authSlice";
 import {
   headerTextStyle,
   menuButtonStyle,
+  modalStyle,
+  navigationBarStyle,
+  pageContainerStyle,
+  pageLayoutStyle,
+  pageMemeFeedBox,
   sideBarButtonStyle,
   userNameStyle,
 } from "../Styles";
@@ -86,18 +90,7 @@ const PageLayout = ({
   };
 
   return (
-    <Container
-      maxWidth={false}
-      disableGutters
-      sx={{
-        p: 0,
-        m: 0,
-        display: "flex",
-        flexDirection: "column",
-        width: "100%",
-        height: "100%",
-      }}
-    >
+    <Container maxWidth={false} disableGutters sx={pageLayoutStyle}>
       <AppBar
         position="static"
         sx={{
@@ -153,102 +146,64 @@ const PageLayout = ({
         </Toolbar>
       </AppBar>
 
-      <Container
-        disableGutters
-        maxWidth={false}
-        sx={{
-          display: "flex",
-          flexDirection: {
-            xs: "column",
-            sm: "column",
-            md: "row",
-            lg: "row",
-          },
-          justifyContent: "start",
-          alignItems: "start",
-          width: "100%",
-          height: "100%",
-          p: 0,
-        }}
-      >
-        <Box>
-          <NavigationBar>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: {
-                  xs: "column",
-                  sm: "column",
-                  md: "column",
-                  lg: "column",
-                  xl: "column",
-                },
-                justifyContent: "center",
-                alignItems: "center",
-                p: 1,
-                // maxWidth: "50%",
-              }}
+      <Container disableGutters maxWidth={false} sx={pageContainerStyle}>
+        <NavigationBar>
+          <Box
+            sx={navigationBarStyle}
+          >
+            <Button
+              variant="contained"
+              color="info"
+              onClick={handleCreateMeme}
+              sx={menuButtonStyle}
             >
-              <Button
-                variant="contained"
-                color="info"
-                onClick={handleCreateMeme}
-                sx={menuButtonStyle}
-              >
-                <Typography variant="h4" color={theme.palette.text.primary}>
-                  {!showCreateMeme ? "Create Meme" : "Home"}
-                </Typography>
-              </Button>
+              <Typography variant="h4" color={theme.palette.text.primary}>
+                {!showCreateMeme ? "Create Meme" : "Home"}
+              </Typography>
+            </Button>
 
-              {!isTabletOrLarger && (
-                <Button
-                  variant="contained"
-                  color="info"
-                  onClick={handleOpenLeaderBoard}
-                  sx={menuButtonStyle}
-                >
-                  <Typography variant="h4" color={theme.palette.text.primary}>
-                    LeaderBoard
-                  </Typography>
-                </Button>
-              )}
+            {!isTabletOrLarger && (
               <Button
                 variant="contained"
                 color="info"
-                onClick={handleShowProfile}
+                onClick={handleOpenLeaderBoard}
                 sx={menuButtonStyle}
               >
                 <Typography variant="h4" color={theme.palette.text.primary}>
-                  {!showProfile ? "Profile" : "Close Profile"}
+                  LeaderBoard
                 </Typography>
               </Button>
-              <Button
-                variant="contained"
-                color="info"
-                onClick={handleOpenHowToPlay}
-                sx={menuButtonStyle}
-              >
-                <Typography variant="h4" color={theme.palette.text.primary}>
-                  How to Play
-                </Typography>
-              </Button>
-            </Box>
-          </NavigationBar>
-        </Box>
+            )}
+            <Button
+              variant="contained"
+              color="info"
+              onClick={handleShowProfile}
+              sx={menuButtonStyle}
+            >
+              <Typography variant="h4" color={theme.palette.text.primary}>
+                {!showProfile ? "Profile" : "Close Profile"}
+              </Typography>
+            </Button>
+            <Button
+              variant="contained"
+              color="info"
+              onClick={handleOpenHowToPlay}
+              sx={menuButtonStyle}
+            >
+              <Typography variant="h4" color={theme.palette.text.primary}>
+                How to Play
+              </Typography>
+            </Button>
+          </Box>
+        </NavigationBar>
         <Box
-          sx={{
-            width: { xs: "95%", md: "80%", lg: "65%" },
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            p: 2,
-          }}
+          sx={pageMemeFeedBox}
         >
           {children}
         </Box>
         {isTabletOrLarger && (
           <Box
-            sx={{ display: { xs: "none", lg: "block" }, width: "20%", p: 2 }}
+            sx={{ display: { xs: "none", lg: "block" }, width: "25%", p: 2 }}
           >
             <LeaderBoard />
           </Box>
@@ -259,14 +214,7 @@ const PageLayout = ({
         <Modal open={openHowToPlay} onClose={handleCloseHowToPlay}>
           <Card sx={{ bgcolor: "white" }}>
             <Box
-              sx={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                width: { xs: "95%", sm: "75%", md: "50%", lg: "25%" },
-                p: 2,
-              }}
+              sx={modalStyle}
             >
               <HowToPlay open={openHowToPlay} onClose={handleCloseHowToPlay} />
               <Button onClick={handleCloseHowToPlay} fullWidth>
@@ -280,14 +228,7 @@ const PageLayout = ({
         <Modal open={openLeaderBoard} onClose={handleCloseLeaderBoard}>
           <Card sx={{ bgcolor: "white" }}>
             <Box
-              sx={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                width: { xs: "95%", sm: "75%", md: "50%", lg: "25%" },
-                p: 2,
-              }}
+              sx={modalStyle}
             >
               <LeaderBoard />
               <Button onClick={handleCloseLeaderBoard} fullWidth>

@@ -11,6 +11,7 @@ import { Theme } from "@mui/material/styles";
 
 import { useTheme } from "@emotion/react";
 import { CaptionStyleType, CardMediaStyleType, UserNameStyleType } from "../Utils/styleTypes";
+import { memeQuoteContainerStyle } from "./Styles";
 
 const MemeCard = ({
   meme,
@@ -55,18 +56,6 @@ const MemeCard = ({
     navigate("/login-sign-up");
   };
 
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    width: { xs: "90%", md: "50%" },
-    transform: "translate(-50%, -50%)",
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 2,
-  };
-
   const captionContainerStyle = {
     background: theme.palette.mode === 'dark' ? "rgba(0, 0, 0, 0.8)" : "rgba(255, 255, 255, 0.8)",
     display: "flex",
@@ -78,8 +67,6 @@ const MemeCard = ({
     left: 0,
     width: "100%",
   };
-
-  
 
   return (
 
@@ -121,7 +108,7 @@ const MemeCard = ({
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={memeQuoteContainerStyle}>
           <MemeQuotes
             localQuotes={localQuotes}
             setPendingChanges={setPendingChanges}

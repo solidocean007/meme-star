@@ -2,13 +2,16 @@ import {
   Box,
   Button,
   CardContent,
+  Divider,
   IconButton,
   List,
   ListItem,
   ListItemText,
   TextField,
+  Theme,
   Tooltip,
   Typography,
+  useTheme,
 } from "@mui/material";
 import React, { useState } from "react";
 import { ChangeType, QuoteType, UsersType } from "../Utils/types";
@@ -41,6 +44,7 @@ export const MemeQuotes = ({
   const [newQuoteText, setNewQuoteText] = useState("");
   const [openDeleteConfirm, setOpenDeleteConfirm] = useState(false);
   const [quoteToDelete, setQuoteToDelete] = useState<QuoteType | null>(null);
+  const theme = useTheme<Theme>();
 
   const handleOpenConfirmDelete = (quote: QuoteType) => {
     setQuoteToDelete(quote);
@@ -131,8 +135,7 @@ export const MemeQuotes = ({
 
   const listStyle = {
     width: "100%",
-    bgcolor: "background.default",
-    color: "text.primary",
+    color: theme.palette.text.primary,
   };
 
   return (
@@ -140,43 +143,46 @@ export const MemeQuotes = ({
       <CardContent sx={{ padding: "0", width: "100%" }}>
         <List sx={listStyle}>
           {localQuotes?.map((quote, index) => (
-            <ListItem key={index}>
-              <ListItemText
-                primary={quote.text}
-                secondary={`by ${quote.userNameQuote}`}
-              />
+            <>
+              <ListItem key={index}>
+                <ListItemText
+                  primary={quote.text}
+                  secondary={`by ${quote.userNameQuote}`}
+                />
 
-              <IconButton
-                onClick={() => {
-                  {
-                    currentUser && handleToggleFavoriteQuote(quote, memeId);
-                  }
-                }}
-              >
-                {quote.quoteLikes.length > 0 &&
-                quote.quoteLikes.some(
-                  (like) => like.userId === currentUser?.id
-                ) ? (
-                  <Favorite sx={{ color: "green" }} />
-                ) : (
-                  <FavoriteBorder />
-                )}
-              </IconButton>
-              <Typography>{quote.quoteLikes.length}</Typography>
-              <Box sx={{ width: 15 }}>
-                {currentUser && currentUsersQuote(quote) && (
-                  <Tooltip title="Delete" arrow>
-                    <IconButton
-                      onClick={() => {
-                        handleOpenConfirmDelete(quote);
-                      }}
-                    >
-                      <Delete sx={{ color: "red" }} />
-                    </IconButton>
-                  </Tooltip>
-                )}
-              </Box>
-            </ListItem>
+                <IconButton
+                  onClick={() => {
+                    {
+                      currentUser && handleToggleFavoriteQuote(quote, memeId);
+                    }
+                  }}
+                >
+                  {quote.quoteLikes.length > 0 &&
+                  quote.quoteLikes.some(
+                    (like) => like.userId === currentUser?.id
+                  ) ? (
+                    <Favorite sx={{ color: "green" }} />
+                  ) : (
+                    <FavoriteBorder />
+                  )}
+                </IconButton>
+                <Typography>{quote.quoteLikes.length}</Typography>
+                <Box sx={{ width: 15 }}>
+                  {currentUser && currentUsersQuote(quote) && (
+                    <Tooltip title="Delete" arrow>
+                      <IconButton
+                        onClick={() => {
+                          handleOpenConfirmDelete(quote);
+                        }}
+                      >
+                        <Delete sx={{ color: "red" }} />
+                      </IconButton>
+                    </Tooltip>
+                  )}
+                </Box>
+              </ListItem>
+              <Divider variant="inset" component="li" />
+            </>
           ))}
         </List>
         {!userAlreadyQuoted && (

@@ -110,6 +110,9 @@ export const applyChanges = async ({
           dispatch(showSnackbar({ message: "Meme deleted successfully", type: "success" }));
           break;
         }
+        // case "addMeme": {
+
+        // }
         default:
           console.error("Unhandled change type:", change);
       }

@@ -109,6 +109,16 @@ const memesSlice = createSlice({
     ) => {
       state.entities = state.entities.filter((meme) => meme.id !== action.payload.memeId);
     },
+    // addMemeToRedux: (
+    //   state,
+    //   action: PayloadAction<{ id: string;
+    //     imageUrl: string;
+    //     userId: string;
+    //    }>
+    // ) => {
+    //   const { id, imageUrl, userId } = action.payload;
+    //   state.entities = state.entities.push({id, imageUrl, userId});
+    // },
   },
   extraReducers: (builder) => {
     builder
@@ -140,6 +150,7 @@ export const {
   removeLikedQuoteFromRedux,
   addQuoteToRedux,
   deleteMemeFromRedux,
+  // addMemeToRedux,
 } = memesSlice.actions;
 
 export default memesSlice.reducer;

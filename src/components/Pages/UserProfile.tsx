@@ -1,4 +1,4 @@
-import { Box, Container, Typography, Tabs, Tab, Avatar, styled, useTheme, Theme } from "@mui/material";
+import { Avatar, Box, Container, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
@@ -9,7 +9,6 @@ import ProfileMemes from "../ProfileMemes";
 import { TabsSerrated } from "../TabsSerrated";
 
 const UserProfile = () => {
-  const theme = useTheme<Theme>();
   const loggedInUser = useSelector((state: RootState) => state.auth.user);
   const [value, setValue] = React.useState(0);
 
@@ -20,25 +19,9 @@ const UserProfile = () => {
     navigate("/login-sign-up");
   }
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-
-  // const profileCardMediaStyle = {
-  //   position: "relative",
-  //   height: { md: 250, lg: 350 },
-  //   width: "100%",
-  // };
-
-  // const profileCaptionStyle = {
-  //   flexGrow: 1,
-  //   mr: 1,
-  //   fontSize: { md: 15, lg: 25 },
-  // };
-
-  // const profileUserNameStyle = {
-  //   fontSize: { md: 15, lg: 20 },
-  // };
 
   return (
     <Container sx={{ width: "100%", p: 2 }}>

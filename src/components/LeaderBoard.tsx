@@ -72,7 +72,7 @@ const LeaderBoard = () => {
                   primary={`${index + 1}. ${entry.user.firstName} ${entry.user.lastName}`}
                   primaryTypographyProps={{ color: 'white' }}
                 />
-                <Typography variant="h6" color={theme.palette.primary}>
+                <Typography variant="h6" color={theme.palette.text.primary}>
                   {entry.points}
                 </Typography>
                 {index === 0 && <div className="glare"></div>}
