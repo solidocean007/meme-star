@@ -1,4 +1,13 @@
-import { Checkbox, Container, Grid, Button, useTheme, Theme } from "@mui/material";
+import {
+  Checkbox,
+  Container,
+  Button,
+  useTheme,
+  Theme,
+  Box,
+  Grid,
+  Typography,
+} from "@mui/material";
 import MemeCard from "./MemeCard";
 import { applyChanges } from "../helperFunctions/applyChanges";
 import { ChangeType, ProcessedMemeType } from "../Utils/types";
@@ -17,9 +26,7 @@ interface ProfileMemesProps {
   setPendingChanges: React.Dispatch<React.SetStateAction<ChangeType[]>>;
 }
 
-const ProfileMemes = ({
-  setPendingChanges,
-}: ProfileMemesProps) => {
+const ProfileMemes = ({ setPendingChanges }: ProfileMemesProps) => {
   const theme = useTheme<Theme>();
 
   const loggedInUser = useSelector((state: RootState) => state.auth.user);
@@ -104,49 +111,64 @@ const ProfileMemes = ({
       : "The selected meme will be permanently deleted.";
 
   return (
-    <Container maxWidth={false} sx={{ background: theme.palette.background.paper, borderRadius: "5px"}}>
+    <Container
+      maxWidth={false}
+      sx={{
+        background: theme.palette.background.paper,
+        borderRadius: "5px",
+        padding: "30px",
+      }}
+    >
       <Button
-      variant="contained"
+        variant="contained"
         onClick={handleDeleteSelected}
         disabled={selectedMemes.size === 0}
         sx={menuButtonStyle}
       >
         Delete Selected
       </Button>
-      <Grid container spacing={2} >
-        {profileMemes.length === 0 && <h1>No Memes</h1>}
+      <div
+        style={{
+          display: "flex",
+          width: "100%",
+          height: "100%",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {profileMemes.length === 0 && (
+          <Typography variant="h6">No Memes</Typography>
+        )}
         {profileMemes.map((meme: ProcessedMemeType, index) => (
-          <Grid
-            container
-            item
-            xs={12}
-            sm={10}
-            md={8}
-            lg={6}
-            xl={4}
-            spacing={1}
+          <Box
             key={index}
-            alignItems="center"
-            style={{ padding: "10px 0" }}
+            sx={{
+              position: "relative",
+              width: { xs: "70%", xl: "45%" },
+              margin: "10px",
+            }}
           >
-            <Grid item xs={1}>
-              <Checkbox
-                checked={selectedMemes.has(meme.id)}
-                onChange={() => handleSelectMeme(meme.id)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={10} md={8} lg={6} xl={8} key={index}>
-              <MemeCard
-                meme={meme}
-                loggedInUser={loggedInUser}
-                cardMediaStyle={portfolioCardMediaStyle}
-                captionStyle={portfolioCaptionStyle}
-                userNameStyle={portfolioUserNameStyle}
-              />
-            </Grid>
-          </Grid>
+            <MemeCard
+              meme={meme}
+              loggedInUser={loggedInUser}
+              cardMediaStyle={portfolioCardMediaStyle}
+              captionStyle={portfolioCaptionStyle}
+              userNameStyle={portfolioUserNameStyle}
+            />
+            <Checkbox
+              sx={{
+                position: "absolute",
+                top: "10px",
+                left: "10px",
+                color: "white",
+              }}
+              checked={selectedMemes.has(meme.id)}
+              onChange={() => handleSelectMeme(meme.id)}
+            />
+          </Box>
         ))}
-      </Grid>
+      </div>
       <DeleteConfirmationDialog
         open={dialogOpen}
         onClose={handleCloseDialog}

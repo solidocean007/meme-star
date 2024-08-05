@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { Card, CardMedia, Box, Modal, Container, Button } from "@mui/material";
-import { ChangeType, ProcessedMemeType, QuoteType, UsersType } from "../Utils/types";
+import {
+  ChangeType,
+  ProcessedMemeType,
+  QuoteType,
+  UsersType,
+} from "../Utils/types";
 import { MemeQuotes } from "./MemeQuotes";
 import { leadingQuoteForMeme } from "../helperFunctions/leadingQuoteForMeme";
 import CaptionWithLikes from "./CaptionWithLikes";
@@ -10,7 +15,11 @@ import { useAppDispatch } from "../Redux/store";
 import { Theme } from "@mui/material/styles";
 
 import { useTheme } from "@emotion/react";
-import { CaptionStyleType, CardMediaStyleType, UserNameStyleType } from "../Utils/styleTypes";
+import {
+  CaptionStyleType,
+  CardMediaStyleType,
+  UserNameStyleType,
+} from "../Utils/styleTypes";
 import { memeQuoteContainerStyle } from "./Styles";
 
 const MemeCard = ({
@@ -57,7 +66,10 @@ const MemeCard = ({
   };
 
   const captionContainerStyle = {
-    background: theme.palette.mode === 'dark' ? "rgba(0, 0, 0, 0.8)" : "rgba(255, 255, 255, 0.8)",
+    background:
+      theme.palette.mode === "dark"
+        ? "rgba(0, 0, 0, 0.8)"
+        : "rgba(255, 255, 255, 0.8)",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -69,7 +81,6 @@ const MemeCard = ({
   };
 
   return (
-
     <Card sx={{ position: "relative" }}>
       <CardMedia component="img" src={meme.imageUrl} sx={cardMediaStyle} />
       {meme.allQuotes?.length && (
@@ -91,7 +102,8 @@ const MemeCard = ({
               }}
               onClick={loggedInUser ? handleOpen : handleGoToSignUp}
             >
-              {loggedInUser && meme.allQuotes.find((quote) => quote.userId == loggedInUser.id)
+              {loggedInUser &&
+              meme.allQuotes.find((quote) => quote.userId == loggedInUser.id)
                 ? null
                 : `${meme.allQuotes?.length || 0} Quotes. Now add yours!`}
               {/* {loggedInUser && meme.allQuotes.find((quote) => quote.userId !== loggedInUser.id)
@@ -100,7 +112,7 @@ const MemeCard = ({
             </Button>
           </Container>
         </Box>
-       )} 
+      )}
 
       <Modal
         open={openQuotes}

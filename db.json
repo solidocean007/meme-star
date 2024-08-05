@@ -119,11 +119,6 @@
       "id": "11",
       "imageUrl": "/src/assets/images/xeno-ripley.webp",
       "userId": "2"
-    },
-    {
-      "id": "a340",
-      "imageUrl": "./assets/images/20230928_090121.jpg",
-      "userId": "2"
     }
   ],
   "quotes": [
@@ -246,14 +241,6 @@
       "memeId": "8",
       "text": "Herbalife Foreverrr",
       "userId": "3"
-    },
-    {
-      "id": "66d0",
-      "memeId": "a340",
-      "text": "nice work",
-      "userId": "2",
-      "userNameQuote": "Clinton Williams",
-      "quoteLikes": []
     }
   ],
   "likedQuotes": [
@@ -346,12 +333,6 @@
       "userId": "7",
       "quoteId": "4",
       "memeId": "1"
-    },
-    {
-      "id": "9865",
-      "userId": "2",
-      "quoteId": "6",
-      "memeId": "3"
     }
   ]
 }
