@@ -60,6 +60,7 @@ const PageLayout = ({
   const [openHowToPlay, setOpenHowToPlay] = useState(false);
 
   const handleLogout = () => {
+    localStorage.removeItem('userLoggedIn');
     dispatch(logout());
   };
   const theme = useTheme<Theme>();
