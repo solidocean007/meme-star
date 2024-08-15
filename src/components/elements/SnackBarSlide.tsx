@@ -2,8 +2,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Snackbar, Alert, Slide, SlideProps } from '@mui/material';
-import { RootState } from '../Redux/store';
-import { hideSnackbar } from '../Redux/snackBarSlice';
+import { RootState } from '../../Redux/store';
+import { hideSnackbar } from '../../Redux/snackBarSlice';
 
 function SlideTransition(props: SlideProps) {
   return <Slide {...props} direction="down" />;

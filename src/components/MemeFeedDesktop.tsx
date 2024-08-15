@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../Redux/store";
 import { Box, Grid } from "@mui/material";
-import MemeCard from "./MemeCard";
+import MemeCard from "./elements/MemeCard";
 import { useEffect } from "react";
 import { fetchMemes } from "../Redux/memeSlice";
 import { showSnackbar } from "../Redux/snackBarSlice";
-import { desktopCaptionStyle, desktopCardMediaStyle, desktopUserNameStyle } from "./Styles";
+import { desktopCaptionStyle, desktopCardMediaStyle, desktopUserNameStyle } from "../styles/Styles";
 
 const MemeFeedDesktop = () => {
   const dispatch = useAppDispatch();

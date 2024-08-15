@@ -1,8 +1,8 @@
 // ThemeButton.tsx
 import { Box, Button, useTheme } from "@mui/material";
-import { RootState, useAppDispatch } from "../Redux/store";
+import { RootState, useAppDispatch } from "../../Redux/store";
 import { useSelector } from "react-redux";
-import { toggleTheme } from "../Redux/themeSlice";
+import { toggleTheme } from "../../Redux/themeSlice";
 
 const ThemeButton = () => {
   const dispatch = useAppDispatch();

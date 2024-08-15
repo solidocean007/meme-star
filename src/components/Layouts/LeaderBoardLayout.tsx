@@ -1,10 +1,10 @@
 import { Box, Typography, List, ListItem, ListItemText, useTheme, Theme } from '@mui/material';
 import { styled } from '@mui/system';
 import { useSelector } from 'react-redux';
-import { RootState } from '../Redux/store';
-import calculateLeaderBoard from '../helperFunctions/calculateLeaderBoard';
+import { RootState } from '../../Redux/store';
+import calculateLeaderBoard from '../../helperFunctions/calculateLeaderBoard';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import './leaderboard.css'
+import '../../styles/leaderboard.css'
 
 // Styled component for the leaderBoard container
 const LeaderBoardContainer = styled(Box)(({ theme }) => ({
@@ -33,7 +33,7 @@ const LeaderBoardItem = styled(ListItem)(({ theme }) => ({
   // color: "white"
 }));
 
-const LeaderBoard = () => {
+const LeaderBoardLayout = () => {
   const { entities: memes, loading, error } = useSelector((state: RootState) => state.memes);
   const theme = useTheme<Theme>();
   const { userPoints, userDetails } = calculateLeaderBoard(memes);
@@ -85,5 +85,5 @@ const LeaderBoard = () => {
   );
 };
 
-export default LeaderBoard;
+export default LeaderBoardLayout;
 

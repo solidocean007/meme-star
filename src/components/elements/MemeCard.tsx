@@ -5,13 +5,13 @@ import {
   ProcessedMemeType,
   QuoteType,
   UsersType,
-} from "../Utils/types";
+} from "../../Utils/types";
 import { MemeQuotes } from "./MemeQuotes";
-import { leadingQuoteForMeme } from "../helperFunctions/leadingQuoteForMeme";
+import { leadingQuoteForMeme } from "../../helperFunctions/leadingQuoteForMeme";
 import CaptionWithLikes from "./CaptionWithLikes";
 import { useNavigate } from "react-router";
-import { applyChanges } from "../helperFunctions/applyChanges";
-import { useAppDispatch } from "../Redux/store";
+import { applyChangesToMemes } from "../../helperFunctions/applyChangesToMemes";
+import { useAppDispatch } from "../../Redux/store";
 import { Theme } from "@mui/material/styles";
 
 import { useTheme } from "@emotion/react";
@@ -19,8 +19,8 @@ import {
   CaptionStyleType,
   CardMediaStyleType,
   UserNameStyleType,
-} from "../Utils/styleTypes";
-import { memeQuoteContainerStyle } from "./Styles";
+} from "../../Utils/styleTypes";
+import { memeQuoteContainerStyle } from "../../styles/Styles";
 
 const MemeCard = ({
   meme,
@@ -47,7 +47,7 @@ const MemeCard = ({
 
   useEffect(() => {
     if (!openQuotes && pendingChanges.length > 0) {
-      applyChanges({
+      applyChangesToMemes({
         pendingChanges,
         setPendingChanges,
         dispatch,

@@ -14,13 +14,17 @@ import {
   useTheme,
 } from "@mui/material";
 import React, { useState } from "react";
-import { ChangeType, QuoteType, UsersType } from "../Utils/types";
+import { ChangeType, QuoteType, UsersType, LikedQuotesType } from "../../Utils/types";
 import { Delete, FavoriteBorder } from "@mui/icons-material";
 import Favorite from "@mui/icons-material/Favorite";
-import { toggleFavoriteQuote } from "../helperFunctions/MemeQuoteHelperFunctions/toggleFavoriteQuote";
-import { createChangeToDeleteUserQuote } from "../helperFunctions/MemeQuoteHelperFunctions/createChangeToDeleteUserQuote";
+import { toggleFavoriteQuote } from "../../MemeQuoteHelperFunctions/toggleFavoriteQuote";
+import { createChangeToDeleteUserQuote } from "../../MemeQuoteHelperFunctions/createChangeToDeleteUserQuote";
+import { deleteLikesForDeletedQuote } from "../../MemeQuoteHelperFunctions/deleteLikesForDeletedQuote";
 import { DeleteConfirmationDialog } from "./DeleteConfirmationDialog";
-import { deleteLikesForDeletedQuote } from "../helperFunctions/MemeQuoteHelperFunctions/deleteLikesForDeletedQuote";
+// import { toggleFavoriteQuote } from "../helperFunctions/MemeQuoteHelperFunctions/toggleFavoriteQuote";
+// import { createChangeToDeleteUserQuote } from "../helperFunctions/MemeQuoteHelperFunctions/createChangeToDeleteUserQuote";
+// import { DeleteConfirmationDialog } from "./DeleteConfirmationDialog";
+// import { deleteLikesForDeletedQuote } from "../helperFunctions/MemeQuoteHelperFunctions/deleteLikesForDeletedQuote";
 
 interface MemeQuotesProps {
   localQuotes: QuoteType[];
@@ -159,7 +163,7 @@ export const MemeQuotes = ({
                 >
                   {quote.quoteLikes.length > 0 &&
                   quote.quoteLikes.some(
-                    (like) => like.userId === currentUser?.id
+                    (like : LikedQuotesType) => like.userId === currentUser?.id
                   ) ? (
                     <Favorite sx={{ color: "green" }} />
                   ) : (

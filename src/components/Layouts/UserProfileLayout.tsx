@@ -4,11 +4,11 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
 import { useNavigate } from "react-router";
 import { ChangeType } from "../../Utils/types";
-import ProfileQuotes from "../ProfileQuotes";
-import ProfileMemes from "../ProfileMemes";
-import { TabsSerrated } from "../TabsSerrated";
+import ProfileMemes from "../elements/ProfileMemes";
+import { TabsSerrated } from "../elements/TabsSerrated";
+import ProfileQuotes from "../elements/ProfileQuotes";
 
-const UserProfile = () => {
+const UserProfileLayout = () => {
   const loggedInUser = useSelector((state: RootState) => state.auth.user);
   const [value, setValue] = React.useState(0);
 
@@ -50,4 +50,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default UserProfileLayout;

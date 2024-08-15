@@ -6,9 +6,9 @@ import {
 import MemeFeed from "../MemeFeed";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
-import PageLayout from "./PageLayout";
+import PageLayout from "../Layouts/PageLayout";
 import MemeFeedDesktop from "../MemeFeedDesktop";
-import UsersProfile from "./UserProfile";
+import UsersProfile from "../Layouts/UserProfileLayout";
 import CreateMeme from "../CreateMeme";
 
 const HomePage = () => {

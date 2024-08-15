@@ -4,7 +4,7 @@ import { FixedSizeList as List } from "react-window";
 import { useSelector } from "react-redux";
 import { fetchMemes } from "../Redux/memeSlice";
 import { RootState, useAppDispatch } from "../Redux/store";
-import MemeCard from "./MemeCard";
+import MemeCard from "./elements/MemeCard";
 import { Box } from "@mui/material";
 import { showSnackbar } from "../Redux/snackBarSlice";
 import useWindowDimensions from "../helperFunctions/useWindowDimensions";
@@ -12,7 +12,7 @@ import {
   mobileCaptionStyle,
   mobileCardMediaStyle,
   mobileUserNameStyle,
-} from "./Styles";
+} from "../styles/Styles";
 
 const MemeFeed: React.FC = () => {
   const dispatch = useAppDispatch();

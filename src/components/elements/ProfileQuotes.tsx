@@ -8,12 +8,12 @@ import {
   useTheme,
 } from "@mui/material";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../Redux/store";
+import { RootState, useAppDispatch } from "../../Redux/store";
 import { useEffect, useState } from "react";
-import { ChangeType, QuoteType } from "../Utils/types";
+import { ChangeType, QuoteType } from "../../Utils/types";
+import { applyChangesToMemes } from "../../helperFunctions/applyChangesToMemes";
+import { menuButtonStyle } from "../../styles/Styles";
 import { DeleteConfirmationDialog } from "./DeleteConfirmationDialog";
-import { applyChanges } from "../helperFunctions/applyChanges";
-import { menuButtonStyle } from "./Styles";
 
 interface QuoteWithImageType extends QuoteType {
   memeImageUrl: string;
@@ -117,7 +117,7 @@ const ProfileQuotes = ({ setPendingChanges }: ProfileQuotesProps) => {
 
       setPendingChanges((prev) => {
         const updatedChanges = [...prev, ...newChanges];
-        applyChanges({
+        applyChangesToMemes({
           pendingChanges: updatedChanges,
           setPendingChanges,
           dispatch,

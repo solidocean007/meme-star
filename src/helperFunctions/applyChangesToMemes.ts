@@ -1,4 +1,3 @@
-// applyChanges.ts
 import { ChangeType, QuoteType } from "../Utils/types";
 import { addLikedQuote } from "../api/addLikedQuote";
 import { createQuote } from "../api/createQuote";
@@ -17,19 +16,19 @@ import { deleteMeme } from "../api/deleteMeme";
 import { deleteQuotesByMemeId } from "./deleteQuotesByMemeId";
 import { deleteLikedQuotesByMemeId } from "./deleteLikedQuotesByMemeId";
 
-interface ApplyChangesProps {
+interface ApplyChangesToMemesProps {
   pendingChanges: ChangeType[];
   setPendingChanges: React.Dispatch<React.SetStateAction<ChangeType[]>>;
   dispatch: AppDispatch;
   setLocalQuotes?: React.Dispatch<React.SetStateAction<QuoteType[]>>;
 }
 
-export const applyChanges = async ({
+export const applyChangesToMemes = async ({
   pendingChanges,
   setPendingChanges,
   dispatch,
   setLocalQuotes,
-}: ApplyChangesProps) => {
+}: ApplyChangesToMemesProps) => {
   if (pendingChanges.length === 0) {
     return;
   }

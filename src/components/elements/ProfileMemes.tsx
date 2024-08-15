@@ -9,10 +9,10 @@ import {
   Typography,
 } from "@mui/material";
 import MemeCard from "./MemeCard";
-import { applyChanges } from "../helperFunctions/applyChanges";
-import { ChangeType, ProcessedMemeType } from "../Utils/types";
+import { applyChangesToMemes } from "../../helperFunctions/applyChangesToMemes";
+import { ChangeType, ProcessedMemeType } from "../../Utils/types";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../Redux/store";
+import { RootState, useAppDispatch } from "../../Redux/store";
 import { useEffect, useState } from "react";
 import { DeleteConfirmationDialog } from "./DeleteConfirmationDialog";
 import {
@@ -20,7 +20,7 @@ import {
   portfolioCaptionStyle,
   portfolioCardMediaStyle,
   portfolioUserNameStyle,
-} from "./Styles";
+} from "../../styles/Styles";
 
 interface ProfileMemesProps {
   setPendingChanges: React.Dispatch<React.SetStateAction<ChangeType[]>>;
@@ -85,7 +85,7 @@ const ProfileMemes = ({ setPendingChanges }: ProfileMemesProps) => {
 
       setPendingChanges((prev) => {
         const updatedChanges = [...prev, ...newChanges];
-        applyChanges({
+        applyChangesToMemes({
           pendingChanges: updatedChanges,
           setPendingChanges,
           dispatch,

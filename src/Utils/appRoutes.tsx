@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router";
 import HomePage from "../components/Pages/HomePage";
 import LoginSignUp from "../components/Pages/LoginSignUpPage";
 import { Container } from "@mui/material";
-import ThemeButton from "../components/ThemeButton";
+import ThemeButton from "../components/elements/ThemeButton";
 
 const AppRoutes = () => {
   return (

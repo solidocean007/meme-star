@@ -3,13 +3,13 @@ import { useEffect } from "react";
 import AppRoutes from "./Utils/appRoutes";
 import { BrowserRouter as Router } from "react-router-dom";
 import { setUser } from "./Redux/authSlice";
-import SnackBarSlide from "./components/SnackBarSlide";
 import { RootState, useAppDispatch } from "./Redux/store";
 import "./App.css";
 import { useSelector } from "react-redux";
 import { Container, CssBaseline, ThemeProvider } from "@mui/material";
 import { darkTheme, lightTheme } from "./Utils/theme";
 import { setTheme } from "./Redux/themeSlice";
+import SnackBarSlide from "./components/elements/SnackBarSlide";
 
 const App = () => {
   const dispatch = useAppDispatch();

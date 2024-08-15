@@ -26,11 +26,11 @@ import {
   pageMemeFeedBox,
   sideBarButtonStyle,
   userNameStyle,
-} from "../Styles";
-import LeaderBoard from "../LeaderBoard";
-import HowToPlay from "../HowToPlay";
+} from "../../styles/Styles";
+import LeaderBoard from "./LeaderBoardLayout";
+import HowToPlay from "../elements/HowToPlay";
 import { useNavigate } from "react-router";
-import NavigationBar from "../NavigationBar";
+import NavigationBar from "../elements/NavigationBar";
 
 interface PageLayoutProps {
   children: ReactNode;

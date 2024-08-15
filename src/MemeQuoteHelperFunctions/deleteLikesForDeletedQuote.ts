@@ -1,6 +1,6 @@
 // deleteLikesForDeletedQuote.ts
-import { LikedQuotesType } from "../../Utils/types";
-import { getWholeItem } from "../../api/getWholeItem";
+import { LikedQuotesType } from "../Utils/types";
+import { getWholeItem } from "../api/getWholeItem";
 
 export const deleteLikesForDeletedQuote = async (quoteId: string): Promise<string[]> => {
   try {
