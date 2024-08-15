@@ -175,16 +175,16 @@ const PageLayout = ({
                 </Typography>
               </Button>
             )}
-            <Button
+            {loggedInUser && <Button
               variant="contained"
               color="info"
               onClick={handleShowProfile}
               sx={menuButtonStyle}
             >
-              <Typography variant="h4" color={theme.palette.text.primary}>
-                {!showProfile ? "Profile" : "Close Profile"}
-              </Typography>
-            </Button>
+             <Typography variant="h4" color={theme.palette.text.primary}>
+              {!showProfile ? "Profile" : "Close Profile"}
+            </Typography>
+            </Button>}
             <Button
               variant="contained"
               color="info"

@@ -8,7 +8,7 @@ import './leaderboard.css'
 
 // Styled component for the leaderBoard container
 const LeaderBoardContainer = styled(Box)(({ theme }) => ({
-  backgroundColor: 'rgba(0, 0, 0, 0.7)',
+  backgroundColor: '#0288d1',
   padding: theme.spacing(2),
   borderRadius: theme.shape.borderRadius,
   margin: 'auto',

@@ -26,6 +26,7 @@ const CaptionWithLikes = ({ caption, user, captionStyle, userNameStyle }: Captio
   const captionBoxStyle = {
     display: "flex",
     alignItems: "center",
+    pt: "20px"
   };
 
   return (

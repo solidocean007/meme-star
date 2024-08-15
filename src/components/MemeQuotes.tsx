@@ -186,13 +186,30 @@ export const MemeQuotes = ({
           ))}
         </List>
         {!userAlreadyQuoted && (
-          <Box sx={{ my: 2 }}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: "30px", alignItems: "center", my: 2 }}>
             <TextField
               fullWidth
               variant="outlined"
               label="Add your two cents here"
               value={newQuoteText}
               onChange={(e) => setNewQuoteText(e.target.value)}
+              InputProps={{
+                sx: {
+                  "&::placeholder": {
+                    color: "rgba(255, 255, 255, 0.5)", // Placeholder color
+                    opacity: 1, // Ensure the placeholder is fully visible
+                  },
+                  color: "white", // Text color
+                },
+                classes: {
+                  notchedOutline: "MuiOutlinedInput-notchedOutline", // You can add specific classes if needed
+                },
+              }}
+              InputLabelProps={{
+                style: {
+                  color: "white", // This controls the label color
+                },
+              }}
             />
             <Button
               onClick={() => handleSubmitNewQuote(memeId)}

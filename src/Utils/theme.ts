@@ -15,7 +15,7 @@ const lightPalette: PaletteOptions = {
   text: {
     // primary: '#2C2C2C', // Dark grey for primary text
     primary: '#FFFFFF', // Dark grey for primary text
-    secondary: '#6C757D', // Lighter grey for secondary text
+    secondary: 'black', // Lighter grey for secondary text
   },
   action: {
     active: '#005EA6', // Blue
