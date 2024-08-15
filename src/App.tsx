@@ -9,6 +9,7 @@ import "./App.css";
 import { useSelector } from "react-redux";
 import { Container, CssBaseline, ThemeProvider } from "@mui/material";
 import { darkTheme, lightTheme } from "./Utils/theme";
+import { setTheme } from "./Redux/themeSlice";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -20,6 +21,10 @@ const App = () => {
     if (storedUserData) {
       const userData = JSON.parse(storedUserData);
       dispatch(setUser(userData));
+    }
+    const savedTheme = localStorage.getItem('isDarkMode');
+    if (savedTheme !== null) {
+      dispatch(setTheme(JSON.parse(savedTheme)));
     }
   }, [dispatch]);
 

@@ -3,42 +3,42 @@ import { createTheme, PaletteOptions } from '@mui/material/styles';
 const lightPalette: PaletteOptions = {
   mode: 'light',
   primary: {
-    main: '#005EA6', // Blue
+    main: '#005EA6',
   },
   secondary: {
-    main: '#F6D7A8', // Light Orange
+    main: '#F6D7A8',
   },
   background: {
     default: '#DEE2E6',
     paper: '#95A5A6',
   },
   text: {
-    // primary: '#2C2C2C', // Dark grey for primary text
-    primary: '#FFFFFF', // Dark grey for primary text
-    secondary: 'black', // Lighter grey for secondary text
+    // primary: '#2C2C2C',
+    primary: '#FFFFFF',
+    secondary: 'black',
   },
   action: {
-    active: '#005EA6', // Blue
-    hover: '#78ACFD', // Light Blue
-    selected: '#F6D7A8', // Light Orange
+    active: '#005EA6',
+    hover: '#78ACFD',
+    selected: '#F6D7A8',
   },
 };
 
 const darkPalette: PaletteOptions = {
   mode: 'dark',
   primary: {
-    main: '#bb86fc', // Primary purple color
+    main: '#bb86fc',
   },
   secondary: {
-    main: '#03dac6', // Secondary color (assuming cyan from the image)
+    main: '#03dac6',
   },
   background: {
-    default: '#121212', // Dark background color
-    paper: '#282828', // Lighter dark background for paper elements
+    default: '#121212',
+    paper: '#424552',
   },
   text: {
-    primary: 'rgba(255, 255, 255, 0.87)', // Light text for dark theme
-    secondary: 'rgba(255, 255, 255, 0.54)', // Lighter text for secondary text
+    primary: 'rgba(255, 255, 255, 0.87)',
+    secondary: 'rgba(255, 255, 255, 0.54)',
   },
 };
 
