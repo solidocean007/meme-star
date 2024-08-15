@@ -110,17 +110,23 @@ const LoginSignUp = () => {
   };
 
   return (
-    <div className="login-signup-page">
+    <Container sx={{display: "flex", flexDirection: "column", gap: "3rem", justifyContent: "center", alignItems: "center"}}>
+      <Button variant="contained" onClick={() => navigate("/")}>
+        Meme Star
+      </Button>
       <Container maxWidth="sm">
-        <AppBar position="static" color="primary">
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, padding: 1 }}
-          >
-            {isLogin ? "Login" : "Sign Up"}
-          </Typography>
-        </AppBar>
+        <Box sx={{ display: "flex", width: "100%" }}>
+          <AppBar position="static" sx={{ display: "flex" }}>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{ flexGrow: 1, padding: 1 }}
+            >
+              {isLogin ? "Login" : "Sign Up"}
+            </Typography>
+          </AppBar>
+        </Box>
+
         <Box component="form" onSubmit={submitLogin} noValidate sx={{ mt: 1 }}>
           {!isLogin && (
             <Grid container spacing={2}>
@@ -243,7 +249,7 @@ const LoginSignUp = () => {
           </Button>
         </Box>
       </Container>
-    </div>
+    </Container>
   );
 };
 

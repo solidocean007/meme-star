@@ -8,6 +8,8 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
+  Theme,
+  useTheme,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import {
@@ -39,6 +41,7 @@ const StepCard = styled(Card)(({ theme }) => ({
 }));
 
 const HowToPlay = ({ open , onClose } : { open : boolean , onClose : () => void } ) => {
+  const theme = useTheme<Theme>();
   const steps = [
     {
       icon: <Create color="primary" />,
@@ -101,13 +104,13 @@ const HowToPlay = ({ open , onClose } : { open : boolean , onClose : () => void 
                   <CardHeader
                     avatar={step.icon}
                     title={
-                      <Typography variant="h6" color="textPrimary">
+                      <Typography variant="h6" color={theme.palette.text.secondary}>
                         {step.title}
                       </Typography>
                     }
                   />
                   <CardContent>
-                    <Typography variant="body1" color="textSecondary">
+                    <Typography variant="body1" color={theme.palette.text.secondary}>
                       {step.description}
                     </Typography>
                     {step.subPoints && (
