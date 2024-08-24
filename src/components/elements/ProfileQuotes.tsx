@@ -68,8 +68,8 @@ const ProfileQuotes = ({ setPendingChanges }: ProfileQuotesProps) => {
     setProfileQuotes(usersQuotes);
   }, [allMemes, loggedInUser, selectedQuotes]);
 
-  const handleSelectQuote = (quoteId: string | undefined, memeId: string) => {
-    if (!quoteId) return;
+  const handleSelectQuote = (quoteId: string | undefined, memeId: string | undefined) => {
+    if (!quoteId || !memeId) return;
     setSelectedQuotes((prev) => {
       const newSelectedQuotes = new Set(prev);
       const quote = { quoteId, memeId };

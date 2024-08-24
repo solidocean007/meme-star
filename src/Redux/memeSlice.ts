@@ -18,8 +18,7 @@ export const fetchMemes = createAsyncThunk<
   async (_, { rejectWithValue, dispatch }) => {
     try {
       const response = await getAllData();
-      const processedMemes = processMemes(response);
-      return processedMemes;
+      return processMemes(response);
     } catch (error) {
       const fetchError: FetchError = {
         message: error instanceof Error ? error.message : 'Unknown error',

@@ -60,7 +60,7 @@ const PageLayout = ({
   const [openHowToPlay, setOpenHowToPlay] = useState(false);
 
   const handleLogout = () => {
-    localStorage.removeItem('userLoggedIn');
+    localStorage.removeItem("userLoggedIn");
     dispatch(logout());
   };
   const theme = useTheme<Theme>();
@@ -149,19 +149,19 @@ const PageLayout = ({
 
       <Container disableGutters maxWidth={false} sx={pageContainerStyle}>
         <NavigationBar>
-          <Box
-            sx={navigationBarStyle}
-          >
-            <Button
-              variant="contained"
-              color="info"
-              onClick={handleCreateMeme}
-              sx={menuButtonStyle}
-            >
-              <Typography variant="h4" color={theme.palette.text.primary}>
-                {!showCreateMeme ? "Create Meme" : "Home"}
-              </Typography>
-            </Button>
+          <Box sx={navigationBarStyle}>
+            {loggedInUser && (
+              <Button
+                variant="contained"
+                color="info"
+                onClick={handleCreateMeme}
+                sx={menuButtonStyle}
+              >
+                <Typography variant="h4" color={theme.palette.text.primary}>
+                  {!showCreateMeme ? "Create Meme" : "Home"}
+                </Typography>
+              </Button>
+            )}
 
             {!isTabletOrLarger && (
               <Button
@@ -175,16 +175,18 @@ const PageLayout = ({
                 </Typography>
               </Button>
             )}
-            {loggedInUser && <Button
-              variant="contained"
-              color="info"
-              onClick={handleShowProfile}
-              sx={menuButtonStyle}
-            >
-             <Typography variant="h4" color={theme.palette.text.primary}>
-              {!showProfile ? "Profile" : "Close Profile"}
-            </Typography>
-            </Button>}
+            {loggedInUser && (
+              <Button
+                variant="contained"
+                color="info"
+                onClick={handleShowProfile}
+                sx={menuButtonStyle}
+              >
+                <Typography variant="h4" color={theme.palette.text.primary}>
+                  {!showProfile ? "Profile" : "Close Profile"}
+                </Typography>
+              </Button>
+            )}
             <Button
               variant="contained"
               color="info"
@@ -197,11 +199,7 @@ const PageLayout = ({
             </Button>
           </Box>
         </NavigationBar>
-        <Box
-          sx={pageMemeFeedBox}
-        >
-          {children}
-        </Box>
+        <Box sx={pageMemeFeedBox}>{children}</Box>
         {isTabletOrLarger && (
           <Box
             sx={{ display: { xs: "none", lg: "block" }, width: "25%", p: 2 }}
@@ -214,9 +212,7 @@ const PageLayout = ({
       {openHowToPlay && (
         <Modal open={openHowToPlay} onClose={handleCloseHowToPlay}>
           <Card sx={{ bgcolor: "white" }}>
-            <Box
-              sx={modalStyle}
-            >
+            <Box sx={modalStyle}>
               <HowToPlay open={openHowToPlay} onClose={handleCloseHowToPlay} />
               <Button onClick={handleCloseHowToPlay} fullWidth>
                 Close
@@ -228,9 +224,7 @@ const PageLayout = ({
       {openLeaderBoard && (
         <Modal open={openLeaderBoard} onClose={handleCloseLeaderBoard}>
           <Card sx={{ bgcolor: "white" }}>
-            <Box
-              sx={modalStyle}
-            >
+            <Box sx={modalStyle}>
               <LeaderBoard />
               <Button onClick={handleCloseLeaderBoard} fullWidth>
                 Close

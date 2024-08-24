@@ -32,7 +32,6 @@ export const applyChangesToMemes = async ({
   if (pendingChanges.length === 0) {
     return;
   }
-  console.log(pendingChanges);
 
   for (const change of pendingChanges) {
     try {
@@ -67,11 +66,15 @@ export const applyChangesToMemes = async ({
           break;
         }
         case "addQuote": {
+          if (!change.data.memeId) {
+            console.error("memeId is undefined, skipping addQuote");
+            break; // Exit early if memeId is undefined
+          }
           const createQuoteResponse = await createQuote(change.data);
           dispatch(
             addQuoteToRedux({
               id: createQuoteResponse.id,
-              memeId: change.data.memeId,
+              memeId: change.data.memeId, // error here
               text: change.data.text,
               userId: change.data.userId,
               userNameQuote: change.data.userNameQuote,

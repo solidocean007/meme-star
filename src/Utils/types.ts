@@ -5,7 +5,7 @@ export interface MemeType {
 }
 
 export interface ProcessedMemeType  {
-  'id': string,
+  'id': string | undefined,
   'imageUrl': string,
   'createdBy': UsersType,
   'allQuotes'?: QuoteType[],
@@ -23,7 +23,7 @@ export type NewUserType = Omit<UsersType, 'id'>;
 
 export interface QuoteType {
   'id': string | undefined,
-  "memeId": string,
+  "memeId": string | undefined,
   'text': string,
   'userId': string,
   'userNameQuote': string,
@@ -36,7 +36,7 @@ export type ProcessedQuoteType = QuoteType & {
 };
 
 export interface LikedQuotesType {
-  'id': string;     
+  'id': string | undefined;     
   'userId': string;
   'quoteId': string;
   'memeId': string;

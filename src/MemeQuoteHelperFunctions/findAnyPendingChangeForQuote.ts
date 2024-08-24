@@ -1,4 +1,4 @@
-import { ChangeType, QuoteType } from "../../Utils/types";
+import { ChangeType, QuoteType } from "../Utils/types";
 
 export const findAnyPendingChangeForQuote = (quote: QuoteType, pendingChanges: ChangeType[]) => {
   return pendingChanges.filter((change) => {

@@ -1,8 +1,8 @@
 import { Typography, Box, Badge, useTheme, Theme } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { LikedQuotesType, QuoteType, UsersType } from "../Utils/types";
 import { FavoriteBorderOutlined } from "@mui/icons-material";
-import { CaptionStyleType, UserNameStyleType } from "../Utils/styleTypes";
+import { CaptionStyleType, UserNameStyleType } from "../../Utils/styleTypes";
+import { LikedQuotesType, QuoteType, UsersType } from "../../Utils/types";
 
 interface CaptionWithLikesProps {
   caption: QuoteType | null;

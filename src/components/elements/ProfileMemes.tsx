@@ -5,7 +5,6 @@ import {
   useTheme,
   Theme,
   Box,
-  Grid,
   Typography,
 } from "@mui/material";
 import MemeCard from "./MemeCard";
@@ -46,7 +45,10 @@ const ProfileMemes = ({ setPendingChanges }: ProfileMemesProps) => {
     setProfileMemes(userMemes);
   }, [allMemes, loggedInUser, selectedMemes]);
 
-  const handleSelectMeme = (memeId: string) => {
+  const handleSelectMeme = (memeId: string | undefined) => {
+    if (!memeId) {
+      return;
+    }
     setSelectedMemes((prev) => {
       const newSelectedMemes = new Set(prev);
       if (newSelectedMemes.has(memeId)) {
@@ -156,16 +158,18 @@ const ProfileMemes = ({ setPendingChanges }: ProfileMemesProps) => {
               captionStyle={portfolioCaptionStyle}
               userNameStyle={portfolioUserNameStyle}
             />
-            <Checkbox
-              sx={{
-                position: "absolute",
-                top: "10px",
-                left: "10px",
-                color: "white",
-              }}
-              checked={selectedMemes.has(meme.id)}
-              onChange={() => handleSelectMeme(meme.id)}
-            />
+            {meme.id && (
+              <Checkbox
+                sx={{
+                  position: "absolute",
+                  top: "10px",
+                  left: "10px",
+                  color: "white",
+                }}
+                checked={selectedMemes.has(meme.id)}
+                onChange={() => handleSelectMeme(meme.id)}
+              />
+            )}
           </Box>
         ))}
       </div>

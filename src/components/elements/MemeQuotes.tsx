@@ -30,7 +30,7 @@ interface MemeQuotesProps {
   localQuotes: QuoteType[];
   setPendingChanges: React.Dispatch<React.SetStateAction<ChangeType[]>>;
   pendingChanges: ChangeType[];
-  memeId: string;
+  memeId: string | undefined;
   currentUser: UsersType | null;
   setLocalQuotes: React.Dispatch<React.SetStateAction<QuoteType[]>>;
   handleClose: () => void;
@@ -70,7 +70,10 @@ export const MemeQuotes = ({
     return quote.userId === currentUser.id;
   };
 
-  const handleToggleFavoriteQuote = (quote: QuoteType, memeId: string) => {
+  const handleToggleFavoriteQuote = (quote: QuoteType, memeId: string | undefined) => {
+    if(!memeId){
+      return;
+    }
     toggleFavoriteQuote(
       quote,
       currentUser,
@@ -91,9 +94,9 @@ export const MemeQuotes = ({
 
   const handleDeleteUserQuote = async (
     quoteToDelete: QuoteType,
-    memeId: string
+    memeId: string | undefined
   ) => {
-    if (!quoteToDelete.id || !currentUser) return;
+    if (!quoteToDelete.id || !currentUser || !memeId) return;
     createChangeToDeleteUserQuote(
       quoteToDelete,
       memeId,
@@ -117,7 +120,10 @@ export const MemeQuotes = ({
     handleClose();
   };
 
-  const handleSubmitNewQuote = (memeId: string) => {
+  const handleSubmitNewQuote = (memeId: string | undefined) => {
+    if(!memeId){
+      return;
+    }
     if (newQuoteText && currentUser.id) {
       const newChange: ChangeType = {
         type: "addQuote",
