@@ -42,13 +42,6 @@ const HomePage = () => {
       ) : (
         <MemeFeed />
       )}
-      {/* {showProfile ? (
-        <UsersProfile />
-      ) : isTabletOrLarger ? (
-        <MemeFeedDesktop />
-      ) : (
-        <MemeFeed />
-      )} */}
     </PageLayout>
   );
 };

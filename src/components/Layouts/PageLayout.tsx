@@ -53,8 +53,6 @@ const PageLayout = ({
   showCreateMeme,
   setShowCreateMeme,
 }: PageLayoutProps) => {
-  // const isDarkMode = useSelector((state: RootState) => state.theme.isDarkMode);
-
   const dispatch = useAppDispatch();
   const [openLeaderBoard, setOpenLeaderBoard] = useState(false);
   const [openHowToPlay, setOpenHowToPlay] = useState(false);
@@ -66,8 +64,10 @@ const PageLayout = ({
   const theme = useTheme<Theme>();
   const navigate = useNavigate();
 
-  const handleCreateMeme = () => setShowCreateMeme((prev) => !prev);
-
+  const handleCreateMeme = () => {
+    setShowProfile(false);
+    setShowCreateMeme((prev) => !prev);
+  };
   const handleOpenLeaderBoard = () => setOpenLeaderBoard(true);
 
   const handleCloseLeaderBoard = () => setOpenLeaderBoard(false);
