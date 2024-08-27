@@ -23,6 +23,7 @@ const MemeFeed: React.FC = () => {
     error,
   } = useSelector((state: RootState) => state.memes);
   const { width } = useWindowDimensions();
+
   // Calculate item size based on window width
   const getItemSize = (width: number) => {
     if (width < 400) return 300; // xSmall screens
@@ -33,6 +34,7 @@ const MemeFeed: React.FC = () => {
   };
 
   const itemSize = getItemSize(width);
+
   useEffect(() => {
     try {
       dispatch(fetchMemes());
@@ -49,11 +51,13 @@ const MemeFeed: React.FC = () => {
     return <div>Error: {error}</div>;
   }
 
+  // const itemWidth = 
+
   return (
     <Box>
       <List
         height={800}
-        width={600}
+        width={itemSize}
         itemSize={itemSize}
         itemCount={memes.length}
         itemData={memes}
