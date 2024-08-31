@@ -21,18 +21,24 @@ export const CreateMeme = () => {
   const loggedInUser = useSelector((state: RootState) => state.auth.user);
 
   const [image, setImage] = useState<File | null>(null);
+  const [memeImageUrl, setMemeImageUrl] = useState<string>('');
   const [quote, setQuote] = useState("");
 
   const clearForm = () => {
     setImage(null);
+    setMemeImageUrl('');
     setQuote("");
   };
 
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      setImage(event.target.files[0]);
-    }
-  };
+  // const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (event.target.files && event.target.files[0]) {
+  //     setImage(event.target.files[0]);
+  //   }
+  // };
+
+  const handleSetUrlPath = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMemeImageUrl(event.target.value);
+  }
 
   const handleQuoteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuote(event.target.value);
@@ -40,12 +46,14 @@ export const CreateMeme = () => {
 
   const handleSubmit = async () => {
     try {
-      if (image && loggedInUser && quote) {
+      // if (image && loggedInUser && quote ) {
+      if (loggedInUser && quote && memeImageUrl) {
         const addNewMemeChange: ChangeType = {
           type: "addMeme",
           data: {
             id: undefined,
-            imageUrl: `/src/assets/images/${image.name}`, // what would be the image url if this was not using json-server?
+            // imageUrl: `/src/assets/images/${image.name}`,
+            imageUrl: memeImageUrl,
             userId: loggedInUser.id,
           },
         };
@@ -96,13 +104,23 @@ export const CreateMeme = () => {
           </Typography>
           <Box sx={{ mb: 3 }}>
             <Typography variant="h6" sx={{ mb: 1 }}>
-              Upload Image
+              Save Meme Image Url
             </Typography>
-            <Button variant="contained" component="label">
+            <Box sx={{ mb: 3 }}>
+            
+            <TextField
+              fullWidth
+              variant="outlined"
+              placeholder="Enter Meme Image url here."
+              value={memeImageUrl}
+              onChange={handleSetUrlPath}
+            />
+          </Box>
+            {/* <Button variant="contained" component="label">
               Upload File
-              {/* <input type="file" hidden onChange={handleImageUpload} /> */}
-              {/* <input type="text" onChange={handleImageUrlSave} /> */}
-            </Button>
+              <input type="file" hidden onChange={handleImageUpload} />
+              <input type="text" onChange={handleImageUrlSave} />
+            </Button> */}
             {image && (
               <>
                 <Typography sx={{ mt: 2 }}>{image.name}</Typography>

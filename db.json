@@ -119,6 +119,11 @@
       "id": "11",
       "imageUrl": "/src/assets/images/xeno-ripley.webp",
       "userId": "2"
+    },
+    {
+      "id": "f143",
+      "imageUrl": "https://images.inc.com/uploaded_files/image/1920x1080/getty_517194189_373099.jpg",
+      "userId": "2"
     }
   ],
   "quotes": [
@@ -241,6 +246,14 @@
       "memeId": "8",
       "text": "Herbalife Foreverrr",
       "userId": "3"
+    },
+    {
+      "id": "7166",
+      "memeId": "f143",
+      "text": "who dis",
+      "userId": "2",
+      "userNameQuote": "Clinton Williams",
+      "quoteLikes": []
     }
   ],
   "likedQuotes": [
