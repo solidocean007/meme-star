@@ -100,7 +100,8 @@ export const CreateMeme = () => {
             </Typography>
             <Button variant="contained" component="label">
               Upload File
-              <input type="file" hidden onChange={handleImageUpload} />
+              {/* <input type="file" hidden onChange={handleImageUpload} /> */}
+              {/* <input type="text" onChange={handleImageUrlSave} /> */}
             </Button>
             {image && (
               <>

@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../Redux/store";
-import { Box, Grid } from "@mui/material";
+import { Box, CircularProgress, Grid } from "@mui/material";
 import MemeCard from "./elements/MemeCard";
 import { useEffect } from "react";
 import { fetchMemes } from "../Redux/memeSlice";
@@ -25,7 +25,7 @@ const MemeFeedDesktop = () => {
   }, [dispatch]);
 
   if (loading === "loading") {
-    return <div>Loading...</div>;
+    return <CircularProgress />;
   }
 
   if (error) {

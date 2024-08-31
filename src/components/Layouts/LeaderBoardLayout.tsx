@@ -1,4 +1,4 @@
-import { Box, Typography, List, ListItem, ListItemText, useTheme, Theme } from '@mui/material';
+import { Box, Typography, List, ListItem, ListItemText, useTheme, Theme, CircularProgress } from '@mui/material';
 import { styled } from '@mui/system';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../Redux/store';
@@ -47,7 +47,7 @@ const LeaderBoardLayout = () => {
     .sort((a, b) => b.points - a.points);
 
   if (loading === 'loading') {
-    return <div>Loading...</div>;
+    return <CircularProgress />;
   }
 
   if (error) {

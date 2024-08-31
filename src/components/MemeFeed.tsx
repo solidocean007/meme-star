@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { fetchMemes } from "../Redux/memeSlice";
 import { RootState, useAppDispatch } from "../Redux/store";
 import MemeCard from "./elements/MemeCard";
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import { showSnackbar } from "../Redux/snackBarSlice";
 import useWindowDimensions from "../helperFunctions/useWindowDimensions";
 import {
@@ -44,7 +44,7 @@ const MemeFeed: React.FC = () => {
   }, [dispatch]);
 
   if (loading === "loading") {
-    return <div>Loading...</div>;
+    return <CircularProgress />;
   }
 
   if (error) {
