@@ -64,6 +64,11 @@ const PageLayout = ({
   const theme = useTheme<Theme>();
   const navigate = useNavigate();
 
+  const handleShowProfile = () => {
+    setShowProfile((prevShowProfile) => !prevShowProfile);
+    setShowCreateMeme(false);
+  };
+
   const handleCreateMeme = () => {
     setShowProfile(false);
     setShowCreateMeme((prev) => !prev);
@@ -78,9 +83,7 @@ const PageLayout = ({
     }
   };
 
-  const handleShowProfile = () => {
-    setShowProfile((prevShowProfile) => !prevShowProfile);
-  };
+  
 
   const handleOpenHowToPlay = () => {
     setOpenHowToPlay(true);
@@ -183,7 +186,7 @@ const PageLayout = ({
                 sx={menuButtonStyle}
               >
                 <Typography variant="h4" color={theme.palette.text.primary}>
-                  {!showProfile ? "Profile" : "Close Profile"}
+                  {!showProfile ? "Profile" : "Home"}
                 </Typography>
               </Button>
             )}
